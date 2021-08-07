@@ -4,7 +4,9 @@
     "lang":"deu",
     "updatetime":1800,
     "index":{
-        "Gehalt/Gehalt":["RECHENZENTRUM","VOLMARSTEIN","Gehaltsmitteilung"],
+        "!Versicherungen/AOK":["AOK"],
         "Pass/peng":["Grundst","Erfassung ","Mitteilung"]
     }
 }
+			
+			
