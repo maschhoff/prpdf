@@ -29,7 +29,7 @@ def index():
         else:
                 search={}
                 search["name"]=""
-        return render_template('layout.html', liste=pdf, preview=search['name'], folders=loadArchivFolder())
+        return render_template('explorer.html', liste=pdf, preview=search['name'], folders=loadArchivFolder())
 
 @app.route('/autoscan')
 def autoscan():
@@ -41,7 +41,7 @@ def autoscan():
         else:
                 search={}
                 search["name"]=""
-        return render_template('layout.html', liste=pdf, preview=search['name'], folders=loadArchivFolder())
+        return render_template('explorer.html', liste=pdf, preview=search['name'], folders=loadArchivFolder())
 
 @app.route('/<string:id>')
 def filter(id):
@@ -51,7 +51,7 @@ def filter(id):
                 if id in p["name"]:
                         res.append(p)
         search=pdf[0]
-        return render_template('layout.html', liste=res, preview=search['name'], folders=loadArchivFolder())
+        return render_template('explorer.html', liste=res, preview=search['name'], folders=loadArchivFolder())
 
 
 @app.route('/', methods=['POST'])
@@ -67,15 +67,24 @@ def my_form_post():
                         shutil.move(unknown_dir+"/"+id,unknown_dir+"/"+newid+'.pdf') 
         pdf=loadFiles()
         if newid!="":
-                return render_template('layout.html', message="title changed", liste=pdf, preview=newid+'.pdf', folders=loadArchivFolder())
+                return render_template('explorer.html', message="title changed", liste=pdf, preview=newid+'.pdf', folders=loadArchivFolder())
         else:
-                return render_template('layout.html', message="Error: title was empty", liste=pdf, preview=id, folders=loadArchivFolder())
+                return render_template('explorer.html', message="Error: title was empty", liste=pdf, preview=id, folders=loadArchivFolder())
 
 
 @app.route('/settings')
 def setting():
 	config_raw= settings.getConfigRaw()
 	return render_template('settings.html', config=config, config_raw=config_raw.read())
+
+@app.route('/settings', methods=['POST'])
+def setting_save():
+	config_raw=request.form['hiddenconfig']
+	settings.writeConfig(config_raw)
+	global config
+	config=settings.loadConfig()
+	#os.execl(sys.executable, sys.executable, *sys.argv)
+	return render_template('settings.html', config=config, config_raw=config_raw, message="config saved")
 
 
 def loadArchivFolder():
