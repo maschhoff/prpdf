@@ -4,16 +4,46 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div id="editor">
-	{{config_raw}}
+
+
+
+
+
+<div style="position: absolute; top: 60px; left: 5px; right: 5px;">
+	{% if message %}
+	<div class="alert alert-primary" role="alert">
+	  {{ message }}
+	</div>
+	{% endif %}
+	
+	<form name="config" action="/settings" method="POST">  
+		<input type="hidden" name="hiddenconfig" style="display: none;">
+	<button type="submit" class="btn btn-primary">
+		<ion-icon name="save"></ion-icon> Save
+		</button>
+	</form>
 </div>
-<div>
-<form name="config" action="/settings" method="POST">  
-	<input type="hidden" name="hiddenconfig" style="display: none;">
-<button type="submit" class="btn btn-primary">
-	<ion-icon name="save"></ion-icon> Save
-	</button></form>
-</div>
+
+
+			<div  id="editor">
+
+				{{config_raw}}
+			</div>
+
+
+
+<script>
+
+var editor = ace.edit('editor');
+        editor.session.setMode("ace/mode/json");
+        editor.setTheme("ace/theme/xcode");
+
+    var input = $('input[name="hiddenconfig"]');
+        editor.getSession().on("change", function () {
+        input.val(editor.getSession().getValue());
+    });
+
+</script>
 
  
 	

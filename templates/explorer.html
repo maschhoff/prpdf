@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container-fluid">
+  <br/>  <br/>  
+    <div class="row" id="element1">
+      <div class="col-5">
+        {% if message %}
+        <div class="alert alert-primary" role="alert">
+          {{ message }}
+        </div>
+        {% endif %}
+        
+   
+        
+
+            <div data---="LAZY directory"></div>
+      <div data---="datagrid__items__margin:22;button:clicked">
+<script type="text/plain">
+  [
+    { name: 'name', text: 'Name', width: 350 },
+                      { name: 'published', text: 'Date', filter: 'Search in date', width: 100 },
+                      { name: 'size', text: 'Size', filter: 'Search in size', width: 100 },
+    { type: 'controls', template: '<button name="show"><i class="fa fa-search"></i><span>Show</span></button><button name="remove"><i class="fa fa-trash-o red"></i></button>' }
+  ]
+</script>
+      </div>
+        
+        
+        
+      </div>
+      <div class="col-5">
+        <div class="row">
+        <div class="col">
+        <div id="embedpdf" class="content-section">
+        
+        <form action="/" method="POST">
+<div class="form-group">
+  <label for="film">Edit document title:</label>
+  <input type="text" class="form-control" id="edittitle" name="pdf" value="{{preview}}">
+  <input type="hidden" class="form-control" id="oldtitle" name="oldpdf" value="{{preview}}">
+  
+  <select class="form-control" name="folder">
+  <option value="unknown">unknown</option>
+  {% for folder in folders %}
+              <option value="{{folder}}">{{folder}}</option>
+              {% endfor %} 
+</select>
+  
+   <button type="submit" class="btn btn-primary"><ion-icon name="create"></ion-icon></button>
+   
+</div>
+
+
+</form>         
+        
+        <a href="/ScanDocument"> <button type="submit" class="btn btn-primary" id="filter"><ion-icon name="search"></ion-icon></button></a>
+         <button type="submit" class="btn btn-primary" id="next">>></button>
+        
+
+
+
+        </div>
+        </div>
+        </div>
+          <div class="row">
+             <div class="col">
+            <embed id="embed" src="./static/pdf/unknown/{{preview}}" width="100%" height="700" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">
+              </div>
+      </div>
+      
+      
+      
+    </div>
+  </div>
+  </div>
+
+
+  {% endblock content %}
