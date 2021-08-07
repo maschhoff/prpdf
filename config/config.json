@@ -1,0 +1,10 @@
+{
+    "port":80,
+    "debug":"off",
+    "lang":"deu",
+    "updatetime":1800,
+    "index":{
+        "Gehalt/Gehalt":["RECHENZENTRUM","VOLMARSTEIN","Gehaltsmitteilung"],
+        "Pass/peng":["Grundst","Erfassung ","Mitteilung"]
+    }
+}

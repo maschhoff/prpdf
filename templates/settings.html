@@ -1,0 +1,20 @@
+
+
+
+{% extends "layout.html" %}
+{% block content %}
+
+<div id="editor">
+	{{config_raw}}
+</div>
+<div>
+<form name="config" action="/settings" method="POST">  
+	<input type="hidden" name="hiddenconfig" style="display: none;">
+<button type="submit" class="btn btn-primary">
+	<ion-icon name="save"></ion-icon> Save
+	</button></form>
+</div>
+
+ 
+	
+{% endblock content %}

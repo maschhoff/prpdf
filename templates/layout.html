@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+     
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -23,9 +25,18 @@
   
 </style>
 
-<link href="https://cdn.componentator.com/spa.min@18.css" rel="stylesheet" type="text/css" />
+   <link href="https://cdn.componentator.com/spa.min@18.css" rel="stylesheet" type="text/css" />
 
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://cdn.componentator.com/spa.min@18.js"></script> 
+      <!--  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="https://cdn.componentator.com/spa.min@18.js"></script> -->
 
 </head>
 <body>
@@ -49,7 +60,8 @@
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-              <a class="nav-item nav-link" href="/"><ion-icon name="refresh"></ion-icon></a>
+              <a class="nav-item nav-link" id="button_autoscan" href="/autoscan"><ion-icon name="refresh"></ion-icon></a>
+              <a class="nav-item nav-link" href="/settings"><ion-icon name="settings"></ion-icon></a>
               <a class="nav-item nav-link" href="https://github.com/maschhoff/prpdf" target="_blank"><ion-icon name="logo-github"></ion-icon></a>
             <!--  <a class="nav-item nav-link" href="/settings"><ion-icon name="settings"></ion-icon></a>-->
             </div>
@@ -63,7 +75,7 @@
     
     <div class="container-fluid">
     <br/>  <br/>  
-      <div class="row">
+      <div class="row" id="element1">
         <div class="col-5">
           {% if message %}
           <div class="alert alert-primary" role="alert">
@@ -92,6 +104,8 @@
           
         </div>
         <div class="col-5">
+          <div class="row">
+          <div class="col">
           <div id="embedpdf" class="content-section">
           
           <form action="/" method="POST">
@@ -99,47 +113,103 @@
     <label for="film">Edit document title:</label>
     <input type="text" class="form-control" id="edittitle" name="pdf" value="{{preview}}">
     <input type="hidden" class="form-control" id="oldtitle" name="oldpdf" value="{{preview}}">
+    
+    <select class="form-control" name="folder">
+		<option value="unknown">unknown</option>
+		{% for folder in folders %}
+                <option value="{{folder}}">{{folder}}</option>
+                {% endfor %} 
+	</select>
+    
      <button type="submit" class="btn btn-primary"><ion-icon name="create"></ion-icon></button>
+     
   </div>
  
+
 </form>         
           
-   <embed id="embed" src="./static/pdf/{{preview}}" width="100%" height="600" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">
+          <a href="/ScanDocument"> <button type="submit" class="btn btn-primary" id="filter"><ion-icon name="search"></ion-icon></button></a>
+           <button type="submit" class="btn btn-primary" id="next">>></button>
+          
+ 
+
 
           </div>
+          </div>
+          </div>
+            <div class="row">
+               <div class="col">
+              <embed id="embed" src="./static/pdf/unknown/{{preview}}" width="100%" height="700" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">
+                </div>
         </div>
+        
+        
+        
       </div>
+    </div>
     </div>
 
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js" type="text/javascript" charset="utf-8"></script>
-        <script src="https://cdn.componentator.com/spa.min@18.js"></script>
+
+
+
+</body>
+
 <script>
 
+
 	var items = [];
+        var iterator=0;
 	<!--for (var i = 1; i < 90; i++)-->
+        
+        
+
+
+        
         {% for pdf in liste %}
 		items.push({ name: '{{pdf["name"]}}',size: '{{pdf["size"]}}', published: '{{pdf["date"]}}' });
         {% endfor %} 
 
-	function clicked(btnname, row, button, e) {
-		console.log(btnname, row['name']);
+	function clicked(btnname, row, button,iterator, e) {
+		console.log(btnname, row);
                 var embed=document.getElementById("embed");
-                embed.setAttribute('src','./static/pdf/'+row['name']);
+                embed.setAttribute('src','./static/pdf/unknown/'+row['name']);
                  var edittitle=document.getElementById("edittitle");
                 edittitle.setAttribute('value',row['name'].slice(0,row['name'].length-4));
                 var oldtitle=document.getElementById("oldtitle");
                 oldtitle.setAttribute('value',row['name']);
+                window.iterator=row['ROW']
 	}
+        
+
+        
+        var next=document.getElementById("next");
+        next.onclick=function(){
+        
+                console.log(iterator,items[iterator]["name"]);
+                
+                var embed=document.getElementById("embed");
+                embed.setAttribute('src','./static/pdf/unknown/'+items[iterator]["name"]);
+                 var edittitle=document.getElementById("edittitle");
+                edittitle.setAttribute('value',items[iterator]["name"].slice(0,items[iterator]["name"].length-4));
+                var oldtitle=document.getElementById("oldtitle");
+                oldtitle.setAttribute('value',items[iterator]["name"]);
+                iterator++;
+                window.iterator=iterator++;
+        
+        };
+        
+        
+        var autoscan_cl=document.getElementById("button_autoscan");
+        autoscan_cl.onclick=function(){
+                
+                $("#element1").LoadingOverlay("show")
+        
+        };
+        
+      
 
 </script>
 
-</body>
 </html>
