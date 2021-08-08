@@ -59,12 +59,16 @@ def my_form_post():
         newid = request.form['pdf']
         id = request.form['oldpdf']
         folder=request.form['folder']
+        
+        filedatum=date.fromtimestamp(os.path.getmtime(unknown_dir+"/"+id)).strftime('%d_%m_%Y')
+        fileneu=newid+"_"+filedatum+"_"+str(random.randint(1111,9999))+".pdf" 
+        
         print(folder)
         if newid!="":
                 if folder!="unknown":
-                        shutil.move(unknown_dir+"/"+id,archiv_dir+"/"+folder+"/"+newid+'.pdf')
+                        shutil.move(unknown_dir+"/"+id,archiv_dir+"/"+folder+"/"+fileneu)
                 else:
-                        shutil.move(unknown_dir+"/"+id,unknown_dir+"/"+newid+'.pdf') 
+                        shutil.move(unknown_dir+"/"+id,unknown_dir+"/"+fileneu) 
         pdf=loadFiles()
         if newid!="":
                 return render_template('explorer.html', message="title changed", liste=pdf, preview=newid+'.pdf', folders=loadArchivFolder())
