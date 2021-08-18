@@ -30,13 +30,14 @@
 				{{config_raw}}
 			</div>
 
-
+		</body>
 
 <script>
 
 var editor = ace.edit('editor');
         editor.session.setMode("ace/mode/json");
         editor.setTheme("ace/theme/xcode");
+		
 
     var input = $('input[name="hiddenconfig"]');
         editor.getSession().on("change", function () {

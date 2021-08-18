@@ -1,136 +1,106 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-     
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-
-        <title>PR PDF</title>
+  <head>
         
-        <style type="text/css" media="screen">
-    #editor { 
-        position: absolute;
-        top: 100px;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
-  
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/css/mdb.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="../static/main.css" rel="stylesheet">
+    
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"/>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/js/mdb.min.js"></script>
+    
+
+    <!-- LoadingOverlay und ACE Editpor-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+
+
+    <style>
+body {
+  overflow: hidden; /* Hide scrollbars */
+}
 </style>
 
-   <link href="https://cdn.componentator.com/spa.min@18.css" rel="stylesheet" type="text/css" />
+        </head>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://cdn.componentator.com/spa.min@18.js"></script> 
-      <!--  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
-        <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js" type="text/javascript" charset="utf-8"></script>
-	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js" type="text/javascript" charset="utf-8"></script>
-        <script src="https://cdn.componentator.com/spa.min@18.js"></script> -->
-
-</head>
-<body>
+    <body>
 
 
+        
+      <header>
+            <!-- Navbar -->
+           <!--<nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
+            <nav class="navbar navbar-expand-lg navbar-light text-dark bg-light">
+                <!-- Container wrapper -->
+                <div class="container-fluid">
+                  <!-- Toggle button -->
+                  <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                  >
+                    <i class="fas fa-bars"></i>
+                  </button>
+              
+                  <!-- Collapsible wrapper -->
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand" href="/"><i class="fas fa-file-pdf"></i></a>
+                    
+                     PR PDF - Scan Documents Explorer
+
+                  </div>
 
 
-
-    <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-        <div class="container">
-          <a class="navbar-brand mr-4" href="/"><ion-icon name="document"></ion-icon>PR PDF Explorer</a> 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarToggle">
-            <div class="navbar-nav mr-auto">
-
-
-
-            </div>
-            <!-- Navbar Right Side -->
-            <div class="navbar-nav">
-              <a class="nav-item nav-link" id="button_autoscan" href="/autoscan"><ion-icon name="refresh"></ion-icon></a>
-              <a class="nav-item nav-link" href="/settings"><ion-icon name="settings"></ion-icon></a>
-              <a class="nav-item nav-link" href="https://github.com/maschhoff/prpdf" target="_blank"><ion-icon name="logo-github"></ion-icon></a>
-            <!--  <a class="nav-item nav-link" href="/settings"><ion-icon name="settings"></ion-icon></a>-->
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
+                  <ul class="navbar-nav nav-flex-icons">
+        <li class="nav-item">
+          <a class="nav-link" id="button_autoscan"> <i class="fas fa-sync"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./settings"> <i class="fas fa-cog"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/maschhoff/prpdf/" target="_blank"> <i class="fab fa-github"></i></a>
+        </li>
+      </ul>
     
+              
+           
+                 
+                  <!-- Right elements -->
+                </div>
+                <!-- Container wrapper -->
+              </nav>
+            <!-- Navbar -->
+          
+    
+          </header>
 
     {% block content %}{% endblock %}
     
- 
 
+<script>  
 
-
-
-
-</body>
-
-<script>
-
-
-
-
-
-
-	var items = [];
-        var iterator=0;
-	<!--for (var i = 1; i < 90; i++)-->
-        
-        
-
-
-        
-        {% for pdf in liste %}
-		items.push({ name: '{{pdf["name"]}}',size: '{{pdf["size"]}}', published: '{{pdf["date"]}}' });
-        {% endfor %} 
-
-	function clicked(btnname, row, button,iterator, e) {
-		console.log(btnname, row);
-                var embed=document.getElementById("embed");
-                embed.setAttribute('src','./static/pdf/unknown/'+row['name']);
-                 var edittitle=document.getElementById("edittitle");
-                edittitle.setAttribute('value',row['name'].slice(0,row['name'].length-4));
-                var oldtitle=document.getElementById("oldtitle");
-                oldtitle.setAttribute('value',row['name']);
-                window.iterator=row['ROW']
-	}
-        
-
-        
-        var next=document.getElementById("next");
-        next.onclick=function(){
-        
-                console.log(iterator,items[iterator]["name"]);
-                
-                var embed=document.getElementById("embed");
-                embed.setAttribute('src','./static/pdf/unknown/'+items[iterator]["name"]);
-                 var edittitle=document.getElementById("edittitle");
-                edittitle.setAttribute('value',items[iterator]["name"].slice(0,items[iterator]["name"].length-4));
-                var oldtitle=document.getElementById("oldtitle");
-                oldtitle.setAttribute('value',items[iterator]["name"]);
-                iterator++;
-                window.iterator=iterator++;
-        
-        };
-        
-        
         var autoscan_cl=document.getElementById("button_autoscan");
         autoscan_cl.onclick=function(){
                 
@@ -138,10 +108,6 @@
         
         };
         
-      
-
-     
-
 
 </script>
 
