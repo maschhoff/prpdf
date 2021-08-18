@@ -39,7 +39,7 @@ body {
 
         </head>
 
-    <body>
+    <body id="load">
 
 
         
@@ -74,10 +74,10 @@ body {
 
                   <ul class="navbar-nav nav-flex-icons">
         <li class="nav-item">
-          <a class="nav-link" id="button_autoscan"> <i class="fas fa-sync"></i></a>
+          <a class="nav-link" href="/autoscan" id="button_autoscan"> <i class="fas fa-sync"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./settings"> <i class="fas fa-cog"></i></a>
+          <a class="nav-link" href="/settings"> <i class="fas fa-cog"></i></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="https://github.com/maschhoff/prpdf/" target="_blank"> <i class="fab fa-github"></i></a>
@@ -104,7 +104,7 @@ body {
         var autoscan_cl=document.getElementById("button_autoscan");
         autoscan_cl.onclick=function(){
                 
-                $("#element1").LoadingOverlay("show")
+                $("#load").LoadingOverlay("show")
         
         };
         
