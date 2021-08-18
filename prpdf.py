@@ -29,11 +29,15 @@ def index():
         else:
                 search={}
                 search["name"]=""
-        return render_template('explorer.html', liste=pdf, preview=search['name'], folders=loadArchivFolder())
+        return render_template('explorer.html', liste=pdf, preview=search['name'], folders=loadArchivFolder(),iterator=0)
 
 @app.route('/autoscan')
 def autoscan():
-        run()
+        try:
+            run()
+        except Exception as e:
+            print("An exception occurred "+e)
+            logging.error("An exception occurred "+e)
 
         pdf=loadFiles()
         if pdf:
@@ -41,17 +45,9 @@ def autoscan():
         else:
                 search={}
                 search["name"]=""
-        return render_template('explorer.html', liste=pdf, preview=search['name'], folders=loadArchivFolder())
+        return render_template('explorer.html', liste=pdf, preview=search['name'], folders=loadArchivFolder(),iterator=0)
 
-@app.route('/<string:id>')
-def filter(id):
-        pdf=loadFiles()
-        res=[]
-        for p in pdf:
-                if id in p["name"]:
-                        res.append(p)
-        search=pdf[0]
-        return render_template('explorer.html', liste=res, preview=search['name'], folders=loadArchivFolder())
+
 
 
 @app.route('/', methods=['POST'])
@@ -59,6 +55,7 @@ def my_form_post():
         newid = request.form['pdf']
         id = request.form['oldpdf']
         folder=request.form['folder']
+        iterator=request.form['inputiterator']
         
         filedatum=date.fromtimestamp(os.path.getmtime(unknown_dir+"/"+id)).strftime('%d_%m_%Y')
         fileneu=newid+"_"+filedatum+"_"+str(random.randint(1111,9999))+".pdf" 
@@ -71,9 +68,9 @@ def my_form_post():
                         shutil.move(unknown_dir+"/"+id,unknown_dir+"/"+fileneu) 
         pdf=loadFiles()
         if newid!="":
-                return render_template('explorer.html', message="title changed", liste=pdf, preview=newid+'.pdf', folders=loadArchivFolder())
+                return render_template('explorer.html', message="title changed", liste=pdf, preview=newid+'.pdf', folders=loadArchivFolder(),iterator=iterator)
         else:
-                return render_template('explorer.html', message="Error: title was empty", liste=pdf, preview=id, folders=loadArchivFolder())
+                return render_template('explorer.html', message="Error: title was empty", liste=pdf, preview=id, folders=loadArchivFolder(),iterator=iterator)
 
 
 @app.route('/settings')
@@ -92,7 +89,7 @@ def setting_save():
 
 
 def loadArchivFolder():
-        return os.listdir(archiv_dir)
+        return sorted(os.listdir(archiv_dir))
 
 def loadFiles():
         
