@@ -62,8 +62,9 @@
   <div class="row">
   <div class="col-sm">
   <div class="form-outline">
-  <input type="hidden" class="form-control" id="oldtitle" name="oldpdf" value="2020-10-KZVK Nachweis.pdf">
-  <input type="text" id="edittitle" class="form-control" name="pdf" value="2020-10-KZVK Nachweis.pdf"/>
+    <input type="hidden" class="form-control" id="inputiterator" name="inputiterator" value="">
+  <input type="hidden" class="form-control" id="oldtitle" name="oldpdf" value="">
+  <input type="text" id="edittitle" class="form-control" name="pdf" value=""/>
 
   </div>
   </div>
@@ -114,11 +115,11 @@ $(document).ready(function () {
           });
           $('.dataTables_length').addClass('bs-select');
 
-          iterator=0;
+          iterator={{iterator}};
            const $tableID = $('#dtDocuments');
 
 
-           id = $tableID.find('tr').eq(1).children('td')[0].innerHTML;
+           id = $tableID.find('tr').eq(++iterator).children('td')[0].innerHTML;
                 console.log("PREVIEW", iterator, id);
 
                 var embed=document.getElementById("embed");
@@ -126,7 +127,9 @@ $(document).ready(function () {
             var edittitle=document.getElementById("edittitle");
             edittitle.setAttribute('value',id.slice(0,id.length-4));
             var oldtitle=document.getElementById("oldtitle");
-            oldtitle.setAttribute('value',id);
+            oldtitle.setAttribute('value',id); 
+            var inputiterator=document.getElementById("inputiterator");
+            inputiterator.setAttribute('value',iterator);
 
 
            $tableID.on('click', '.table-view', function () {
@@ -141,6 +144,8 @@ $(document).ready(function () {
             edittitle.setAttribute('value',id.slice(0,id.length-4));
             var oldtitle=document.getElementById("oldtitle");
             oldtitle.setAttribute('value',id);
+            var inputiterator=document.getElementById("inputiterator");
+            inputiterator.setAttribute('value',row);
             iterator=row+1
 
           });
@@ -160,6 +165,8 @@ $(document).ready(function () {
             edittitle.setAttribute('value',id.slice(0,id.length-4));
             var oldtitle=document.getElementById("oldtitle");
             oldtitle.setAttribute('value',id);
+            var inputiterator=document.getElementById("inputiterator");
+            inputiterator.setAttribute('value',iterator);
             
         
         };
