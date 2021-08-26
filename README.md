@@ -14,6 +14,9 @@ PDF OCR Autoscan function based on keywords
 
 ` docker run -d --name='PRPDF' -v '/mnt/user/Share':'/Archiv/':'rw' -v '/mnt/user/SCAN':'/source/static/pdf/':'rw' -v '/mnt/user/appdata/prpdf/':'/source/config':'rw' 'knex666/prpdf' python3 /source/prpdf.py`
 
+Note: besited a folder structure for documents in a folder you mount to /Archiv/ you can volume mount any directory you want to /Archiv/ to build you own virtual folder structure
+` -v '/mnt/user/Files/Accounting':'/Archiv/Accounting':'rw'`
+
 ## Run with python on linux
 Note: Please enshure to run it from /source/ 
 create a folder /Archiv for your files 
@@ -23,8 +26,6 @@ otherwise feel free to edit the sourcecode on vars.py etc.
 * ` python3 -m pip install -r requirements.txt`
 * ` sudo apt-get install tesseract-ocr poppler-utils`
 * ` python3 prpdf.py`
-
-
 
 # configuration
 please copy and volume mount the example configuration from https://github.com/maschhoff/prpdf/blob/main/config/config.json
