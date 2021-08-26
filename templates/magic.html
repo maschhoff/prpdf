@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block content %}
+<script src="https://www.jqueryscript.net/demo/Bootstrap-4-Tag-Input-Plugin-jQuery/tagsinput.js"></script>
+<link href="https://www.jqueryscript.net/demo/Bootstrap-4-Tag-Input-Plugin-jQuery/tagsinput.css" rel="stylesheet" type="text/css">
+
+<body>
+
+  <div class="container-fluid">
+    <div class="row"><br/></div>
+      <div class="row">
+         <div class="col">
+            <h3>OCR Scan</h3>
+            <div class="form-group">
+                
+                <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="33">{{text}}</textarea>
+              </div>
+
+            
+         </div>
+         <div class="col">
+
+                
+              <form action="/magic" method="POST">
+              
+              
+                <h3>New Autoscan Rule</h3>
+                
+                <div class="row">
+                <div class="col-sm">
+                <div class="form-outline">
+                <input type="text" id="edittitle" class="form-control" name="pdf" value="" placeholder="Filename"/>
+  
+  
+                </div>
+                </div>
+                <div class="col-sm"> <div class="form-outline">
+                
+                <select class="form-control" name="folder">
+                    <option value="" disabled selected>Choose your folder</option>
+                
+                {% for folder in folders %}
+                <option value="{{folder}}">{{folder}}</option>
+                {% endfor %} 
+                          
+                </select>
+                
+                </div>
+                
+                </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-sm">
+                    <input type="text" id="keywords" class="form-control" data-role="tagsinput" name="keywords" value="" placeholder="Keywords"/>
+                </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-sm">
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>
+                        </div>
+
+                </div>
+                
+                
+                </div>
+                </form>  
+        </div>
+      </div>
+  </div>
+
+
+
+
+
+{% endblock content %}

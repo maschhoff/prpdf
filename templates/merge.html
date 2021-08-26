@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="container-fluid">
+    <div class="row"><br/></div>
+    <div class="row">
+         <div class="col">
+             <h3>Merge Files</h3>
+
+            <form action="/merge" method="POST">
+
+                <div class="row">
+                <div class="col-sm">
+
+                    First File:
+                    <select class="form-control" name="file1">
+                        
+                        {% for file in files %}
+                        <option value="{{file['name']}}">{{file['name']}}</option>
+                        {% endfor %} 
+                                  
+                        </select>
+
+                </div>
+
+
+                <div class="col-sm">
+
+                    Second File:
+                    <select class="form-control" name="file2">
+                                               
+                        {% for file in files %}
+                        <option value="{{file['name']}}">{{file['name']}}</option>
+                        {% endfor %} 
+                                  
+                        </select>
+
+                </div>
+
+                <div class="col-sm">
+                    Option:
+                    <select class="form-control" name="option">
+                        <option value="merge">Merge</option>
+                        <option value="frontback">Front/Back Merge</option>
+                                                
+                        </select>
+
+                </div>
+
+                <div class="col-sm">
+                    Filename:
+                    <input type="text" id="edittitle" class="form-control" name="pdf" value=""/>
+
+                </div>
+
+
+                <div class="col-sm">
+                    <br/>
+                    <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-caret-square-down"></i></button>
+                    </div>
+
+                </div>
+            </form>
+
+         </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}

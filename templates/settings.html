@@ -10,11 +10,7 @@
 
 
 <div style="position: absolute; top: 60px; left: 5px; right: 5px;">
-	{% if message %}
-	<div class="alert alert-primary" role="alert">
-	  {{ message }}
-	</div>
-	{% endif %}
+
 	
 	<form name="config" action="/settings" method="POST">  
 		<input type="hidden" name="hiddenconfig" style="display: none;">
@@ -25,10 +21,7 @@
 </div>
 
 
-			<div  id="editor">
-
-				{{config_raw}}
-			</div>
+			<div  id="editor">{{config_raw}}</div>
 
 		</body>
 

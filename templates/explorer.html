@@ -2,100 +2,102 @@
 {% block content %}
 <body>
 
-  <div class="container-expand-lg">
+  <div class="container-fluid">
     <div class="row"><br/></div>
       <div class="row">
-                <div class="col">
+         <div class="col">
   
-  <h3>Scanned Documents</h3>
-  
-  
- <!-- <table id="dtDocuments" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">-->
-  <table id="dtDocuments" class="table table-bordered table-hover " cellspacing="0"> 
-  <thead>
-      <tr>
-        <th scope="col">Name
-        </th>
-        <th scope="col">Size
-        </th>
-        <th scope="col">Date
-        </th>
-        <th scope="col">View
-        </th>
-       
-      </tr>
-    </thead>
-    <tbody>
+              <h3>Scanned Documents</h3>
+              
+              
+            <!-- <table id="dtDocuments" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">-->
+              <table id="dtDocuments" class="table  table-hover " cellspacing="0"> 
+              <thead>
+                  <tr>
+                    <th scope="col">Name
+                    </th>
+                    <th scope="col">Size
+                    </th>
+                    <th scope="col">Date
+                    </th>
+                    <th scope="col">View
+                    </th>
+                  
+                  </tr>
+                </thead>
+           
+                <tbody>
 
-      {% for pdf in liste %}
+                  {% for pdf in liste %}
 
-      <tr>
-        <td>{{pdf["name"]}}</td>
-        <td>{{pdf["size"]}}</td>
-        <td>{{pdf["date"]}}</td>
-        <td>
-     
-        <span class="table-view">
-        <button type="button" id="{{pdf["name"]}}" class="btn btn-primary btn-rounded btn-sm px-3">
-          <i class="fas fa-eye"></i>
-        </button>
-      </span>
-    </td>
-        
-      </tr>
+                  <tr>
+                    <td>{{pdf["name"]}}</td>
+                    <td>{{pdf["size"]}}</td>
+                    <td>{{pdf["date"]}}</td>
+                    <td>
+                
+                      <span class="table-view">
+                        <button type="button" id="{{pdf["name"]}}" class="btn btn-primary btn-rounded btn-sm px-3">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                      </span>
+                </td>
+                    
+                  </tr>
 
-      {% endfor %} 
-    
-    </tbody>
+                  {% endfor %} 
+                
+                </tbody>
 
-  </table>
+              </table>
   
   </div>
   <div class="col" id="embedpdf" >
   
      
-  <form action="/" method="POST">
-  
-  
-  <h3>Edit Filename</h3>
-  
-  <div class="row">
-  <div class="col-sm">
-  <div class="form-outline">
-    <input type="hidden" class="form-control" id="inputiterator" name="inputiterator" value="">
-  <input type="hidden" class="form-control" id="oldtitle" name="oldpdf" value="">
-  <input type="text" id="edittitle" class="form-control" name="pdf" value=""/>
+              <form action="/" method="POST">
+              
+              
+              <h3>Edit Filename</h3>
+              
+              <div class="row">
+              <div class="col-sm">
+              <div class="form-outline">
+                <input type="hidden" class="form-control" id="inputiterator" name="inputiterator" value="">
+              <input type="hidden" class="form-control" id="oldtitle" name="oldpdf" value="">
+              <input type="text" id="edittitle" class="form-control" name="pdf" value=""/>
 
-  </div>
-  </div>
-  <div class="col-sm"> <div class="form-outline">
-  
-  <select class="form-control" name="folder">
-  <option value="unknown">Unknown</option>
-  
-  {% for folder in folders %}
-  <option value="{{folder}}">{{folder}}</option>
-  {% endfor %} 
-             
-  </select>
-  
-  </div>
-  
-  </div>
-  
-  <div class="col-sm">
-  <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>
-  </div>
-  </div>
-  </form>  
+              </div>
+              </div>
+              <div class="col-sm"> <div class="form-outline">
+              
+              <select class="form-control" name="folder">
+              <option value="unknown">Unknown</option>
+              
+              {% for folder in folders %}
+              <option value="{{folder}}">{{folder}}</option>
+              {% endfor %} 
+                        
+              </select>
+              
+              </div>
+              
+              </div>
+              
+              <div class="col-sm">
+              <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>
+              </div>
+              </div>
+              </form>  
 
 
 
-  
-  <!--  <a href="/ScanDocument"> <button type="submit" class="btn btn-primary btn-sm" id="filter"><i class="fas fa-filter"></i></button></a>-->
-                 <button type="submit" class="btn btn-primary btn-sm" id="next"><i class="fas fa-angle-double-right"></i></button>
-       <embed id="embed" src="./static/pdf/unknown/{{preview}}" width="100%" height="700px" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">
-  
+              
+              <!--  <a href="/ScanDocument"> <button type="submit" class="btn btn-primary btn-sm" id="filter"><i class="fas fa-filter"></i></button></a>-->
+                  <button type="submit" class="btn btn-primary btn-sm" id="next"><i class="fas fa-angle-double-right"></i></button>
+                  <button type="submit" class="btn btn-primary btn-sm" id="magic"><i class="fas fa-magic"></i></button>
+                  <embed id="embed" src="./static/pdf/unknown/{{preview}}" width="100%" height="700px" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">
+              
   </div>
       </div>
   </body>
@@ -103,72 +105,79 @@
 
   <script>
 
-            
-$(document).ready(function () {
-          $('#dtDocuments').DataTable({
-            "scrollY": "700px",
-            "scrollCollapse": true,
-            "bPaginate": false,
-            "info": false,
-            "scrollX": false,
-            "order": [[ 2, "desc" ]]
+          //Document Ready initiate DataTable - sort on Date  
+          $(document).ready(function () {
+              $('#dtDocuments').DataTable({
+                "scrollY": "700px",
+                "scrollCollapse": true,
+                "bPaginate": false,
+                "info": false,
+                "scrollX": false,
+                "order": [[ 2, "desc" ]]
           });
           $('.dataTables_length').addClass('bs-select');
 
+          //Iterator for Preview
           iterator={{iterator}};
-           const $tableID = $('#dtDocuments');
+          const $tableID = $('#dtDocuments');
 
+          //PREVIEW on document ready
+          id = $tableID.find('tr').eq(++iterator).children('td')[0].innerHTML;
+          console.log("PREVIEW", iterator, id);
 
-           id = $tableID.find('tr').eq(++iterator).children('td')[0].innerHTML;
-                console.log("PREVIEW", iterator, id);
+          var embed=document.getElementById("embed");
+          embed.setAttribute('src','./static/pdf/unknown/'+id);
+          var edittitle=document.getElementById("edittitle");
+          edittitle.setAttribute('value',id.slice(0,id.length-4));
+          var oldtitle=document.getElementById("oldtitle");
+          oldtitle.setAttribute('value',id); 
+          var inputiterator=document.getElementById("inputiterator");
+          inputiterator.setAttribute('value',iterator);
 
-                var embed=document.getElementById("embed");
-            embed.setAttribute('src','./static/pdf/unknown/'+id);
-            var edittitle=document.getElementById("edittitle");
-            edittitle.setAttribute('value',id.slice(0,id.length-4));
-            var oldtitle=document.getElementById("oldtitle");
-            oldtitle.setAttribute('value',id); 
-            var inputiterator=document.getElementById("inputiterator");
-            inputiterator.setAttribute('value',iterator);
-
-
-           $tableID.on('click', '.table-view', function () {
+          //PREVIEW BUTTON clicked
+          $tableID.on('click', '.table-view', function () {
           
-          row=$(this).parents('tr').index();
-          console.log("ROW",row, iterator);
-          $(this).parents('tr'); 
-          id=$(this).children('button').attr('id');
-           var embed=document.getElementById("embed");
-            embed.setAttribute('src','./static/pdf/unknown/'+id);
-            var edittitle=document.getElementById("edittitle");
-            edittitle.setAttribute('value',id.slice(0,id.length-4));
-            var oldtitle=document.getElementById("oldtitle");
-            oldtitle.setAttribute('value',id);
-            var inputiterator=document.getElementById("inputiterator");
-            inputiterator.setAttribute('value',row);
-            iterator=row+1
+                row=$(this).parents('tr').index();
+                console.log("ROW",row, iterator);
+                $(this).parents('tr'); 
+                id=$(this).children('button').attr('id');
+                var embed=document.getElementById("embed");
+                embed.setAttribute('src','./static/pdf/unknown/'+id);
+                var edittitle=document.getElementById("edittitle");
+                edittitle.setAttribute('value',id.slice(0,id.length-4));
+                var oldtitle=document.getElementById("oldtitle");
+                oldtitle.setAttribute('value',id);
+                var inputiterator=document.getElementById("inputiterator");
+                inputiterator.setAttribute('value',row);
+                iterator=row+1
 
           });
 
 
+          //NEXT BUTTON clicked      
+          var next=document.getElementById("next");
+          next.onclick=function(){
                 
-        var next=document.getElementById("next");
-        next.onclick=function(){
+                id = $tableID.find('tr').eq(++iterator).children('td')[0].innerHTML;
+                console.log("NEXT", iterator, id);
 
-                
-            id = $tableID.find('tr').eq(++iterator).children('td')[0].innerHTML;
-            console.log("NEXT", iterator, id);
-
-            var embed=document.getElementById("embed");
-            embed.setAttribute('src','./static/pdf/unknown/'+id);
-            var edittitle=document.getElementById("edittitle");
-            edittitle.setAttribute('value',id.slice(0,id.length-4));
-            var oldtitle=document.getElementById("oldtitle");
-            oldtitle.setAttribute('value',id);
-            var inputiterator=document.getElementById("inputiterator");
-            inputiterator.setAttribute('value',iterator);
-            
+                var embed=document.getElementById("embed");
+                embed.setAttribute('src','./static/pdf/unknown/'+id);
+                var edittitle=document.getElementById("edittitle");
+                edittitle.setAttribute('value',id.slice(0,id.length-4));
+                var oldtitle=document.getElementById("oldtitle");
+                oldtitle.setAttribute('value',id);
+                var inputiterator=document.getElementById("inputiterator");
+                inputiterator.setAttribute('value',iterator);         
         
+        };
+
+
+      // MAGIC BUTTON click
+      var magic=document.getElementById("magic");
+      magic.onclick=function(){
+          id = $tableID.find('tr').eq(iterator).children('td')[0].innerHTML;
+          location.href = "/"+id; 
         };
 });
 
