@@ -11,7 +11,7 @@ PDF OCR Autoscan function based on keywords
 
 ## Run with python on linux
 * ` python3 -m pip install -r requirements.txt`
-* ` apt get install `
+* ` sudo apt-get install tesseract-ocr poppler-utils`
 * ` python3 prpdf.py`
 
 ## Run as docker
