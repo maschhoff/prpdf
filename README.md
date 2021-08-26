@@ -19,7 +19,7 @@ PDF OCR Autoscan function based on keywords
 
 ` docker run -d --name='PRPDF' -v '/mnt/user/Share':'/Archiv/':'rw' -v '/mnt/user/SCAN':'/source/static/pdf/':'rw' -v '/mnt/user/appdata/prpdf/':'/source/config':'rw' 'knex666/prpdf' python3 /source/prpdf.py`
 
-#configuration
+# configuration
 please copy and volume mount the example configuration from https://github.com/maschhoff/prpdf/blob/main/config/config.json
 
     "port":80, - choose any port you want
