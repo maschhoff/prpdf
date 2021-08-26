@@ -20,6 +20,9 @@ def loadConfig():
         res = json.load(fp)
     return res
    
+def writeJsonConfig(config):
+    jc=json.dumps(config)
+    writeConfig(jc)
 
 def writeConfig(config):
 	f = open("/source/config/config.json", "w")

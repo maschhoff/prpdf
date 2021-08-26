@@ -16,6 +16,7 @@ import threading
 import shutil
 import random
 import settings
+from vars import *
 
 
 
@@ -38,12 +39,6 @@ updatetime=config["updatetime"]
 index=config["index"]
 
 
-# Folder - !!! DO NOT CHANGE FOR DOCKER !!!!
-
-pdf_dir = r"/source/static/pdf"           # Source
-temp_dir = r"/tmp/images"        # Temp
-archiv_dir= r"/Archiv/"      # Oberordner Archiv -- darunter Ablage der Item Ordner
-unknown_dir=r"/source/static/pdf/unknown"     # nicht erkannte PDFs
 
 #Ordner anlegen
 
@@ -65,8 +60,8 @@ def autoscan_cron():
         try:
             run()
         except Exception as e:
-            print("An exception occurred "+e)
-            logging.error("An exception occurred "+e)
+            print("An exception occurred "+str(e))
+            logging.error("An exception occurred "+str(e))
         time.sleep(updatetime) # TODO conf updatetime
 
 # aus OCR text indexieren und PDFs in Ordner schieben
@@ -99,25 +94,13 @@ def run():
     # PDFs in Bilder umwandeln und OCR Texterkennung 
     print("Run Dir")
     for pdf_file in os.listdir(pdf_dir):   # Schleife uber Source Ordner 
-        print("---- OCR PDF-File: ",pdf_file," ----\n")
-        if pdf_file.endswith(".pdf"):
-            temp=temp_dir+"/"+pdf_file[:-4]
-            source=pdf_dir+"/"+pdf_file
-        # Bilder aus pdf
-            pages=convert_from_path(source, dpi=400,first_page=1,last_page=1,grayscale=True)
-            count=0
-            for page in pages:
-                count+=1
-                filename=temp+"_"+str(count)+".jpg"
-                page.save(filename,'JPEG')
-                
-        # OCR Texterkennung
-            try:
-                text=pytesseract.image_to_string(Image.open(temp+"_1.jpg"),lang=lang)
-            except:
-                text=""
-            sort(pdf_file,text) # PDFs der Reihe nach indexieren
-            
+        try:
+            sort(pdf_file,ocr(pdf_dir,pdf_file)) # PDFs der Reihe nach indexieren
+        except Exception as e:
+            logging.error("An exception occurred "+str(e))
+            print("An exception occurred "+str(e))
+            continue
+
     print("Run Del")    
     for image_file in os.listdir(temp_dir): # temp Dir loeschen
         os.remove(temp_dir+"/"+image_file)
@@ -127,6 +110,29 @@ def run():
                 logging.info("MOVE "+pdf_dir+"/"+unknown_file+" to "+unknown_dir+"/"+unknown_file)
                 print("MOVE "+pdf_dir+"/"+unknown_file+" to "+unknown_dir+"/"+unknown_file)
                 shutil.move(pdf_dir+"/"+unknown_file,unknown_dir+"/"+unknown_file)
+
+def ocr(folder, pdf_file):
+    print("---- OCR PDF-File: ",pdf_file," ----\n")
+    if pdf_file.endswith(".pdf"):
+        temp=temp_dir+"/"+pdf_file[:-4]
+        source=folder+"/"+pdf_file
+
+    # Bilder aus pdf
+        try:
+            pages=convert_from_path(source, dpi=400,first_page=1,last_page=1,grayscale=True)
+        except Exception as e:
+            logging.error("An exception occurred "+str(e))
+            print("An exception occurred "+str(e))
+            return ""           
+
+        filename=temp+"_1.jpg"
+        pages[0].save(filename,'JPEG')
+            
+    # OCR Texterkennung
+        try:
+            return pytesseract.image_to_string(Image.open(temp+"_1.jpg"),lang=lang)
+        except:
+            return ""
 
 
 #Cron Thread start

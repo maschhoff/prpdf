@@ -15,8 +15,11 @@ import logging
 import time
 import threading
 import shutil
+import random
 import settings
-from autoscan import *
+import autoscan
+import merge
+from vars import *
 
 app = Flask(__name__)
 
@@ -31,13 +34,57 @@ def index():
                 search["name"]=""
         return render_template('explorer.html', liste=pdf, preview=search['name'], folders=loadArchivFolder(),iterator=0)
 
+
+@app.route('/', methods=['POST'])
+def my_form_post():
+        newid = request.form['pdf']
+        id = request.form['oldpdf']
+        folder=request.form['folder']
+        iterator=request.form['inputiterator']
+        
+        filedatum=date.fromtimestamp(os.path.getmtime(unknown_dir+id)).strftime('%d_%m_%Y')
+        fileneu=newid+"_"+filedatum+"_"+str(random.randint(1111,9999))+".pdf" 
+        
+        print(folder)
+        if newid!="":
+                if folder!="unknown":
+                        shutil.move(unknown_dir+id,archiv_dir+"/"+folder+"/"+fileneu)
+                else:
+                        shutil.move(unknown_dir+id,unknown_dir+"/"+fileneu) 
+        pdf=loadFiles()
+        if newid!="":
+                return render_template('explorer.html', message="title changed", liste=pdf, preview=newid+'.pdf', folders=loadArchivFolder(),iterator=iterator)
+        else:
+                return render_template('explorer.html', message="Error: title was empty", liste=pdf, preview=id, folders=loadArchivFolder(),iterator=iterator)
+
+
+@app.route('/merge')
+def domerge():
+        pdf=loadFiles()
+        return render_template('merge.html', files=pdf)
+
+@app.route('/merge', methods=['POST'])
+def domergepost():
+        file1 = request.form['file1']
+        file2 = request.form['file2']
+        option = request.form['option']
+        filename = request.form['pdf']
+
+        if "merge" in option:
+                merge.pdf_merge_file(unknown_dir+file1,unknown_dir+file2,filename)
+        else:
+                merge.pdf_adf(unknown_dir+file1,unknown_dir+file2,filename)
+
+        pdf=loadFiles()
+        return render_template('explorer.html', liste=pdf, message="merged", folders=loadArchivFolder(),iterator=0)
+
 @app.route('/autoscan')
-def autoscan():
+def doautoscan():
         try:
-            run()
+            autoscan.run()
         except Exception as e:
-            print("An exception occurred "+e)
-            logging.error("An exception occurred "+e)
+            print("An exception occurred "+str(e))
+            logging.error("An exception occurred "+str(e))
 
         pdf=loadFiles()
         if pdf:
@@ -47,31 +94,25 @@ def autoscan():
                 search["name"]=""
         return render_template('explorer.html', liste=pdf, preview=search['name'], folders=loadArchivFolder(),iterator=0)
 
+@app.route('/<string:id>')
+def doocr(id):
+        text=autoscan.ocr(unknown_dir,id) 
+        return render_template('magic.html', text=text, folders=loadArchivFolder(), pdf=id)
 
-
-
-@app.route('/', methods=['POST'])
-def my_form_post():
+@app.route('/magic', methods=['POST'])
+def autoscan_rule():
         newid = request.form['pdf']
-        id = request.form['oldpdf']
-        folder=request.form['folder']
-        iterator=request.form['inputiterator']
+        folder = request.form['folder']
+        keywords = request.form['keywords']
         
-        filedatum=date.fromtimestamp(os.path.getmtime(unknown_dir+"/"+id)).strftime('%d_%m_%Y')
-        fileneu=newid+"_"+filedatum+"_"+str(random.randint(1111,9999))+".pdf" 
-        
-        print(folder)
-        if newid!="":
-                if folder!="unknown":
-                        shutil.move(unknown_dir+"/"+id,archiv_dir+"/"+folder+"/"+fileneu)
-                else:
-                        shutil.move(unknown_dir+"/"+id,unknown_dir+"/"+fileneu) 
-        pdf=loadFiles()
-        if newid!="":
-                return render_template('explorer.html', message="title changed", liste=pdf, preview=newid+'.pdf', folders=loadArchivFolder(),iterator=iterator)
-        else:
-                return render_template('explorer.html', message="Error: title was empty", liste=pdf, preview=id, folders=loadArchivFolder(),iterator=iterator)
+        keyw_array=keywords.split(",")
+        key=folder+"/"+newid
 
+        config["index"].update({key:keyw_array})
+        settings.writeJsonConfig(config)
+
+        pdf=loadFiles()
+        return render_template('explorer.html', liste=pdf, folders=loadArchivFolder(),iterator=0, message="autoscan rule saved")
 
 @app.route('/settings')
 def setting():
