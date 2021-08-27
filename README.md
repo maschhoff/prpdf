@@ -16,10 +16,10 @@ PDF OCR Autoscan function based on keywords
 
 * Note 1: remember to setup the network to map the port of your configuration ` -p 80:80` you can choose any port you want see config
 * Note 2: besited a folder structure for documents in a folder you mount to /Archiv/ you can volume mount any directory you want to /Archiv/ to build you own virtual folder structure
-` -v '/mnt/user/Files/Accounting':'/Archiv/Accounting':'rw'`
+` -v '/mnt/user/Files/Accounting':'/Archiv/Accounting':'rw'` etc.
 
 ## Run with python on linux
-Note: Please enshure to run it from /source/ 
+Note: Please ensure to run it from /source/ 
 create a folder /Archiv for your files 
 and a folder /source/static/pdf/ as location for you scanned pdfs
 otherwise feel free to edit the sourcecode on vars.py etc.
