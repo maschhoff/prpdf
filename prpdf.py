@@ -134,16 +134,17 @@ def loadArchivFolder():
 
 def loadFiles():
         
-        folder=unknown_dir # config unknown dir
-        files=os.listdir(folder)
         res=[]
-        for file in files:
-                filer={}
-                filer["name"]=file
-                filer["size"]=str(os.path.getsize(folder+"/"+file)/1000000)+" MB"
-                timestamp = date.fromtimestamp(os.path.getmtime(folder+"/"+file))
-                filer["date"]=timestamp
-                res.append(filer)
+        if os.path.exists(unknown_dir):
+                files=sorted(os.listdir(unknown_dir))
+                
+                for file in files:
+                        filer={}
+                        filer["name"]=file
+                        filer["size"]=str(os.path.getsize(unknown_dir+file)/1000000)+" MB"
+                        timestamp = date.fromtimestamp(os.path.getmtime(unknown_dir+file))
+                        filer["date"]=timestamp
+                        res.append(filer)
         
         return res
 

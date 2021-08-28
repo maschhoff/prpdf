@@ -8,15 +8,31 @@ settings - Helpers
 """
 
 import json
+import os
+
+configsrc='/source/config/config.json'
 
 def getConfigRaw():
-	config_raw= open('/source/config/config.json', 'r')
+	config_raw= open(configsrc, 'r')
 	return config_raw
 
 def loadConfig():
     #print("loadConfig()")
     res={}
-    with open('/source/config/config.json', 'r') as fp:
+
+    if not os.path.exists(configsrc):
+        writeConfig(""" {
+        "port":80,
+        "debug":"off",
+        "lang":"eng",
+        "updatetime":1800,
+        "index":{
+            "Foldername/Filename":["Keyword1"],
+            "Foldername2/Filename":["Keyword1","Keyword2 ","Keyword3"]
+        }
+        }""")
+
+    with open(configsrc, 'r') as fp:
         res = json.load(fp)
     return res
    
@@ -25,6 +41,6 @@ def writeJsonConfig(config):
     writeConfig(jc)
 
 def writeConfig(config):
-	f = open("/source/config/config.json", "w")
+	f = open(configsrc, "w")
 	f.write(config)
 	f.close()
