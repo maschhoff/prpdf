@@ -10,14 +10,21 @@ def pdf_adf(frontpdfraw, backpdfraw, out_filename):
     frontpdf = PdfFileReader(open(frontpdfraw, "rb"))
     backpdf = PdfFileReader(open(backpdfraw, "rb"))
 
-    output = PdfFileWriter()
-    for i in range(int(frontpdf.numPages)):
-        #print(i)
-        output.addPage(frontpdf.getPage(i))
-        output.addPage(backpdf.getPage(backpdf.numPages-i-1))
-        #print(backpdf.numPages-i-1)
-    with open(unknown_dir+out_filename+".pdf", "wb") as outputStream:
-        output.write(outputStream)
+    if frontpdf.numPages==backpdf.numPages:
+
+        output = PdfFileWriter()
+        for i in range(int(frontpdf.numPages)):
+            #print(i)
+            output.addPage(frontpdf.getPage(i))
+            output.addPage(backpdf.getPage(backpdf.numPages-i-1))
+            #print(backpdf.numPages-i-1)
+        with open(unknown_dir+out_filename+".pdf", "wb") as outputStream:
+            output.write(outputStream)
+
+        return "merged"
+
+    else:
+        return "page amount front/back differs"
 
 
 
@@ -45,4 +52,5 @@ def pdf_merge_file(file1,file2,out_filename):
         merger.append(files) 
     with open(unknown_dir+out_filename+".pdf", "wb") as new_file:
         merger.write(new_file)              # alle Seiten in neues File
+    return "merged"
 
