@@ -71,12 +71,12 @@ def domergepost():
         filename = request.form['pdf']
 
         if "merge" in option:
-                merge.pdf_merge_file(unknown_dir+file1,unknown_dir+file2,filename)
+                message=merge.pdf_merge_file(unknown_dir+file1,unknown_dir+file2,filename)
         else:
-                merge.pdf_adf(unknown_dir+file1,unknown_dir+file2,filename)
+                message=merge.pdf_adf(unknown_dir+file1,unknown_dir+file2,filename)
 
         pdf=loadFiles()
-        return render_template('explorer.html', liste=pdf, message="merged", folders=loadArchivFolder(),iterator=0)
+        return render_template('explorer.html', liste=pdf, message=message, folders=loadArchivFolder(),iterator=0)
 
 @app.route('/autoscan')
 def doautoscan():
