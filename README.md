@@ -1,7 +1,7 @@
 # PR PDF Explorer
-Preview and Rename PDF Explorer\
+Preview and Rename PDF Explorer
 
-For easy view, rename and move scanned PDF files.\
+For easy view, rename and move scanned PDF files.
 
 Functions:
 * PDF OCR Autoscan will move known documents based on keywords
