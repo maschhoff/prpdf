@@ -15,8 +15,8 @@ How it works:
 
 How it looks like:
 
-![Explorer](https://i.ibb.co/b723gYv/Explorer.jpg =300px)
-![OCR](https://i.ibb.co/JQb8Frf/OCR.jpg =300px)
+![Explorer](https://i.ibb.co/b723gYv/Explorer.jpg){ width=50% }
+![OCR](https://i.ibb.co/JQb8Frf/OCR.jpg){ width=50% }
 
 # Install and run
 
