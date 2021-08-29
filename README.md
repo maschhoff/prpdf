@@ -7,16 +7,16 @@ Functions:
 * PDF OCR Autoscan will move known documents based on keywords
 * PDF Merge let you merge documents (1+1 and front and back pages)
 
-How it works:\
+How it works:
 1. Documents get scanned to a scan-folder 
 2. these documents will be autoscanned and moved to the specific locations
 3. Any files that are not recognized by autoscan will be moved to the subfolder "unknown" of the scan-folder
 4. The Webbased PR PDF Explorer lists all documents of the "unknown" folder.
 
-How it looks like:\
+How it looks like:
 
-![Explorer](https://i.ibb.co/b723gYv/Explorer.jpg)
-![OCR](https://i.ibb.co/JQb8Frf/OCR.jpg)
+![Explorer](https://i.ibb.co/b723gYv/Explorer.jpg =300px)
+![OCR](https://i.ibb.co/JQb8Frf/OCR.jpg =300px)
 
 # Install and run
 
