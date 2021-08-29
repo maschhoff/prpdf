@@ -1,27 +1,28 @@
 # PR PDF Explorer
 Preview and Rename PDF Explorer\ For easy view, rename and move scanned PDF files.
   
-Background and Motivation:  
+## Background and Motivation:  
 I was searching for a easy to use solution to get my letters and paper digital.  
 Since I was searching for a solution for my unraid NAS, solutions like paperwork dont work as docker/in web or on many computer.  
 Programs like Paperless and Papermerge are great but much to heavy with database etc.  
 I like to keep my files in a normal folder structure to share and access them from every pc.  
 Thats how PR PDF started. As an lightwight easy to use web based application to make it easy to preview, rename and move scanned documents.  
   
-BETA Note:  
+## BETA Note:  
 This program is very new and theres a lot to test. Please report issues to the issues tab on github.
 
-Functions:
+## Functions:
 * PDF OCR Autoscan will move known documents based on keywords
+* Preview and Rename documents from a web browser
 * PDF Merge let you merge documents (1+1 and front and back pages)
 
-How it works:
+## How it works:
 1. Documents get scanned to a scan-folder 
 2. these documents will be autoscanned and moved to the specific locations
 3. Any files that are not recognized by autoscan will be moved to the subfolder "unknown" of the scan-folder
 4. The Webbased PR PDF Explorer lists all documents of the "unknown" folder.
 
-How it looks like:
+## How it looks like:
 
 ![Explorer](https://i.ibb.co/b723gYv/Explorer.jpg)
 ![OCR](https://i.ibb.co/JQb8Frf/OCR.jpg)
@@ -47,7 +48,7 @@ otherwise feel free to edit the sourcecode on vars.py etc.
 * ` sudo apt-get install tesseract-ocr poppler-utils`
 * ` python3 prpdf.py`
 
-# configuration
+# Configuration
 please copy and volume mount the example configuration from https://github.com/maschhoff/prpdf/blob/main/config/config.json
 
     "port":80, - choose any port you want
@@ -55,6 +56,6 @@ please copy and volume mount the example configuration from https://github.com/m
     "lang":"deu", set the ocr language see https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html
     "updatetime":1800, uptime in seconds
 
-# donate
-Buy me a Pizza -> https://www.buymeacoffee.com/maschhoff
+# Donate
+If you like what you see please buy me a Pizza -> https://www.buymeacoffee.com/maschhoff
 
