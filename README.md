@@ -1,8 +1,7 @@
 # PR PDF Explorer
-Preview and Rename PDF Explorer
-For easy view, rename and move scanned PDF files.
+Preview and Rename PDF Explorer\ For easy view, rename and move scanned PDF files.
 
-Background and Motivation:
+Background and Motivation:\
 I was searching for a easy to use solution to get my letters and paper digital.
 Since I was searching for a solution for my unraid NAS, solutions like paperwork dont work as docker/in web or on many computer.
 Programs like Paperless and Papermerge are great but much to heavy with database etc. 
