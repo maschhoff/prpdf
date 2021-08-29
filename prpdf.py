@@ -16,6 +16,7 @@ import time
 import threading
 import shutil
 import random
+import json
 import settings
 import autoscan
 import merge
@@ -45,17 +46,17 @@ def my_form_post():
         filedatum=date.fromtimestamp(os.path.getmtime(unknown_dir+id)).strftime('%d_%m_%Y')
         fileneu=newid+"_"+filedatum+"_"+str(random.randint(1111,9999))+".pdf" 
         
+        message=""
         print(folder)
         if newid!="":
                 if folder!="unknown":
                         shutil.move(unknown_dir+id,archiv_dir+"/"+folder+"/"+fileneu)
+                        message="moved"
                 else:
-                        shutil.move(unknown_dir+id,unknown_dir+"/"+fileneu) 
+                        shutil.move(unknown_dir+id,unknown_dir+"/"+fileneu)
+                        message="title chaned"
         pdf=loadFiles()
-        if newid!="":
-                return render_template('explorer.html', message="title changed", liste=pdf, preview=newid+'.pdf', folders=loadArchivFolder(),iterator=iterator)
-        else:
-                return render_template('explorer.html', message="Error: title was empty", liste=pdf, preview=id, folders=loadArchivFolder(),iterator=iterator)
+        return render_template('explorer.html', message=message, liste=pdf, preview=newid+'.pdf', folders=loadArchivFolder(),iterator=iterator)
 
 
 @app.route('/merge')
@@ -121,12 +122,22 @@ def setting():
 
 @app.route('/settings', methods=['POST'])
 def setting_save():
-	config_raw=request.form['hiddenconfig']
-	settings.writeConfig(config_raw)
-	global config
-	config=settings.loadConfig()
-	#os.execl(sys.executable, sys.executable, *sys.argv)
-	return render_template('settings.html', config=config, config_raw=config_raw, message="config saved")
+        config_raw=request.form['hiddenconfig']
+        global config
+        logging.info("Config: "+config_raw)
+
+        if not config_raw:
+                config_raw= settings.getConfigRaw()
+                return render_template('settings.html', config=config, config_raw=config_raw.read())
+        
+        try:
+                json.loads(config_raw)
+                settings.writeConfig(config_raw)
+                config=settings.loadConfig()
+                return render_template('settings.html', config=config, config_raw=config_raw, message="config saved")
+        except Exception as e:
+                logging.error(e)
+                return render_template('settings.html', config=config, config_raw=config_raw, message="JSON error")
 
 
 def loadArchivFolder():
