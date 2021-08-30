@@ -49,7 +49,9 @@ otherwise feel free to edit the sourcecode on vars.py etc.
 * ` python3 prpdf.py`
 
 # Configuration
-please copy and volume mount the example configuration from https://github.com/maschhoff/prpdf/blob/main/config/config.json
+A default config will be creating within the first start of PR PDF.
+For Docker please mount the config folder to make it persistent.
+An example: https://github.com/maschhoff/prpdf/blob/main/config/config.json
 
     "port":80, - choose any port you want
     "debug":"off", set so on or off to see ocr results while autoscan
