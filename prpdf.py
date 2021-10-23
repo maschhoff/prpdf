@@ -9,7 +9,7 @@ Main Server File
 """ 
 
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from datetime import datetime, date
 import logging
 import time
@@ -20,6 +20,7 @@ import json
 import settings
 import autoscan
 import merge
+import splitpages
 from vars import *
 
 app = Flask(__name__)
@@ -79,6 +80,24 @@ def domergepost():
         pdf=loadFiles()
         return render_template('explorer.html', liste=pdf, message=message, folders=loadArchivFolder(),iterator=0)
 
+@app.route('/split')
+def dosplit():
+        pdf=loadFiles()
+        return render_template('split.html', files=pdf)
+
+
+@app.route('/split', methods=['POST'])
+def dosplitpost():
+        file1 = request.form['file1']
+        page = request.form['page']
+        logging.info("Split Page after: "+page)
+
+        splitpages.split_pdf(unknown_dir+file1,int(page))
+
+        pdf=loadFiles()
+        return render_template('explorer.html', liste=pdf, message="", folders=loadArchivFolder(),iterator=0)
+
+
 @app.route('/autoscan')
 def doautoscan():
         try:
@@ -94,6 +113,12 @@ def doautoscan():
                 search={}
                 search["name"]=""
         return render_template('explorer.html', liste=pdf, preview=search['name'], folders=loadArchivFolder(),iterator=0)
+
+@app.route('/del/<string:id>')
+def dosdel(id):
+        os.remove(unknown_dir+id)
+        return redirect('/')
+
 
 @app.route('/<string:id>')
 def doocr(id):

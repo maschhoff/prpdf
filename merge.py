@@ -1,3 +1,13 @@
+"""
+
+PR PDF
+
+Merge Pages File
+
+2020 maschhoff github.com/maschhoff
+
+""" 
+
 from PyPDF2 import PdfFileMerger,PdfFileReader,PdfFileWriter
 import os
 from vars import *
