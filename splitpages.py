@@ -1,28 +1,3 @@
-"""
-from PyPDF2 import PdfFileWriter, PdfFileReader
-
-
-def splitPages(inputfile,page):
-    input_pdf = PdfFileReader(open(inputfile, "rb"))
-    output1 = PdfFileWriter()
-
-    #for x in range(2):
-    output1.addPage(input_pdf.getPage(0))
-
-
-    with open(inputfile.split(".")[0]+"_1.pdf", "wb") as output_stream1:
-        output1.write(output_stream1)
-    
-    output2 = PdfFileWriter()
-
-    #for y in range(3, input_pdf.numPages-1):
-    output2.addPage(input_pdf.getPage(0))
-
-    with open(inputfile.split(".")[0]+"_2.pdf", "wb") as output_stream2:
-        output2.write(output_stream2)
-
-"""
-
 from PyPDF2 import PdfFileWriter, PdfFileReader
 
 def split_pdf(filename,seite):
