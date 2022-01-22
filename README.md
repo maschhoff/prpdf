@@ -1,4 +1,4 @@
-# PR PDF Explorer
+# PR PDF - scan documents explorer and automation 
 Preview and Rename PDF Explorer\ For easy view, rename and move scanned PDF files.
   
 ## Background and Motivation:  
