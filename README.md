@@ -1,5 +1,5 @@
 # PR PDF - scan documents explorer and automation 
-Preview and Rename PDF Explorer\ For easy view, rename and move scanned PDF files.
+Preview and Rename PDF Explorer\ A webbased document explorer and automation. For easy view, rename and move scanned PDF files.
   
 ## Background and Motivation:  
 I was searching for a easy to use solution to get my letters and paper digital.  
