@@ -120,6 +120,14 @@ def dosdel(id):
         return redirect('/')
 
 
+@app.route('/rotate/<string:id>')
+def dorotate(id):
+        #Rotate
+        splitpages.rotate_pages(unknown_dir+id)
+        return redirect('/')
+        #text=autoscan.ocr(unknown_dir,id) 
+        #return render_template('magic.html', text=text, folders=loadArchivFolder(), pdf=id)
+
 @app.route('/<string:id>')
 def doocr(id):
         text=autoscan.ocr(unknown_dir,id) 

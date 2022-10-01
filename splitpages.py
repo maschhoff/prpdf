@@ -1,5 +1,36 @@
+"""
+
+PR PDF
+
+Split Pages File
+
+2022 maschhoff github.com/maschhoff 
+
+""" 
+
 from PyPDF2 import PdfFileWriter, PdfFileReader
 
+#Rotate a document 180 clockwise
+def rotate_pages(filename):
+    try:
+        pdf_in = open(filename, 'rb')
+        pdf_reader = PdfFileReader(pdf_in)
+        pdf_writer = PdfFileWriter()
+
+        for pagenum in range(pdf_reader.numPages):
+            page = pdf_reader.getPage(pagenum)
+            page.rotateClockwise(180)
+            pdf_writer.addPage(page)
+ 
+        pdf_out = open(filename[:-4]+"_rotated.pdf", 'wb')
+        #pdf_out = open(filename, 'wb')
+        pdf_writer.write(pdf_out)
+        pdf_out.close()
+        pdf_in.close()
+    except:
+        print("Error: rotation failed")
+
+#split a document after pagenumber
 def split_pdf(filename,seite):
     pdf_reader = PdfFileReader(open(filename, "rb"))
     out1 = '{}_part_{}.pdf'.format(filename[:-4], 1)
