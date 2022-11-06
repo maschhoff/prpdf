@@ -1,4 +1,6 @@
 # syntax=docker/dockerfile:1
+# docker build -t knex666/prpdf:latest .
+
 FROM knex666/prpdf:latest
 WORKDIR /source
 ENV FLASK_APP=prpdf.py
