@@ -80,6 +80,8 @@
               {% endfor %} 
                         
               </select>
+              <!-- <button type="button" class="btn btn-primary btn-sm" id="select" data-toggle="modal" data-target="#myModal2" data-toggle="tooltip" data-placement="bottom"
+                  title="select folder"><i class="fas fa-folder"></i></button>-->
               
               </div>
               
@@ -130,6 +132,84 @@
         </div>
       </div>
       
+      
+        
+      
+      <!-- TreeView Modal -->
+      <div class="modal fade" id="myModal2" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!--<h5 class="modal-title" id="exampleModalLabel">Delete file?</h5>-->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+              
+              
+								   <div class="treeview w-100 border">
+					  <h6 class="pt-3 pl-3">Folders</h6>
+					  <hr>
+					  <ul class="mb-1 pl-3 pb-2">
+						<li><i class="fas fa-angle-right rotate"></i>
+              <span><i class="far fa-envelope-open ic-w mx-1"></i>Mail</span>
+						  <ul class="nested">
+							<li> <input type="checkbox" class="custom-control-input" id="defaultUnchecked">Offers</li>
+							<li><i class="far fa-address-book ic-w mr-1"></i>Contacts</li>
+							<li><i class="fas fa-angle-right rotate"></i>
+							  <span><i class="far fa-calendar-alt ic-w mx-1"></i>Calendar</span>
+							  <ul class="nested">
+								<li><i class="far fa-clock ic-w mr-1"></i>Deadlines</li>
+								<li><i class="fas fa-users ic-w mr-1"></i>Meetings</li>
+								<li><i class="fas fa-basketball-ball ic-w mr-1"></i>Workouts</li>
+								<li><i class="fas fa-mug-hot ic-w mr-1"></i>Events</li>
+							  </ul>
+							</li>
+						  </ul>
+						</li>
+						<li><i class="fas fa-angle-right rotate"></i>
+						  <span><i class="far fa-folder-open ic-w mx-1"></i>Inbox</span>
+						  <ul class="nested">
+							<li><i class="far fa-folder-open ic-w mr-1"></i>Admin</li>
+							<li><i class="far fa-folder-open ic-w mr-1"></i>Corporate</li>
+							<li><i class="far fa-folder-open ic-w mr-1"></i>Finance</li>
+							<li><i class="far fa-folder-open ic-w mr-1"></i>Other</li>
+						  </ul>
+						</li>
+						<li><i class="fas fa-angle-right rotate"></i>
+						  <span><i class="far fa-gem ic-w mx-1"></i>Favourites</span>
+						  <ul class="nested">
+							  <li><i class="fas fa-pepper-hot ic-w mr-1"></i>Restaurants</li>
+							  <li><i class="far fa-eye ic-w mr-1"></i>Places</li>
+							  <li><i class="fas fa-gamepad ic-w mr-1"></i>Games</li>
+							  <li><i class="fas fa-cocktail ic-w mr-1"></i>Coctails</li>
+							  <li><i class="fas fa-pizza-slice ic-w mr-1"></i>Food</li>
+							</ul>
+						</li>
+						<li><i class="far fa-comment ic-w mr-1"></i>Notes</li>
+						<li><i class="fas fa-cogs ic-w mr-1"></i>Settings</li>
+						<li><i class="fas fa-desktop ic-w mr-1"></i>Devices</li>
+						<li><i class="fas fa-trash-alt ic-w mr-1"></i>Deleted Items</li>
+					  </ul>
+					</div>
+              
+              
+              
+              
+              
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="dodel" class="btn btn-primary btn-sm">Apply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      
 
   </body>
 
@@ -147,6 +227,9 @@
                 "order": [[ 2, "desc" ]]
           });
           $('.dataTables_length').addClass('bs-select');
+
+          //TREEVIEW
+          $('.treeview').mdbTreeview();
 
           //Iterator for Preview
           iterator={{iterator}};
