@@ -11,6 +11,7 @@ Main Server File
 import os
 from flask import Flask, render_template, request, redirect
 from datetime import datetime, date
+from os import path
 import logging
 import time
 import threading
@@ -21,6 +22,7 @@ import settings
 import autoscan
 import merge
 import splitpages
+import glob
 from vars import *
 
 app = Flask(__name__)
@@ -180,13 +182,15 @@ def loadFiles():
         
         res=[]
         if os.path.exists(unknown_dir):
-                files=sorted(os.listdir(unknown_dir))
+                #files=sorted(os.listdir(unknown_dir))
+                files=glob.glob(unknown_dir+"/*.pdf") #glob.glob(path.join(unknown_dir,"*.{}".format("pdf"))) #glob.glob(unknown_dir,"*.pdf")
+                print(files)
                 
                 for file in files:
                         filer={}
-                        filer["name"]=file
-                        filer["size"]=str(os.path.getsize(unknown_dir+file)/1000000)+" MB"
-                        timestamp = date.fromtimestamp(os.path.getmtime(unknown_dir+file))
+                        filer["name"]=file.rsplit("/",1)[1]
+                        filer["size"]=str(os.path.getsize(file)/1000000)+" MB"
+                        timestamp = date.fromtimestamp(os.path.getmtime(file))
                         filer["date"]=timestamp
                         res.append(filer)
         

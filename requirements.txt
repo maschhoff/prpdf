@@ -1,7 +1,8 @@
-pip3 install flask
-pip3 install Pillow
-pip3 install pytesseract
-pip3 install pdf2image
-pip3 install pdfsplit
-sudo apt-get install tesseract-ocr
-sudo apt-get install poppler-utils
+flask
+Pillow
+pytesseract
+pdf2image
+PyPDF2
+#pdfsplit==0.4.2
+#sudo apt-get install tesseract-ocr
+#sudo apt-get install poppler-utils
