@@ -1,9 +1,10 @@
 # syntax=docker/dockerfile:1
-# docker build -t knex666/prpdf:latest .
-
-FROM knex666/prpdf:latest
+FROM python:3.11.0-slim-buster
 WORKDIR /source
 ENV FLASK_APP=prpdf.py
 ENV FLASK_RUN_HOST=0.0.0.0
-COPY . /source
+ENV FLASK_RUN_PORT=80
+COPY /prpdf /source
+RUN apt-get update && apt-get install tesseract-ocr poppler-utils tesseract-ocr-deu -y
+RUN pip3 install -r /source/requirements.txt
 CMD ["flask", "run"]
