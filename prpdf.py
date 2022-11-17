@@ -28,6 +28,9 @@ from vars import *
 app = Flask(__name__)
 
 
+
+
+
 @app.route('/')
 def index():
         pdf=loadFiles()
@@ -53,7 +56,7 @@ def my_form_post():
         print(folder)
         if newid!="":
                 if folder!="unknown":
-                        shutil.move(unknown_dir+id,archiv_dir+"/"+folder+"/"+fileneu)
+                        shutil.move(unknown_dir+id,folder+"/"+fileneu)
                         message="moved"
                 else:
                         shutil.move(unknown_dir+id,unknown_dir+"/"+fileneu)
@@ -175,8 +178,23 @@ def setting_save():
                 return render_template('settings.html', config=config, config_raw=config_raw, message="JSON error")
 
 
+
+subdirs=[archiv_dir]
+
+def listdirs(rootdir):
+    for it in os.scandir(rootdir):
+        if it.is_dir():
+            subdirs.append(it.path)
+            listdirs(it)
+ 
+listdirs(archiv_dir)
+
+#print (subdirs)
+
+
 def loadArchivFolder():
-        return sorted(os.listdir(archiv_dir))
+        #return sorted(os.listdir(archiv_dir))
+        return subdirs
 
 def loadFiles():
         
@@ -219,3 +237,4 @@ if __name__ == '__main__':
 	""")
 
         app.run(host='0.0.0.0',port=config["port"],debug=True)
+
