@@ -1,1 +1,1 @@
-{"port": 80, "debug": "off", "lang": "deu", "updatetime": 1800, "index": {"Test1/TESTARC;Filename": ["Keyword1"], "/Archiv/Test1;Filename": ["Bibliothek", "Johann"]}}
+{"port": 80, "debug": "off", "lang": "deu", "updatetime": 1800, "index": {"/Archiv/Test1/TESTARC;Filename": ["Keyword1"], "/Archiv/Test1;Filename": ["Bibliothek", "Johann"]}}
