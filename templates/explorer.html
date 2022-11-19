@@ -59,43 +59,40 @@
               <form action="/" method="POST">
               
               
-              <h3>Edit Filename</h3>
+              <h3>Edit and move</h3>
               
               <div class="row">
-              <div class="col-sm">
+              <div class="col-6">
               <div class="form-outline">
                 <input type="hidden" class="form-control" id="inputiterator" name="inputiterator" value="">
               <input type="hidden" class="form-control" id="oldtitle" name="oldpdf" value="">
+              <input type="hidden" id="folder" name="folder" value="unknown">
               <input type="text" id="edittitle" class="form-control" name="pdf" value=""/>
 
               </div>
               </div>
-              <div class="col-sm"> <div class="form-outline">
+              <div class="col-2"> 
+   
               
-              <select class="form-control" name="folder">
-              <option value="unknown">Unknown</option>
+                
+             <button type="button" class="btn btn-primary btn-sm" id="select" data-toggle="modal" data-target="#myModal2" data-toggle="tooltip" data-placement="bottom"
+                  title="select folder"><i class="fas fa-folder"></i></button>
               
-              {% for folder in folders %}
-              <option value="{{folder}}">{{folder}}</option>
-              {% endfor %} 
-                        
-              </select>
-              <!-- <button type="button" class="btn btn-primary btn-sm" id="select" data-toggle="modal" data-target="#myModal2" data-toggle="tooltip" data-placement="bottom"
-                  title="select folder"><i class="fas fa-folder"></i></button>-->
+            
               
               </div>
               
-              </div>
-              
-              <div class="col-sm">
-              <button type="submit" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom"
-              title="Edit document title"><i class="fas fa-pen"></i></button>
+              <div class="col-2">
+    
+                <button type="submit" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                title="Edit document title"><i class="fas fa-check"></i></button>
+
               </div>
               </div>
               </form>  
 
 
-
+<hr>
               
               <!--  <a href="/ScanDocument"> <button type="submit" class="btn btn-primary btn-sm" id="filter"><i class="fas fa-filter"></i></button></a>-->
                   <button type="submit" class="btn btn-primary btn-sm" id="next" data-toggle="tooltip" data-placement="bottom"
@@ -140,69 +137,53 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <!--<h5 class="modal-title" id="exampleModalLabel">Delete file?</h5>-->
+              <h5 class="modal-title" id="exampleModalLabel">Select folder</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
               
+              <div class="treeview">
+                
+                <ul class="mb-1 pl-3 pb-2">
               
+						<!--subdirhtml  
+            
+              TODO unknown und .
+
+            -->
+
+            <li><i class="fas fa-angle-right rotate"></i>
+              <span><i class="far fa-folder-open ic-w mx-1"></i><a href="javascript:void(0)" onClick="selectfolder('unknown');">Unknown</a></span>
+              <ul class="nested">
+                </ul>
+                </li>
+
+                <li><i class="fas fa-angle-right rotate"></i>
+                  <span><i class="far fa-folder-open ic-w mx-1"></i><a href="javascript:void(0)" onClick="selectfolder('/Archiv/');">Main archiv folder</a></span>
+                  <ul class="nested">
+                    </ul>
+                    </li>
+            
+                  <hr>
+          
+
+            {{ subdirhtml|safe }}
+       
+          
+
+
+
+          </ul></div>
+          </div>
               
-								   <div class="treeview w-100 border">
-					  <h6 class="pt-3 pl-3">Folders</h6>
-					  <hr>
-					  <ul class="mb-1 pl-3 pb-2">
-						<li><i class="fas fa-angle-right rotate"></i>
-              <span><i class="far fa-envelope-open ic-w mx-1"></i>Mail</span>
-						  <ul class="nested">
-							<li> <input type="checkbox" class="custom-control-input" id="defaultUnchecked">Offers</li>
-							<li><i class="far fa-address-book ic-w mr-1"></i>Contacts</li>
-							<li><i class="fas fa-angle-right rotate"></i>
-							  <span><i class="far fa-calendar-alt ic-w mx-1"></i>Calendar</span>
-							  <ul class="nested">
-								<li><i class="far fa-clock ic-w mr-1"></i>Deadlines</li>
-								<li><i class="fas fa-users ic-w mr-1"></i>Meetings</li>
-								<li><i class="fas fa-basketball-ball ic-w mr-1"></i>Workouts</li>
-								<li><i class="fas fa-mug-hot ic-w mr-1"></i>Events</li>
-							  </ul>
-							</li>
-						  </ul>
-						</li>
-						<li><i class="fas fa-angle-right rotate"></i>
-						  <span><i class="far fa-folder-open ic-w mx-1"></i>Inbox</span>
-						  <ul class="nested">
-							<li><i class="far fa-folder-open ic-w mr-1"></i>Admin</li>
-							<li><i class="far fa-folder-open ic-w mr-1"></i>Corporate</li>
-							<li><i class="far fa-folder-open ic-w mr-1"></i>Finance</li>
-							<li><i class="far fa-folder-open ic-w mr-1"></i>Other</li>
-						  </ul>
-						</li>
-						<li><i class="fas fa-angle-right rotate"></i>
-						  <span><i class="far fa-gem ic-w mx-1"></i>Favourites</span>
-						  <ul class="nested">
-							  <li><i class="fas fa-pepper-hot ic-w mr-1"></i>Restaurants</li>
-							  <li><i class="far fa-eye ic-w mr-1"></i>Places</li>
-							  <li><i class="fas fa-gamepad ic-w mr-1"></i>Games</li>
-							  <li><i class="fas fa-cocktail ic-w mr-1"></i>Coctails</li>
-							  <li><i class="fas fa-pizza-slice ic-w mr-1"></i>Food</li>
-							</ul>
-						</li>
-						<li><i class="far fa-comment ic-w mr-1"></i>Notes</li>
-						<li><i class="fas fa-cogs ic-w mr-1"></i>Settings</li>
-						<li><i class="fas fa-desktop ic-w mr-1"></i>Devices</li>
-						<li><i class="fas fa-trash-alt ic-w mr-1"></i>Deleted Items</li>
-					  </ul>
-					</div>
-              
-              
-              
-              
-              
+			
+
               
             </div>
             <div class="modal-footer">
-              <button type="button" id="dodel" class="btn btn-primary btn-sm">Apply</button>
+            <!--  <button type="button" id="apply" class="btn btn-primary btn-sm">Apply</button> -->
             </div>
           </div>
         </div>
@@ -215,6 +196,12 @@
 
 
   <script>
+
+function selectfolder(sfolder){
+  var folder=document.getElementById("folder");
+  folder.setAttribute('value',sfolder);
+  $('#myModal2').modal('hide')
+}
 
           //Document Ready initiate DataTable - sort on Date  
           $(document).ready(function () {
