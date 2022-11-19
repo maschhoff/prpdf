@@ -1,1 +1,1 @@
-{"port": 80, "debug": "off", "lang": "deu", "updatetime": 1800, "index": {"Foldername/Filename": ["Keyword1"], "Foldername2/Filename": ["Keyword1", "Keyword2 ", "Keyword3"], "Test1/Wolfgang ": ["Goethe", "Wolfgang ", "1749"]}}
+{"port": 80, "debug": "off", "lang": "deu", "updatetime": 1800, "index": {"Test1/TESTARC;Filename": ["Keyword1"], "/Archiv/Test1;Filename": ["Bibliothek", "Johann"]}}
