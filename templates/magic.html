@@ -35,14 +35,11 @@
                 </div>
                 <div class="col-sm"> <div class="form-outline">
                 
-                <select class="form-control" name="folder">
-                    <option value="" disabled selected>Choose your folder</option>
-                
-                {% for folder in folders %}
-                <option value="{{folder}}">{{folder}}</option>
-                {% endfor %} 
-                          
-                </select>
+                  <input type="hidden" id="folder" name="folder" value="unknown">
+
+                  <button type="button" class="btn btn-primary btn-sm" id="select" data-toggle="modal" data-target="#myModal2" data-toggle="tooltip" data-placement="bottom"
+                  title="select folder"><i class="fas fa-folder"></i></button>
+              
                 
                 </div>
                 
@@ -57,7 +54,7 @@
                 <div class="row">
 
                     <div class="col-sm">
-                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></button>
                         </div>
 
                 </div>
@@ -67,9 +64,69 @@
                 </form>  
         </div>
       </div>
-  </div>
 
 
+       <!-- TreeView Modal -->
+       <div class="modal fade" id="myModal2" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Select folder</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+              <div class="treeview">
+                
+                <ul class="mb-1 pl-3 pb-2">
+              
+
+                <li><i class="fas fa-angle-right rotate"></i>
+                  <span><i class="far fa-folder-open ic-w mx-1"></i><a href="javascript:void(0)" onClick="selectfolder('/Archiv/');">Main archiv folder</a></span>
+                  <ul class="nested">
+                    </ul>
+                    </li>
+            
+                  <hr>
+          
+		<!--subdirhtml  
+            -->
+            {{ subdirhtml|safe }}
+       
+          
+
+
+
+          </ul></div>
+          </div>
+              
+			
+
+              
+            </div>
+            <div class="modal-footer">
+            <!--  <button type="button" id="apply" class="btn btn-primary btn-sm">Apply</button> -->
+            </div>
+          </div>
+        </div>
+
+</body>
+
+<script>
+
+$(document).ready(function() {
+      $('.treeview').mdbTreeview();
+    });
+
+  function selectfolder(sfolder){
+    var folder=document.getElementById("folder");
+    folder.setAttribute('value',sfolder);
+    $('#myModal2').modal('hide')
+  }
+
+</script>
 
 
 
