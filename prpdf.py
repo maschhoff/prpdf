@@ -83,7 +83,7 @@ def domergepost():
                 message=merge.pdf_adf(unknown_dir+file1,unknown_dir+file2,filename)
 
         pdf=loadFiles()
-        return render_template('explorer.html', liste=pdf, message=message, folders=loadArchivFolder(),iterator=0)
+        return render_template('explorer.html', liste=pdf, message=message, subdirhtml=subdirhtml, folders=loadArchivFolder(),iterator=0)
 
 @app.route('/split')
 def dosplit():
@@ -100,7 +100,7 @@ def dosplitpost():
         splitpages.split_pdf(unknown_dir+file1,int(page))
 
         pdf=loadFiles()
-        return render_template('explorer.html', liste=pdf, message="", folders=loadArchivFolder(),iterator=0)
+        return render_template('explorer.html', liste=pdf, message="", subdirhtml=subdirhtml, folders=loadArchivFolder(),iterator=0)
 
 
 @app.route('/autoscan')
@@ -139,7 +139,7 @@ def dorotate(id):
 @app.route('/<string:id>')
 def doocr(id):
         text=autoscan.ocr(unknown_dir,id) 
-        return render_template('magic.html', text=text, folders=loadArchivFolder(), pdf=id)
+        return render_template('magic.html', text=text, subdirhtml=subdirhtml, folders=loadArchivFolder(), pdf=id)
 
 @app.route('/magic', methods=['POST'])
 def autoscan_rule():
@@ -148,18 +148,19 @@ def autoscan_rule():
         keywords = request.form['keywords']
         
         keyw_array=keywords.split(",")
-        key=folder+"/"+newid
+        key=folder+";"+newid
 
+        config=settings.loadConfig()
         config["index"].update({key:keyw_array})
         settings.writeJsonConfig(config)
 
         pdf=loadFiles()
-        return render_template('explorer.html', liste=pdf, folders=loadArchivFolder(),iterator=0, message="autoscan rule saved")
+        return render_template('explorer.html', liste=pdf, subdirhtml=subdirhtml, folders=loadArchivFolder(),iterator=0, message="autoscan rule saved")
 
 @app.route('/settings')
 def setting():
 	config_raw= settings.getConfigRaw()
-	return render_template('settings.html', config=config, config_raw=config_raw.read())
+	return render_template('settings.html', config=settings.loadConfig(), config_raw=config_raw.read())
 
 @app.route('/settings', methods=['POST'])
 def setting_save():

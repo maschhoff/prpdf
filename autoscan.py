@@ -72,7 +72,7 @@ def sort(pdf_file,text):
         print("---------------------------------------------------\n\n")
         
     for archiv_item in index:                 # Schleife uber DICT
-        ordner,filename=archiv_item.split("/")
+        ordner,filename=archiv_item.split(";")
         count=0
         treffer=0
         for keywords in index[archiv_item]:   # Schleife uber Keywords in einem Item    
@@ -80,15 +80,15 @@ def sort(pdf_file,text):
             if treffer>=0:
                 count+=1
         if count>=len(index[archiv_item]):    # match auf alle Keywords
-            if not os.path.exists(archiv_dir+"/"+ordner): # Ordner mit Item aus Dict anlegen
-                os.makedirs(archiv_dir+"/"+ordner)
+            if not os.path.exists(ordner): # Ordner mit Item aus Dict anlegen
+                os.makedirs(ordner)
             filedatum=date.fromtimestamp(os.path.getmtime(pdf_dir+"/"+pdf_file)).strftime('%d_%m_%Y')
             fileneu=filename+"_"+filedatum+"_"+str(random.randint(1111,9999))+".pdf" 
 
     
-            logging.info("MOVE "+pdf_dir+"/"+pdf_file+" to "+archiv_dir+"/"+ordner+"/"+fileneu)   
-            print("MOVE "+pdf_dir+"/"+pdf_file+" to "+archiv_dir+"/"+ordner+"/"+fileneu) 
-            shutil.move(pdf_dir+"/"+pdf_file, archiv_dir+"/"+ordner+"/"+fileneu) # pdf File in Ordner
+            logging.info("MOVE "+pdf_dir+"/"+pdf_file+" to "+ordner+"/"+fileneu)   
+            print("MOVE "+pdf_dir+"/"+pdf_file+" to "+ordner+"/"+fileneu) 
+            shutil.move(pdf_dir+"/"+pdf_file, ordner+"/"+fileneu) # pdf File in Ordner
 
 def run():           
     # PDFs in Bilder umwandeln und OCR Texterkennung 
