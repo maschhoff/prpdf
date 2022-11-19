@@ -39,7 +39,7 @@ def index():
         else:
                 search={}
                 search["name"]=""
-        return render_template('explorer.html', liste=pdf, preview=search['name'], folders=loadArchivFolder(),iterator=0)
+        return render_template('explorer.html', liste=pdf, preview=search['name'], subdirhtml=subdirhtml, folders=loadArchivFolder(),iterator=0)
 
 
 @app.route('/', methods=['POST'])
@@ -62,7 +62,7 @@ def my_form_post():
                         shutil.move(unknown_dir+id,unknown_dir+"/"+fileneu)
                         message="title chaned"
         pdf=loadFiles()
-        return render_template('explorer.html', message=message, liste=pdf, preview=newid+'.pdf', folders=loadArchivFolder(),iterator=iterator)
+        return render_template('explorer.html', message=message, liste=pdf, preview=newid+'.pdf', subdirhtml=subdirhtml, folders=loadArchivFolder(),iterator=iterator)
 
 
 @app.route('/merge')
@@ -107,6 +107,9 @@ def dosplitpost():
 def doautoscan():
         try:
             autoscan.run()
+            global subdirhtml
+            subdirhtml=""
+            listdirs(archiv_dir)
         except Exception as e:
             print("An exception occurred "+str(e))
             logging.error("An exception occurred "+str(e))
@@ -117,7 +120,7 @@ def doautoscan():
         else:
                 search={}
                 search["name"]=""
-        return render_template('explorer.html', liste=pdf, preview=search['name'], folders=loadArchivFolder(),iterator=0)
+        return render_template('explorer.html', liste=pdf, preview=search['name'], subdirhtml=subdirhtml, folders=loadArchivFolder(),iterator=0)
 
 @app.route('/del/<string:id>')
 def dosdel(id):
@@ -180,13 +183,23 @@ def setting_save():
 
 
 subdirs=[archiv_dir]
+subdirhtml=""
+
 
 def listdirs(rootdir):
     for it in os.scandir(rootdir):
         if it.is_dir():
             subdirs.append(it.path)
+            global subdirhtml
+            subdirhtml+= """
+            <li><i class="fas fa-angle-right rotate"></i>\n
+            <span><i class="far fa-folder-open ic-w mx-1"></i><a href="javascript:void(0)" onClick="selectfolder('"""+it.path+"""');">"""+it.name+"""</a></span>\n
+            <ul class="nested">
+            """
             listdirs(it)
+            subdirhtml+="""</ul>\n</li>"""
  
+print('Creating Directory Map... that can take some time')
 listdirs(archiv_dir)
 
 #print (subdirs)
