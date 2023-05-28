@@ -51,9 +51,16 @@ otherwise feel free to edit the sourcecode on vars.py etc.
 * ` python3 prpdf.py`
 
 ## Run as systemd service on Fedora
+* ` clone to /opt/prpdf (or adapt path below)`
 * ` sudo dnf install tesseract-tools tesseract-devel poppler`
 * ` python3 -m pip install -r requirements.txt`
 * ` python3 prpdf.py`
+* Adapt Homepath in the following two commands (default /opt/prpdf) 
+* ` adduser -M -r -s /usr/bin/nologin -d /opt/prpdf`
+* ` chown prpdf:prpdf /opt/prpdf
+* Edit prpdf.service to reflect your WORKDIR (/opt/prpdf by default)
+* ` cp prpdf.service /lib/systemd/system `
+* ` systemctl enable --now prpdf`
 
 # Configuration
 A default config will be creating within the first start of PR PDF.
