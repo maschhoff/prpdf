@@ -54,7 +54,6 @@ otherwise feel free to edit the sourcecode on vars.py etc.
 * ` clone to /opt/prpdf (or adapt path below)`
 * ` sudo dnf install tesseract-tools tesseract-devel poppler`
 * ` python3 -m pip install -r requirements.txt`
-* ` python3 prpdf.py`
 * Adapt Homepath in the following two commands (default /opt/prpdf) 
 * ` adduser -M -r -s /usr/bin/nologin -d /opt/prpdf`
 * ` chown prpdf:prpdf /opt/prpdf
