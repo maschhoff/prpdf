@@ -50,6 +50,11 @@ otherwise feel free to edit the sourcecode on vars.py etc.
 * ` sudo apt-get install tesseract-ocr poppler-utils`
 * ` python3 prpdf.py`
 
+## Run as systemd service on Fedora
+* ` sudo dnf install tesseract-tools tesseract-devel poppler`
+* ` python3 -m pip install -r requirements.txt`
+* ` python3 prpdf.py`
+
 # Configuration
 A default config will be creating within the first start of PR PDF.
 For Docker please mount the config folder to make it persistent.

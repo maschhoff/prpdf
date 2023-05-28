@@ -10,7 +10,9 @@ settings - Helpers
 import json
 import os
 
-configsrc='/source/config/config.json'
+configsrc = os.environ["WORKDIR"]+'/config/config.json'
+
+# or '/data/prpdf/config/config.json'
 
 def getConfigRaw():
 	config_raw= open(configsrc, 'r')

@@ -1,0 +1,14 @@
+[Unit]
+Description=PDF Explorer
+After=network.target
+
+[Service]
+Environment="WORKDIR=/opt/prpdf"
+WorkingDirectory=/opt/prpdf
+Type=simple
+ExecStart=/usr/bin/python ./prpdf.py
+User=prpdf
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,6 +1,9 @@
 # Folder - !!! DO NOT CHANGE FOR DOCKER !!!!
 
-pdf_dir = r"/source/static/pdf/"           # Source
+import os
+
+work_dir = os.environ['WORKDIR']
+pdf_dir = work_dir + r"/static/pdf/"           # Source
 temp_dir = r"/tmp/images/"        # Temp
-archiv_dir= r"/Archiv/"      # Oberordner Archiv -- darunter Ablage der Item Ordner
-unknown_dir=r"/source/static/pdf/unknown/"     # nicht erkannte PDFs
+archiv_dir = work_dir + r"/archiv/"      # Oberordner Archiv -- darunter Ablage der Item Ordner
+unknown_dir = work_dir + r"/static/pdf/unknown/"     # nicht erkannte PDFs
