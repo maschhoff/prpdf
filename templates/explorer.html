@@ -235,29 +235,9 @@ function selectfolder(sfolder){
           var inputiterator=document.getElementById("inputiterator");
           inputiterator.setAttribute('value',iterator);
 
-          //Table row clicked
-          $tableID.on('click', 'tr', function (r) {
-		var table = $tableID.DataTable();  
-		row = $(this).closest('tr').index();
-                console.log("TID", table.row(this).data()[0]);
-                id = table.row(this).data()[0];
-                //#console.log("ROW",row, iterator);
-                $(this).parents('tr'); 
-                //id=$(this).children('button').attr('id');
-                var embed=document.getElementById("embed");
-                embed.setAttribute('src','./static/pdf/unknown/'+id);
-                var edittitle=document.getElementById("edittitle");
-                edittitle.setAttribute('value',id.slice(0,id.length-4));
-                var oldtitle=document.getElementById("oldtitle");
-                oldtitle.setAttribute('value',id);
-                var inputiterator=document.getElementById("inputiterator");
-                inputiterator.setAttribute('value',row);
-                iterator=row+1
-
-          });
-
           //PREVIEW BUTTON clicked
           $tableID.on('click', '.table-view', function () {
+          
                 row=$(this).parents('tr').index();
                 console.log("ROW",row, iterator);
                 $(this).parents('tr'); 
