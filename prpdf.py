@@ -27,10 +27,6 @@ from vars import *
 
 app = Flask(__name__)
 
-
-
-
-
 @app.route('/')
 def index():
         pdf=loadFiles()
@@ -230,12 +226,13 @@ def loadFiles():
 
 
 if __name__ == '__main__':
-        logging.basicConfig(filename='/source/config/server.log',level=logging.INFO)
+        work_dir = os.environ['WORKDIR']
+        logging.basicConfig(filename='/'+work_dir+'/config/server.log',level=logging.INFO)
         config=settings.loadConfig()
 
         #Server start
-        logging.info("Start PR PDF Server...")
-        print("Start PR PDF Server...")
+        logging.info("Start PR PDF Server from "+work_dir+"...")
+        print("Start PR PDF Server from "+work_dir+"...")
         print(""" 
 	
 	 (\__/)  .-  -.)

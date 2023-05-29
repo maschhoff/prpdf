@@ -19,12 +19,12 @@ import settings
 from vars import *
 
 
+work_dir = os.environ['WORKDIR']
 
-
-os.chdir(r'/source/')
+os.chdir(work_dir)
 
 #Logging
-logging.basicConfig(filename='/source/config/server.log',level=logging.INFO)
+logging.basicConfig(filename=work_dir+'/config/server.log',level=logging.INFO)
 
 #Filedate
 #filedatum=datetime.now().strftime('%d_%m_%Y+0') # filename + Tag_Monat_Jahr_Counter
