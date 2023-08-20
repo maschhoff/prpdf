@@ -101,6 +101,8 @@
                   title="OCR-Scan and set keywords for autoscan"><i class="fas fa-magic"></i></button>
                   <button type="submit" class="btn btn-primary btn-sm" id="rotate" data-toggle="tooltip" data-placement="bottom"
                   title="Rotate document 180"><i class="fas fa-redo"></i></button>
+                  <button type="submit" class="btn btn-primary btn-sm" id="download" data-toggle="tooltip" data-placement="bottom"
+                  title="Download document"><i class="fas fa-download"></i></button>
                   <button type="button" class="btn btn-primary btn-sm" id="del" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="bottom"
                   title="Delete this document"><i class="fas fa-trash"></i></button>
                   <embed id="embed" src="./static/pdf/unknown/{{preview}}" width="100%" height="700px" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">
@@ -309,6 +311,10 @@ function selectfolder(sfolder){
           location.href = "/rotate/"+id; 
         };
 
+      var download=document.getElementById("download");
+      download.onclick=function(){
+          location.href = "./static/pdf/unknown/"+id; 
+        };
 
 
          // DODEL BUTTON click
