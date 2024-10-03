@@ -8,7 +8,7 @@ Merge Pages File
 
 """ 
 
-from PyPDF2 import PdfFileMerger,PdfFileReader,PdfFileWriter
+from PyPDF2 import PdfReader,PdfWriter, PdfMerger #PdfFileMerger
 import os
 from vars import *
 
@@ -17,17 +17,17 @@ from vars import *
 # Automatic Document Feader
 def pdf_adf(frontpdfraw, backpdfraw, out_filename):
 
-    frontpdf = PdfFileReader(open(frontpdfraw, "rb"))
-    backpdf = PdfFileReader(open(backpdfraw, "rb"))
+    frontpdf = PdfReader(open(frontpdfraw, "rb"))
+    backpdf = PdfReader(open(backpdfraw, "rb"))
 
-    if frontpdf.numPages==backpdf.numPages:
+    if len(frontpdf.pages)==len(backpdf.pages):
 
-        output = PdfFileWriter()
-        for i in range(int(frontpdf.numPages)):
+        output = PdfWriter()
+        for i in range(int(len(frontpdf.pages))):
             #print(i)
-            output.addPage(frontpdf.getPage(i))
-            output.addPage(backpdf.getPage(backpdf.numPages-i-1))
-            #print(backpdf.numPages-i-1)
+            output.add_page(frontpdf.pages[i])
+            output.add_page(backpdf.pages[len(backpdf.pages)-i-1])
+            #print(backpdf.pages-i-1)
         with open(unknown_dir+out_filename+".pdf", "wb") as outputStream:
             output.write(outputStream)
 
@@ -44,7 +44,7 @@ def pdf_merge_all(allpdfs,out_filename):
     #allpdfs = [a for a in glob(in_dir+"*.pdf")]     # Liste Files aus in_dir
     pdf_anz=int(len(allpdfs))                       # Anzahl Files
     if pdf_anz >1:
-        merger = PdfFileMerger() 
+        merger = PdfMerger() 
         for i in range(int(pdf_anz)):
             merger.append(allpdfs[i])               # alle Seiten plus
 
@@ -57,7 +57,7 @@ def pdf_merge_all(allpdfs,out_filename):
 # PDF zusammenfassen aus mehreren Files alle Seiten in neues File
 def pdf_merge_file(file1,file2,out_filename):
     pdf_files=[file1,file2]
-    merger = PdfFileMerger() 
+    merger = PdfMerger() 
     for files in pdf_files:
         merger.append(files) 
     with open(unknown_dir+out_filename+".pdf", "wb") as new_file:

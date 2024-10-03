@@ -8,19 +8,19 @@ Split Pages File
 
 """ 
 
-from PyPDF2 import PdfFileWriter, PdfFileReader
+from PyPDF2 import PdfWriter, PdfReader
 
 #Rotate a document 180 clockwise
 def rotate_pages(filename):
     try:
         pdf_in = open(filename, 'rb')
-        pdf_reader = PdfFileReader(pdf_in)
-        pdf_writer = PdfFileWriter()
+        pdf_reader = PdfReader(pdf_in)
+        pdf_writer = PdfWriter()
 
-        for pagenum in range(pdf_reader.numPages):
+        for pagenum in range(len(pdf_reader.pages)):
             page = pdf_reader.getPage(pagenum)
             page.rotateClockwise(180)
-            pdf_writer.addPage(page)
+            pdf_writer.add_page(page)
  
         pdf_out = open(filename[:-4]+"_rotated.pdf", 'wb')
         #pdf_out = open(filename, 'wb')
@@ -32,20 +32,20 @@ def rotate_pages(filename):
 
 #split a document after pagenumber
 def split_pdf(filename,seite):
-    pdf_reader = PdfFileReader(open(filename, "rb"))
+    pdf_reader = PdfReader(open(filename, "rb"))
     out1 = '{}_part_{}.pdf'.format(filename[:-4], 1)
     out2 = '{}_part_{}.pdf'.format(filename[:-4], 2)
 
     try:
-        assert seite < pdf_reader.numPages
-        pdf_writer1 = PdfFileWriter()
-        pdf_writer2 = PdfFileWriter()
+        assert seite < len(pdf_reader.pages)
+        pdf_writer1 = PdfWriter()
+        pdf_writer2 = PdfWriter()
 
         for page in range(seite): 
-            pdf_writer1.addPage(pdf_reader.getPage(page))
+            pdf_writer1.add_page(pdf_reader.pages[page])
 
-        for page in range(seite,pdf_reader.getNumPages()):
-            pdf_writer2.addPage(pdf_reader.getPage(page))
+        for page in range(seite,len(pdf_reader.pages)):
+            pdf_writer2.add_page(pdf_reader.pages[page])
 
         with open(out1, 'wb') as file1:
             pdf_writer1.write(file1)
