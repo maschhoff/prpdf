@@ -226,7 +226,7 @@ function selectfolder(sfolder){
 
           //PREVIEW on document ready
 	  var td = $tableID.find('tr').eq(++iterator).children('td')[0];
-	  var id = $(td).hasClass('dataTables_empty') ? '' : td.innerHTML;
+	  id = $(td).hasClass('dataTables_empty') ? '' : td.innerHTML;
 
           console.log("PREVIEW", iterator, id);
 
