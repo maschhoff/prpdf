@@ -225,7 +225,9 @@ function selectfolder(sfolder){
           const $tableID = $('#dtDocuments');
 
           //PREVIEW on document ready
-          id = $tableID.find('tr').eq(++iterator).children('td')[0].innerHTML;
+	  var td = $tableID.find('tr').eq(++iterator).children('td')[0];
+	  var id = $(td).hasClass('dataTables_empty') ? '' : td.innerHTML;
+
           console.log("PREVIEW", iterator, id);
 
           var embed=document.getElementById("embed");
