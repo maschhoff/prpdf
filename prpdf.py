@@ -184,9 +184,14 @@ subdirhtml=""
 
 
 def listdirs(rootdir):
+         
+      #   subdirs = [ f.path for f in os.scandir(rootdir) if f.is_dir() ]
+      #   print (subdirs)
+
     for it in os.scandir(rootdir):
         if it.is_dir():
             subdirs.append(it.path)
+            print (it.path)
             global subdirhtml
             subdirhtml+= """
             <li><i class="fas fa-angle-right rotate"></i>\n
@@ -196,10 +201,9 @@ def listdirs(rootdir):
             listdirs(it)
             subdirhtml+="""</ul>\n</li>"""
  
-print('Creating Directory Map... that can take some time')
+print('Creating Directory Map... that can take some time ')
 listdirs(archiv_dir)
 
-#print (subdirs)
 
 
 def loadArchivFolder():

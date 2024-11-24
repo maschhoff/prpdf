@@ -5,5 +5,6 @@ import os
 work_dir = os.environ['WORKDIR']
 pdf_dir = work_dir + r"/static/pdf/"           # Source
 temp_dir = r"/tmp/images/"        # Temp
-archiv_dir = work_dir + r"/archiv/"      # Oberordner Archiv -- darunter Ablage der Item Ordner
+#archiv_dir = work_dir + r"/archiv/"      # Oberordner Archiv -- darunter Ablage der Item Ordner -- does not work!
+archiv_dir = "/Archiv/"      # Oberordner Archiv -- darunter Ablage der Item Ordner
 unknown_dir = work_dir + r"/static/pdf/unknown/"     # nicht erkannte PDFs
