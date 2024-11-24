@@ -77,6 +77,7 @@
                 
              <button type="button" class="btn btn-primary btn-sm" id="select" data-toggle="modal" data-target="#myModal2" data-toggle="tooltip" data-placement="bottom"
                   title="select folder"><i class="fas fa-folder"></i></button>
+            <p id="out_folder"></p>
               
             
               
@@ -203,6 +204,8 @@ function selectfolder(sfolder){
   var folder=document.getElementById("folder");
   folder.setAttribute('value',sfolder);
   $('#myModal2').modal('hide')
+  console.log(sfolder)
+  document.getElementById("out_folder").innerHTML=sfolder;
 }
 
           //Document Ready initiate DataTable - sort on Date  
