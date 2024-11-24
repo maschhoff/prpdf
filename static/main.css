@@ -1,4 +1,23 @@
+header {
+  margin-bottom: 2rem;
+}
 
+#embedpdf .btn {
+  margin: 3px 1rem 0 0;
+  margin-bottom: 1rem;
+}
+
+#dtDocuments_wrapper table.dataTable thead .sorting {
+  padding: 10px;
+}
+
+#dtDocuments_wrapper .table-view .btn {
+  margin: 0;
+}
+
+#embed {
+  height: calc(100vh - 260px);
+}
 
 #editor {
   position: absolute;
