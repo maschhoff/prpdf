@@ -5,7 +5,7 @@ ENV WORKDIR=/source
 ENV FLASK_APP=prpdf.py
 ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_RUN_PORT=80
-COPY /prpdf /source
+COPY ./ /source
 RUN apt-get update && apt-get install tesseract-ocr poppler-utils tesseract-ocr-deu -y
 RUN pip3 install -r /source/requirements.txt
 CMD ["flask", "run"]
