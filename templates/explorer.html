@@ -207,7 +207,7 @@ function validateForm() {
     alert("Name must be filled out");
     return false;
   }else{
-    var regex = /^[\w,\s-]+\.[A-Za-z]{3}$/
+    var regex = /^[\w,\s-]+$/
     if(regex.test(x)){
       return true;
     }else{
