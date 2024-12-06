@@ -45,7 +45,7 @@ def my_form_post():
         folder=request.form['folder']
         iterator=request.form['inputiterator']
         
-        filedatum=date.fromtimestamp(os.path.getmtime(unknown_dir+id)).strftime('%d_%m_%Y, %H:%M:%S')
+        filedatum=date.fromtimestamp(os.path.getmtime(unknown_dir+id)).strftime('%d_%m_%Y')
         fileneu=newid+"_"+filedatum+"_"+str(random.randint(1111,9999))+".pdf" 
         
         message=""
