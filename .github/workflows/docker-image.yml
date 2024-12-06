@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "main" ]
 
-jobs:dckr_pat_vVY5IX57wnboEob7QJrT53Ci18M
+jobs:
 
   build:
 
