@@ -56,15 +56,15 @@
   <div class="col" id="embedpdf" >
   
      
-              <form action="/" method="POST">
+              <form action="/" onsubmit="return validateForm()" method="POST">
               
               
-              <h3>Edit and move</h3>
+              <h3>Edit and Move</h3>
               
               <div class="row">
               <div class="col-6">
               <div class="form-outline">
-                <input type="hidden" class="form-control" id="inputiterator" name="inputiterator" value="">
+              <input type="hidden" class="form-control" id="inputiterator" name="inputiterator" value="">
               <input type="hidden" class="form-control" id="oldtitle" name="oldpdf" value="">
               <input type="hidden" id="folder" name="folder" value="unknown">
               <input type="text" id="edittitle" class="form-control" name="pdf" value=""/>
@@ -200,6 +200,25 @@
 
   <script>
 
+//Validate Input dont let there be special caraters
+function validateForm() {
+  let x = document.forms["myForm"]["fname"].value;
+  if (x == "") {
+    alert("Name must be filled out");
+    return false;
+  }else{
+    var regex = /^[\w,\s-]+\.[A-Za-z]{3}$/
+    if(regex.test(x)){
+      return true;
+    }else{
+      alert("No special chars allowed");
+      return false;
+    }
+  }
+}
+
+
+//selected folder modal
 function selectfolder(sfolder){
   var folder=document.getElementById("folder");
   folder.setAttribute('value',sfolder);
