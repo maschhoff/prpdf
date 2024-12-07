@@ -113,11 +113,12 @@ def run():
                 shutil.move(pdf_dir+"/"+unknown_file,unknown_dir+"/"+unknown_file)
 
 def ocrpdf(file_path, save_path):
-    ocrmypdf.ocr(file_path, save_path, rotate_pages=True, remove_background=True, language=lang, deskew=True, force_ocr=True)
+    logging.info("--- OCRmyPDF for: "+file_path)
+    ocrmypdf.ocr(file_path, save_path, rotate_pages=True, language=lang, deskew=True, force_ocr=True)
 
 
 def ocr(folder, pdf_file):
-    print("---- OCR PDF-File: ",pdf_file," ----\n")
+    print("---- IMG OCR PDF-File: ",pdf_file," ----\n")
     if pdf_file.endswith(".pdf"):
         temp=temp_dir+"/"+pdf_file[:-4]
         source=folder+"/"+pdf_file 

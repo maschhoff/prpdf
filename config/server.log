@@ -3267,3 +3267,48 @@ INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:13:20] "[36mGET /static/main.css H
 INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:13:20] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 304 -
 INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:13:20] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
 INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:13:20] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:root:STARTING CRONJOB PR PDF AUTOSCAN 2024-12-07 21:18:49.692764
+ERROR:root:An exception occurred in Run Dir 'NoneType' object has no attribute 'find'
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://172.17.0.2:80
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:19:15] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:19:15] "GET /static/main.css HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:19:16] "[33mGET /static/pdf/unknown/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:19:16] "[33mGET /static/pdf/unknown/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:19:16] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:ocrmypdf._pipelines.ocr:Start processing 4 pages concurrently
+INFO:ocrmypdf._pipeline:page already has text! - rasterizing text and running OCR anyway
+INFO:ocrmypdf._pipeline:page already has text! - rasterizing text and running OCR anyway
+INFO:ocrmypdf._pipeline:page already has text! - rasterizing text and running OCR anyway
+INFO:ocrmypdf._pipeline:page already has text! - rasterizing text and running OCR anyway
+INFO:ocrmypdf._pipeline:page is facing ⇧, confidence 12.70 - no change
+INFO:ocrmypdf._pipeline:page is facing ⇧, confidence 14.94 - rotation appears correct
+WARNING:ocrmypdf._pipeline:Weighted average image DPI is 178.0, max DPI is 300.0. The discrepancy may indicate a high detail region on this page, but could also indicate a problem with the input PDF file. Page image will be rendered at 400.0 DPI.
+INFO:ocrmypdf._pipeline:page is facing ⇧, confidence 14.89 - rotation appears correct
+INFO:ocrmypdf._pipeline:page is facing ⇧, confidence 14.18 - rotation appears correct
+INFO:ocrmypdf._pipeline:background removal skipped on mono page
+INFO:ocrmypdf._pipeline:background removal skipped on mono page
+INFO:ocrmypdf._pipeline:background removal skipped on mono page
+ERROR:root:An exception occurred in Run Dir --remove-background is temporarily not implemented
+INFO:ocrmypdf._pipeline:page already has text! - rasterizing text and running OCR anyway
+INFO:ocrmypdf._pipeline:page is facing ⇧, confidence 14.15 - rotation appears correct
+INFO:ocrmypdf._pipeline:background removal skipped on mono page
+INFO:ocrmypdf._pipelines.ocr:Postprocessing...
+INFO:ocrmypdf._pipeline:Image optimization ratio: 1.74 savings: 42.5%
+INFO:ocrmypdf._pipeline:Total file size ratio: 0.33 savings: -203.6%
+INFO:ocrmypdf._pipelines._common:Output file is a PDF/A-2B (as expected)
+ERROR:root:An exception occurred in Run Dir 'NoneType' object has no attribute 'find'
+INFO:ocrmypdf._pipeline:page is facing ⇧, confidence 34.48 - rotation appears correct
+ERROR:root:An exception occurred in Run Dir --remove-background is temporarily not implemented
+INFO:root:MOVE /source/static/pdf//Neue Informationen zu Ihrem Vertrag in Ihrem Online-Postfach - 2023-03-31.pdf to /source/static/pdf/unknown//Neue Informationen zu Ihrem Vertrag in Ihrem Online-Postfach - 2023-03-31.pdf
+INFO:root:MOVE /source/static/pdf//rechnung-MC.M24082596090.pdf to /source/static/pdf/unknown//rechnung-MC.M24082596090.pdf
+INFO:root:MOVE /source/static/pdf//non-text-searchable.pdf to /source/static/pdf/unknown//non-text-searchable.pdf
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:19:57] "GET /autoscan HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:19:57] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:19:57] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:19:57] "GET /static/pdf/unknown/rechnung-MC.M24082596090.pdf HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:19:57] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:20:02] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
