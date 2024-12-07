@@ -115,7 +115,9 @@ def ocr(folder, pdf_file):
     print("---- OCR PDF-File: ",pdf_file," ----\n")
     if pdf_file.endswith(".pdf"):
         temp=temp_dir+"/"+pdf_file[:-4]
-        source=folder+"/"+pdf_file
+        source=folder+"/"+pdf_file 
+
+    #OCR PDF
 
     # Bilder aus pdf
         try:
