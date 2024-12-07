@@ -122,15 +122,18 @@ def ocr(folder, pdf_file):
     if pdf_file.endswith(".pdf"):
         temp=temp_dir+"/"+pdf_file[:-4]
         source=folder+"/"+pdf_file 
-
     #OCR PDF
+      #  try:
+        ocrpdf(source,source)
+       # except Exception as e:
+        #    logging.error("An exception occured in OCRPDF "+str(e))
+
 
     # Bilder aus pdf
         try:
-            ocrpdf(source,source+"x")
             pages=convert_from_path(source, dpi=400,first_page=1,last_page=1,grayscale=True)
         except Exception as e:
-            logging.error("An exception occurred "+str(e))
+            logging.error("An exception occurred in IMG convert"+str(e))
             print("An exception occurred "+str(e))
             return ""           
 
