@@ -221,8 +221,8 @@ def loadFiles():
                 for file in files:
                         filer={}
                         filer["name"]=file.rsplit("/",1)[1]
-                	filer["size"]=str(os.path.getsize(file)/1000000)+" MB"
-			timestamp = datetime.fromtimestamp(os.path.getmtime(file)).strftime('%Y-%m-%d %H:%M:%S')
+                        filer["size"]=str(os.path.getsize(file)/1000000)+" MB"
+                        timestamp = datetime.fromtimestamp(os.path.getmtime(file)).strftime('%Y-%m-%d %H:%M:%S')
 			#timestamp = date.fromtimestamp(os.path.getmtime(file))
                         filer["date"]=timestamp
                         res.append(filer)
