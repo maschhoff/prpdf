@@ -2,7 +2,6 @@
 
 import pytesseract
 import ocrmypdf
-import tesseract
 # Wenn tesseract exe nicht im System PATH angegeben, dann:
 #pytess= r"/home/detleva/.local/bin"
 from PIL import Image
