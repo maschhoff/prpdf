@@ -2964,3 +2964,124 @@ INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 19:01:30] "[36mGET /static/pdf/unknow
 INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 19:01:30] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
 INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 19:01:30] "GET /favicon.ico HTTP/1.1" 200 -
 INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 19:01:39] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:root:STARTING CRONJOB PR PDF AUTOSCAN 2024-12-07 19:15:39.990299
+ERROR:root:An exception occurred 'NoneType' object has no attribute 'find'
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://172.17.0.2:80
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:root:STARTING CRONJOB PR PDF AUTOSCAN 2024-12-07 19:17:12.897067
+ERROR:ocrmypdf.subprocess:
+OCRmyPDF requires 'tesseract' 4.1.1 or higher.  Your system appears
+to have 4.0.0.  Please update this program.
+
+INFO:ocrmypdf.subprocess:
+On systems with the aptitude package manager (Debian, Ubuntu), try these
+commands:
+    sudo apt update
+    sudo apt install tesseract-ocr
+
+On RPM-based systems (Red Hat, Fedora), try this command:
+    sudo dnf install tesseract-ocr
+
+ERROR:root:An exception occurred tesseract
+ERROR:ocrmypdf.subprocess:
+OCRmyPDF requires 'tesseract' 4.1.1 or higher.  Your system appears
+to have 4.0.0.  Please update this program.
+
+INFO:ocrmypdf.subprocess:
+On systems with the aptitude package manager (Debian, Ubuntu), try these
+commands:
+    sudo apt update
+    sudo apt install tesseract-ocr
+
+On RPM-based systems (Red Hat, Fedora), try this command:
+    sudo dnf install tesseract-ocr
+
+ERROR:root:An exception occurred tesseract
+ERROR:root:An exception occurred 'NoneType' object has no attribute 'find'
+ERROR:ocrmypdf.subprocess:
+OCRmyPDF requires 'tesseract' 4.1.1 or higher.  Your system appears
+to have 4.0.0.  Please update this program.
+
+INFO:ocrmypdf.subprocess:
+On systems with the aptitude package manager (Debian, Ubuntu), try these
+commands:
+    sudo apt update
+    sudo apt install tesseract-ocr
+
+On RPM-based systems (Red Hat, Fedora), try this command:
+    sudo dnf install tesseract-ocr
+
+ERROR:root:An exception occurred tesseract
+INFO:root:MOVE /source/static/pdf//Neue Informationen zu Ihrem Vertrag in Ihrem Online-Postfach - 2023-03-31.pdf to /source/static/pdf/unknown//Neue Informationen zu Ihrem Vertrag in Ihrem Online-Postfach - 2023-03-31.pdf
+INFO:root:MOVE /source/static/pdf//rechnung-MC.M24082596090.pdf to /source/static/pdf/unknown//rechnung-MC.M24082596090.pdf
+INFO:root:MOVE /source/static/pdf//non-text-searchable.pdf to /source/static/pdf/unknown//non-text-searchable.pdf
+INFO:root:STARTING CRONJOB PR PDF AUTOSCAN 2024-12-07 19:45:39.991836
+ERROR:root:An exception occurred 'NoneType' object has no attribute 'find'
+INFO:root:STARTING CRONJOB PR PDF AUTOSCAN 2024-12-07 20:15:39.998751
+ERROR:root:An exception occurred 'NoneType' object has no attribute 'find'
+INFO:root:STARTING CRONJOB PR PDF AUTOSCAN 2024-12-07 20:21:21.605703
+ERROR:root:An exception occurred 'NoneType' object has no attribute 'find'
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://172.17.0.2:80
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:22:03] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:22:03] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:22:03] "[33mGET /static/pdf/unknown/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:22:03] "[33mGET /static/pdf/unknown/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:22:03] "GET /favicon.ico HTTP/1.1" 200 -
+ERROR:ocrmypdf.subprocess:
+OCRmyPDF requires 'tesseract' 4.1.1 or higher.  Your system appears
+to have 4.0.0.  Please update this program.
+
+INFO:ocrmypdf.subprocess:
+On systems with the aptitude package manager (Debian, Ubuntu), try these
+commands:
+    sudo apt update
+    sudo apt install tesseract-ocr
+
+On RPM-based systems (Red Hat, Fedora), try this command:
+    sudo dnf install tesseract-ocr
+
+ERROR:root:An exception occurred tesseract
+ERROR:ocrmypdf.subprocess:
+OCRmyPDF requires 'tesseract' 4.1.1 or higher.  Your system appears
+to have 4.0.0.  Please update this program.
+
+INFO:ocrmypdf.subprocess:
+On systems with the aptitude package manager (Debian, Ubuntu), try these
+commands:
+    sudo apt update
+    sudo apt install tesseract-ocr
+
+On RPM-based systems (Red Hat, Fedora), try this command:
+    sudo dnf install tesseract-ocr
+
+ERROR:root:An exception occurred tesseract
+ERROR:root:An exception occurred 'NoneType' object has no attribute 'find'
+ERROR:ocrmypdf.subprocess:
+OCRmyPDF requires 'tesseract' 4.1.1 or higher.  Your system appears
+to have 4.0.0.  Please update this program.
+
+INFO:ocrmypdf.subprocess:
+On systems with the aptitude package manager (Debian, Ubuntu), try these
+commands:
+    sudo apt update
+    sudo apt install tesseract-ocr
+
+On RPM-based systems (Red Hat, Fedora), try this command:
+    sudo dnf install tesseract-ocr
+
+ERROR:root:An exception occurred tesseract
+INFO:root:MOVE /source/static/pdf//Neue Informationen zu Ihrem Vertrag in Ihrem Online-Postfach - 2023-03-31.pdf to /source/static/pdf/unknown//Neue Informationen zu Ihrem Vertrag in Ihrem Online-Postfach - 2023-03-31.pdf
+INFO:root:MOVE /source/static/pdf//rechnung-MC.M24082596090.pdf to /source/static/pdf/unknown//rechnung-MC.M24082596090.pdf
+INFO:root:MOVE /source/static/pdf//non-text-searchable.pdf to /source/static/pdf/unknown//non-text-searchable.pdf
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:22:06] "GET /autoscan HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:22:06] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:22:06] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:22:06] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:22:06] "GET /favicon.ico HTTP/1.1" 200 -

@@ -216,7 +216,7 @@ def loadFiles():
         if os.path.exists(unknown_dir):
                 #files=sorted(os.listdir(unknown_dir))
                 files=glob.glob(unknown_dir+"/*.pdf") #glob.glob(path.join(unknown_dir,"*.{}".format("pdf"))) #glob.glob(unknown_dir,"*.pdf")
-                print(files)
+                #print(files)
                 
                 for file in files:
                         filer={}

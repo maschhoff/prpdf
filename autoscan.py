@@ -61,8 +61,8 @@ def autoscan_cron():
         try:
             run()
         except Exception as e:
-            print("An exception occurred "+str(e))
-            logging.error("An exception occurred "+str(e))
+            print("An exception occurred in autoscan_cron"+str(e))
+            logging.error("An exception occurred in autoscan_cron"+str(e))
         time.sleep(updatetime) # TODO conf updatetime
 
 # aus OCR text indexieren und PDFs in Ordner schieben
@@ -98,8 +98,8 @@ def run():
         try:
             sort(pdf_file,ocr(pdf_dir,pdf_file)) # PDFs der Reihe nach indexieren
         except Exception as e:
-            logging.error("An exception occurred "+str(e))
-            print("An exception occurred "+str(e))
+            logging.error("An exception occurred in Run Dir "+str(e))
+            print("An exception occurred in Run Dir"+str(e))
             continue
 
     print("Run Del")    
@@ -113,8 +113,7 @@ def run():
                 shutil.move(pdf_dir+"/"+unknown_file,unknown_dir+"/"+unknown_file)
 
 def ocrpdf(file_path, save_path):
-    ocrmypdf.ocr(file_path, save_path, rotate_pages=True,
-    remove_background=True,language="en", deskew=True, force_ocr=True)
+    ocrmypdf.ocr(file_path, save_path, rotate_pages=True, remove_background=True,language="en", deskew=True, force_ocr=True)
 
 
 def ocr(folder, pdf_file):
@@ -134,7 +133,7 @@ def ocr(folder, pdf_file):
             pages=convert_from_path(source, dpi=400,first_page=1,last_page=1,grayscale=True)
         except Exception as e:
             logging.error("An exception occurred in IMG convert"+str(e))
-            print("An exception occurred "+str(e))
+            print("An exception occurred in IMG convert "+str(e))
             return ""           
 
         filename=temp+"_1.jpg"
@@ -144,6 +143,8 @@ def ocr(folder, pdf_file):
         try:
             return pytesseract.image_to_string(Image.open(temp+"_1.jpg"),lang=lang)
         except:
+            logging.error("An exception occurred in pytesseract "+str(e))
+            print("An exception occurred in pytesseract "+str(e))
             return ""
 
 
