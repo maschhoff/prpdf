@@ -1,5 +1,6 @@
 # syntax=docker/dockerfile:1
-FROM python:3.11.0-slim-buster
+#FROM python:3.11.0-slim-buster
+FROM python:3.11.11-slim-bullseye
 WORKDIR /source
 ENV WORKDIR=/source
 ENV FLASK_APP=prpdf.py
