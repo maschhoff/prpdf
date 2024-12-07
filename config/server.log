@@ -2863,3 +2863,10 @@ ERROR:root:An exception occurred 'NoneType' object has no attribute 'find'
 INFO:root:Start PR PDF Server...
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 418-463-050
+INFO:root:STARTING CRONJOB PR PDF AUTOSCAN 2024-12-07 18:22:52.920497
+ERROR:root:An exception occurred 'NoneType' object has no attribute 'find'
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://172.17.0.2:80
+INFO:werkzeug:[33mPress CTRL+C to quit[0m

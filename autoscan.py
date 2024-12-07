@@ -1,6 +1,8 @@
 #importing modules
 
 import pytesseract
+import ocrmypdf
+import tesseract
 # Wenn tesseract exe nicht im System PATH angegeben, dann:
 #pytess= r"/home/detleva/.local/bin"
 from PIL import Image
@@ -111,6 +113,11 @@ def run():
                 print("MOVE "+pdf_dir+"/"+unknown_file+" to "+unknown_dir+"/"+unknown_file)
                 shutil.move(pdf_dir+"/"+unknown_file,unknown_dir+"/"+unknown_file)
 
+def ocrpdf(file_path, save_path):
+    ocrmypdf.ocr(file_path, save_path, rotate_pages=True,
+    remove_background=True,language="en", deskew=True, force_ocr=True)
+
+
 def ocr(folder, pdf_file):
     print("---- OCR PDF-File: ",pdf_file," ----\n")
     if pdf_file.endswith(".pdf"):
@@ -121,6 +128,7 @@ def ocr(folder, pdf_file):
 
     # Bilder aus pdf
         try:
+            ocrpdf(source,source)
             pages=convert_from_path(source, dpi=400,first_page=1,last_page=1,grayscale=True)
         except Exception as e:
             logging.error("An exception occurred "+str(e))
