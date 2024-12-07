@@ -128,7 +128,7 @@ def ocr(folder, pdf_file):
 
     # Bilder aus pdf
         try:
-            ocrpdf(source,source)
+            ocrpdf(source,source+"x")
             pages=convert_from_path(source, dpi=400,first_page=1,last_page=1,grayscale=True)
         except Exception as e:
             logging.error("An exception occurred "+str(e))
