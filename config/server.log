@@ -3085,3 +3085,185 @@ INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:22:06] "[36mGET /static/main.css H
 INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:22:06] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 304 -
 INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:22:06] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
 INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:22:06] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:root:STARTING CRONJOB PR PDF AUTOSCAN 2024-12-07 20:41:19.443626
+ERROR:root:An exception occurred in Run Dir 'NoneType' object has no attribute 'find'
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://172.17.0.2:80
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:42:29] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:42:29] "GET /static/main.css HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:42:30] "[33mGET /static/pdf/unknown/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:42:30] "[33mGET /static/pdf/unknown/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:42:30] "GET /favicon.ico HTTP/1.1" 200 -
+ERROR:ocrmypdf.subprocess:
+OCRmyPDF requires 'tesseract' 4.1.1 or higher.  Your system appears
+to have 4.0.0.  Please update this program.
+
+INFO:ocrmypdf.subprocess:
+On systems with the aptitude package manager (Debian, Ubuntu), try these
+commands:
+    sudo apt update
+    sudo apt install tesseract-ocr
+
+On RPM-based systems (Red Hat, Fedora), try this command:
+    sudo dnf install tesseract-ocr
+
+ERROR:root:An exception occurred in Run Dir tesseract
+ERROR:ocrmypdf.subprocess:
+OCRmyPDF requires 'tesseract' 4.1.1 or higher.  Your system appears
+to have 4.0.0.  Please update this program.
+
+INFO:ocrmypdf.subprocess:
+On systems with the aptitude package manager (Debian, Ubuntu), try these
+commands:
+    sudo apt update
+    sudo apt install tesseract-ocr
+
+On RPM-based systems (Red Hat, Fedora), try this command:
+    sudo dnf install tesseract-ocr
+
+ERROR:root:An exception occurred in Run Dir tesseract
+ERROR:root:An exception occurred in Run Dir 'NoneType' object has no attribute 'find'
+ERROR:ocrmypdf.subprocess:
+OCRmyPDF requires 'tesseract' 4.1.1 or higher.  Your system appears
+to have 4.0.0.  Please update this program.
+
+INFO:ocrmypdf.subprocess:
+On systems with the aptitude package manager (Debian, Ubuntu), try these
+commands:
+    sudo apt update
+    sudo apt install tesseract-ocr
+
+On RPM-based systems (Red Hat, Fedora), try this command:
+    sudo dnf install tesseract-ocr
+
+ERROR:root:An exception occurred in Run Dir tesseract
+INFO:root:MOVE /source/static/pdf//Neue Informationen zu Ihrem Vertrag in Ihrem Online-Postfach - 2023-03-31.pdf to /source/static/pdf/unknown//Neue Informationen zu Ihrem Vertrag in Ihrem Online-Postfach - 2023-03-31.pdf
+INFO:root:MOVE /source/static/pdf//rechnung-MC.M24082596090.pdf to /source/static/pdf/unknown//rechnung-MC.M24082596090.pdf
+INFO:root:MOVE /source/static/pdf//non-text-searchable.pdf to /source/static/pdf/unknown//non-text-searchable.pdf
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:42:32] "GET /autoscan HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:42:32] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:42:32] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:42:32] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:42:32] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:42:34] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:root:STARTING CRONJOB PR PDF AUTOSCAN 2024-12-07 20:51:25.270362
+ERROR:root:An exception occurred in Run Dir 'NoneType' object has no attribute 'find'
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://172.17.0.2:80
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:51:53] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:51:53] "GET /static/main.css HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:51:53] "[33mGET /static/pdf/unknown/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:51:53] "[33mGET /static/pdf/unknown/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:51:53] "GET /favicon.ico HTTP/1.1" 200 -
+ERROR:ocrmypdf.subprocess:
+OCRmyPDF requires 'gs' 9.54 or higher.  Your system appears
+to have 9.53.3.  Please update this program.
+
+INFO:ocrmypdf.subprocess:
+On systems with the aptitude package manager (Debian, Ubuntu), try these
+commands:
+    sudo apt update
+    sudo apt install ghostscript
+
+On RPM-based systems (Red Hat, Fedora), try this command:
+    sudo dnf install ghostscript
+
+ERROR:root:An exception occurred in Run Dir gs
+ERROR:ocrmypdf.subprocess:
+OCRmyPDF requires 'gs' 9.54 or higher.  Your system appears
+to have 9.53.3.  Please update this program.
+
+INFO:ocrmypdf.subprocess:
+On systems with the aptitude package manager (Debian, Ubuntu), try these
+commands:
+    sudo apt update
+    sudo apt install ghostscript
+
+On RPM-based systems (Red Hat, Fedora), try this command:
+    sudo dnf install ghostscript
+
+ERROR:root:An exception occurred in Run Dir gs
+ERROR:root:An exception occurred in Run Dir 'NoneType' object has no attribute 'find'
+ERROR:ocrmypdf.subprocess:
+OCRmyPDF requires 'gs' 9.54 or higher.  Your system appears
+to have 9.53.3.  Please update this program.
+
+INFO:ocrmypdf.subprocess:
+On systems with the aptitude package manager (Debian, Ubuntu), try these
+commands:
+    sudo apt update
+    sudo apt install ghostscript
+
+On RPM-based systems (Red Hat, Fedora), try this command:
+    sudo dnf install ghostscript
+
+ERROR:root:An exception occurred in Run Dir gs
+INFO:root:MOVE /source/static/pdf//Neue Informationen zu Ihrem Vertrag in Ihrem Online-Postfach - 2023-03-31.pdf to /source/static/pdf/unknown//Neue Informationen zu Ihrem Vertrag in Ihrem Online-Postfach - 2023-03-31.pdf
+INFO:root:MOVE /source/static/pdf//rechnung-MC.M24082596090.pdf to /source/static/pdf/unknown//rechnung-MC.M24082596090.pdf
+INFO:root:MOVE /source/static/pdf//non-text-searchable.pdf to /source/static/pdf/unknown//non-text-searchable.pdf
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:51:55] "GET /autoscan HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:51:55] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:51:55] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:51:55] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:51:55] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 20:51:56] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:root:STARTING CRONJOB PR PDF AUTOSCAN 2024-12-07 21:12:56.090148
+ERROR:root:An exception occurred in Run Dir 'NoneType' object has no attribute 'find'
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://172.17.0.2:80
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:13:17] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:13:17] "GET /static/main.css HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:13:17] "[33mGET /static/pdf/unknown/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:13:17] "[33mGET /static/pdf/unknown/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:13:17] "GET /favicon.ico HTTP/1.1" 200 -
+ERROR:root:An exception occurred in Run Dir OCR engine does not have language data for the following requested languages: 
+en
+Please install the appropriate language data for your OCR engine.
+
+See the online documentation for instructions:
+    https://ocrmypdf.readthedocs.io/en/latest/languages.html
+
+Note: most languages are identified by a 3-letter ISO 639-2 Code.
+For example, English is 'eng', German is 'deu', and Spanish is 'spa'.
+Simplified Chinese is 'chi_sim' and Traditional Chinese is 'chi_tra'.
+
+ERROR:root:An exception occurred in Run Dir OCR engine does not have language data for the following requested languages: 
+en
+Please install the appropriate language data for your OCR engine.
+
+See the online documentation for instructions:
+    https://ocrmypdf.readthedocs.io/en/latest/languages.html
+
+Note: most languages are identified by a 3-letter ISO 639-2 Code.
+For example, English is 'eng', German is 'deu', and Spanish is 'spa'.
+Simplified Chinese is 'chi_sim' and Traditional Chinese is 'chi_tra'.
+
+ERROR:root:An exception occurred in Run Dir 'NoneType' object has no attribute 'find'
+ERROR:root:An exception occurred in Run Dir OCR engine does not have language data for the following requested languages: 
+en
+Please install the appropriate language data for your OCR engine.
+
+See the online documentation for instructions:
+    https://ocrmypdf.readthedocs.io/en/latest/languages.html
+
+Note: most languages are identified by a 3-letter ISO 639-2 Code.
+For example, English is 'eng', German is 'deu', and Spanish is 'spa'.
+Simplified Chinese is 'chi_sim' and Traditional Chinese is 'chi_tra'.
+
+INFO:root:MOVE /source/static/pdf//Neue Informationen zu Ihrem Vertrag in Ihrem Online-Postfach - 2023-03-31.pdf to /source/static/pdf/unknown//Neue Informationen zu Ihrem Vertrag in Ihrem Online-Postfach - 2023-03-31.pdf
+INFO:root:MOVE /source/static/pdf//rechnung-MC.M24082596090.pdf to /source/static/pdf/unknown//rechnung-MC.M24082596090.pdf
+INFO:root:MOVE /source/static/pdf//non-text-searchable.pdf to /source/static/pdf/unknown//non-text-searchable.pdf
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:13:20] "GET /autoscan HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:13:20] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:13:20] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:13:20] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [07/Dec/2024 21:13:20] "GET /favicon.ico HTTP/1.1" 200 -

@@ -99,7 +99,7 @@ def run():
             sort(pdf_file,ocr(pdf_dir,pdf_file)) # PDFs der Reihe nach indexieren
         except Exception as e:
             logging.error("An exception occurred in Run Dir "+str(e))
-            print("An exception occurred in Run Dir"+str(e))
+            print("An exception occurred in Run Dir "+str(e))
             continue
 
     print("Run Del")    
@@ -113,7 +113,7 @@ def run():
                 shutil.move(pdf_dir+"/"+unknown_file,unknown_dir+"/"+unknown_file)
 
 def ocrpdf(file_path, save_path):
-    ocrmypdf.ocr(file_path, save_path, rotate_pages=True, remove_background=True,language="en", deskew=True, force_ocr=True)
+    ocrmypdf.ocr(file_path, save_path, rotate_pages=True, remove_background=True, language=lang, deskew=True, force_ocr=True)
 
 
 def ocr(folder, pdf_file):
