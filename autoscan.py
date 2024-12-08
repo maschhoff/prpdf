@@ -124,7 +124,7 @@ def ocr(folder, pdf_file):
         source=folder+"/"+pdf_file 
     #OCR PDF
         try:
-            ocrpdf(source,source)s
+            ocrpdf(source,source)
             with open(source, "rb") as pdf_file:
                 read_pdf = PyPDF2.PdfFileReader(pdf_file)
                 number_of_pages = read_pdf.getNumPages()
