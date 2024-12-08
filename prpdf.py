@@ -134,8 +134,8 @@ def dorotate(id):
 
 @app.route('/<string:id>')
 def doocr(id):
-        text=autoscan.ocr(unknown_dir,id) 
-        return render_template('magic.html', text=text, subdirhtml=subdirhtml, folders=loadArchivFolder(), pdf=id)
+      # text=autoscan.ocr(unknown_dir,id) 
+        return render_template('magic.html', preview=id, subdirhtml=subdirhtml, folders=loadArchivFolder(), pdf=id)
 
 @app.route('/magic', methods=['POST'])
 def autoscan_rule():
