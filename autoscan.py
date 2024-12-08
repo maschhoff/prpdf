@@ -8,7 +8,7 @@ from PIL import Image
 # Wenn poppler/bin  nicht im System PATH angegeben, dann:
 #pdftoppm_path = r"/home/detleva/.local/bin/pdftoppm"
 import os#, subprocess
-from pdf2image import convert_from_path
+import PyPDF2
 from datetime import datetime
 import logging
 import time
@@ -123,30 +123,19 @@ def ocr(folder, pdf_file):
         temp=temp_dir+"/"+pdf_file[:-4]
         source=folder+"/"+pdf_file 
     #OCR PDF
-      #  try:
-        ocrpdf(source,source)
-       # except Exception as e:
-        #    logging.error("An exception occured in OCRPDF "+str(e))
-
-
-    # Bilder aus pdf
         try:
-            pages=convert_from_path(source, dpi=400,first_page=1,last_page=1,grayscale=True)
+            ocrpdf(source,source)s
+            with open(source, "rb") as pdf_file:
+                read_pdf = PyPDF2.PdfFileReader(pdf_file)
+                number_of_pages = read_pdf.getNumPages()
+                page = read_pdf.pages[0]
+                page_content = page.extractText()
+            return page_content
         except Exception as e:
-            logging.error("An exception occurred in IMG convert"+str(e))
-            print("An exception occurred in IMG convert "+str(e))
-            return ""           
+             logging.error("An exception occured in OCRPDF "+str(e))
 
-        filename=temp+"_1.jpg"
-        pages[0].save(filename,'JPEG')
-            
-    # OCR Texterkennung
-        try:
-            return pytesseract.image_to_string(Image.open(temp+"_1.jpg"),lang=lang)
-        except:
-            logging.error("An exception occurred in pytesseract "+str(e))
-            print("An exception occurred in pytesseract "+str(e))
-            return ""
+
+         
 
 
 #Cron Thread start

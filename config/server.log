@@ -3421,3 +3421,112 @@ INFO:ocrmypdf._pipelines._common:Output file is a PDF/A-2B (as expected)
 INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:46:59] "GET /non-text-searchable.pdf HTTP/1.1" 200 -
 INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:46:59] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
 INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:46:59] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:root:STARTING CRONJOB PR PDF AUTOSCAN 2024-12-08 08:52:22.509665
+ERROR:root:An exception occurred in Run Dir 'NoneType' object has no attribute 'find'
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://172.17.0.2:80
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:52:32] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:52:32] "GET /static/main.css HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:52:32] "GET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:52:33] "GET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:52:33] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:52:37] "GET /non-text-searchable.pdf HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:52:37] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:52:37] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:52:37] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:54:48] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:54:48] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:54:48] "[35m[1mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 206 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:54:48] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:54:48] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:54:49] "[36mGET /static/pdf/unknown/rechnung-MC.M24082596090.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:54:56] "GET /split HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:54:56] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:54:56] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:55:06] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:55:06] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:55:06] "[35m[1mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 206 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:55:06] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:55:06] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:55:06] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:55:08] "[36mGET /static/pdf/unknown/rechnung-MC.M24082596090.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:55:10] "GET /rechnung-MC.M24082596090.pdf HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:55:10] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:55:10] "[36mGET /static/pdf/unknown/rechnung-MC.M24082596090.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 08:55:10] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 09:01:15] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 09:01:15] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 09:01:15] "[35m[1mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 206 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 09:01:15] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 09:01:15] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 09:01:23] "[36mGET /static/pdf/unknown/rechnung-MC.M24082596090.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 09:01:27] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 09:01:34] "GET /non-text-searchable.pdf HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 09:01:34] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 09:01:34] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 09:01:34] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:14] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:15] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:15] "[35m[1mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 206 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:15] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:15] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:22] "[36mGET /static/pdf/unknown/rechnung-MC.M24082596090.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:25] "[35m[1mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 206 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:25] "[35m[1mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 206 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:28] "GET /split HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:28] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:28] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:root:Split Page after: 1
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:32] "POST /split HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:32] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:33] "GET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31_part_1.pdf HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:33] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:39] "GET /merge HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:39] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:39] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:55] "POST /merge HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:55] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:56] "[33mGET /static/pdf/unknown/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:56] "GET /static/pdf/unknown/Mergetest.pdf HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:23:56] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:24:01] "[36mGET /static/pdf/unknown/Mergetest.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:24:37] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:24:37] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:24:37] "[33mGET /static/pdf/unknown/Mergetest%20Test_test123de.pdf HTTP/1.1[0m" 404 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:24:37] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31_part_1.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:24:38] "GET /favicon.ico HTTP/1.1" 200 -
+ERROR:root:An exception occurred in Run Dir 'NoneType' object has no attribute 'find'
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:24:40] "GET /autoscan HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:24:40] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:24:40] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:24:40] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31_part_1.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:24:40] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:24:56] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:02] "[32mGET /del/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31.pdf HTTP/1.1[0m" 302 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:02] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:02] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:03] "[36mGET /static/pdf/unknown/rechnung-MC.M24082596090.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:03] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31_part_1.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:03] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:06] "GET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31_part_1.pdf HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:06] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:10] "[36mGET /static/pdf/unknown/rechnung-MC.M24082596090.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:10] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31_part_1.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:10] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:31] "GET /Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31_part_1.pdf HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:31] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:31] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31_part_1.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:31] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:34] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:34] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:34] "[36mGET /static/pdf/unknown/rechnung-MC.M24082596090.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:34] "[36mGET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31_part_1.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:25:34] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:root:STARTING CRONJOB PR PDF AUTOSCAN 2024-12-08 10:35:35.171437
+ERROR:root:An exception occurred in Run Dir 'NoneType' object has no attribute 'find'
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:35:42] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:35:58] "GET /static/pdf/unknown/Neue%20Informationen%20zu%20Ihrem%20Vertrag%20in%20Ihrem%20Online-Postfach%20-%202023-03-31_part_2.pdf HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [08/Dec/2024 10:36:00] "[36mGET /static/pdf/unknown/non-text-searchable.pdf HTTP/1.1[0m" 304 -
