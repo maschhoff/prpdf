@@ -1,44 +1,58 @@
-
-
-
 {% extends "layout.html" %}
 {% block content %}
 
-
-
-
-
-
 <div style="position: absolute; top: 60px; left: 5px; right: 5px;">
-
-	
-	<form name="config" action="/settings" method="POST">  
-		<input type="hidden" name="hiddenconfig" style="display: none;">
-	<button type="submit" class="btn btn-primary">
-		<ion-icon name="save"></ion-icon> Save
-		</button>
-	</form>
+  <form name="config" action="/settings" method="POST" id="configForm">
+    <input type="hidden" name="hiddenconfig" id="hiddenconfig" />
+    <button type="submit" class="btn btn-primary mt-3">
+      <ion-icon name="save"></ion-icon> Save
+    </button>
+  </form>
 </div>
 
-
-			<div  id="editor">{{config_raw}}</div>
-
-		</body>
+<div id="editor"></div>
 
 <script>
+  // Parse the raw JSON string passed from backend
+  const rawJsonStr = {{ config_raw | tojson | safe }};
 
-var editor = ace.edit('editor');
-        editor.session.setMode("ace/mode/json");
-        editor.setTheme("ace/theme/xcode");
-		
+  let prettyConfig = '';
+  try {
+    // Parse and pretty-print the JSON
+    const parsedJson = JSON.parse(rawJsonStr);
+    prettyConfig = JSON.stringify(parsedJson, null, 2);
+  } catch (e) {
+    // If invalid JSON, display raw with comment
+    prettyConfig = '// Invalid JSON:\n' + rawJsonStr;
+  }
 
-    var input = $('input[name="hiddenconfig"]');
-        editor.getSession().on("change", function () {
-        input.val(editor.getSession().getValue());
-    });
+  // Initialize ACE editor
+  const editor = ace.edit("editor");
+  editor.session.setMode("ace/mode/json");
+  editor.setTheme("ace/theme/xcode");
+  editor.setValue(prettyConfig, -1);
 
+  // Reference to hidden input to submit JSON string
+  const hiddenInput = document.getElementById("hiddenconfig");
+  hiddenInput.value = editor.getValue();
+
+  // Update hidden input on every editor change
+  editor.getSession().on("change", function () {
+    hiddenInput.value = editor.getValue();
+  });
+
+  // On form submit: validate and pretty-format JSON before sending
+  document.getElementById("configForm").addEventListener("submit", function(event) {
+    try {
+      const parsed = JSON.parse(editor.getValue());
+      const pretty = JSON.stringify(parsed, null, 2);
+      editor.setValue(pretty, -1);
+      hiddenInput.value = pretty;
+    } catch (err) {
+      alert("Invalid JSON! Please fix it before saving.");
+      event.preventDefault(); // Prevent submission if JSON invalid
+    }
+  });
 </script>
 
- 
-	
 {% endblock content %}

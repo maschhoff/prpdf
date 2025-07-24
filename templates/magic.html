@@ -1,137 +1,169 @@
 {% extends "layout.html" %}
 {% block content %}
-<script src="https://www.jqueryscript.net/demo/Bootstrap-4-Tag-Input-Plugin-jQuery/tagsinput.js"></script>
-<link href="https://www.jqueryscript.net/demo/Bootstrap-4-Tag-Input-Plugin-jQuery/tagsinput.css" rel="stylesheet" type="text/css">
 
-<body>
+<!-- External CSS for tags input plugin -->
+<link href="https://www.jqueryscript.net/demo/Bootstrap-4-Tag-Input-Plugin-jQuery/tagsinput.css" rel="stylesheet" />
 
-  <div class="container-fluid">
-    <div class="row"><br/></div>
-      <div class="row">
-         <div class="col">
-            <h3>Dokument</h3>
-            <div class="form-group">
-              <!--
-                <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="33">{{text}}</textarea>
-            -->
+<script>
+  $(document).ready(function () {
+    // Initialize MDBTreeview if available
+    if ($(".treeview").mdbTreeview) {
+      $(".treeview").mdbTreeview();
+    }
+  });
 
-            <embed id="embed" src="./static/pdf/unknown/{{preview}}" width="100%" height="700px" alt="pdf" type="application/pdf">
-              
+  // Function to select folder from modal and update input value
+  function selectfolder(sfolder) {
+    document.getElementById("folder").value = sfolder;
+    $("#myModal2").modal("hide");
+  }
+</script>
+
+<div class="container-fluid">
+  <div class="row mt-3">
+
+    <!-- PDF Preview Section -->
+    <div class="col">
+      <h3>Document</h3>
+      <div class="form-group">
+        <!-- PDF viewer iframe -->
+        <iframe
+          id="pdfViewerFrameMagic"
+          src="/static/pdfjs/web/viewer.html?file=/static/pdf/unknown/{{ preview }}"
+          width="100%"
+          height="800px"
+          frameborder="0"
+          style="border: none;">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Autoscan Rule Form Section -->
+    <div class="col">
+      <form action="/magic" method="POST">
+        <h3>New Autoscan Rule</h3>
+        <strong>How this works:</strong>
+        <ul>
+          <li>By defining an "autoscan rule," when a file with the respective keyword is recognized,
+            it will automatically be moved to the predefined folder (selectable via folder icon)
+            and renamed according to the filename (Note: Filename will be appended by a random ID, depending on your settings)</li>
+            <li>OCR is autmatically applied to the original file</li>
+        </ul>
+          
+
+        <div class="row">
+          <div class="col-sm">
+            <input
+              type="text"
+              id="keywords"
+              class="form-control"
+              data-role="tagsinput"
+              name="keywords"
+              placeholder="Keywords"
+            />
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-sm">
+            <input
+              type="text"
+              id="edittitle"
+              class="form-control"
+              name="pdf"
+              placeholder="File name"
+            />
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-10">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Target folder:</div>
               </div>
+              <input
+                type="text"
+                id="folder"
+                name="folder"
+                value="unknown"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="col-2">
+            <button
+              type="button"
+              class="btn btn-primary btn-sm"
+              id="select"
+              data-toggle="modal"
+              data-target="#myModal2"
+              title="Select folder"
+            >
+              <i class="fas fa-folder"></i>
+            </button>
+          </div>
+        </div>
 
-            
-         </div>
-         <div class="col">
+        <div class="row mt-3">
+          <div class="col-sm">
+            <button type="submit" class="btn btn-primary btn-sm">
+              <i class="fas fa-check"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
-                
-              <form action="/magic" method="POST">
-              
-              
-                <h3>New Autoscan Rule</h3>
-                
-                <div class="row">
-                <div class="col-sm">
-                <div class="form-outline">
-                <input type="text" id="edittitle" class="form-control" name="pdf" value="" placeholder="Filename"/>
-  
-  
-                </div>
-                </div>
-                <div class="col-sm"> <div class="form-outline">
-                
-                  <input type="hidden" id="folder" name="folder" value="unknown">
+<!-- Folder Selection Modal -->
+<div
+  class="modal fade"
+  id="myModal2"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
 
-                  <button type="button" class="btn btn-primary btn-sm" id="select" data-toggle="modal" data-target="#myModal2" data-toggle="tooltip" data-placement="bottom"
-                  title="select folder"><i class="fas fa-folder"></i></button>
-              
-                
-                </div>
-                
-                </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-sm">
-                    <input type="text" id="keywords" class="form-control" data-role="tagsinput" name="keywords" value="" placeholder="Keywords"/>
-                </div>
-                </div>
-                <div class="row">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Select folder</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 
-                    <div class="col-sm">
-                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></button>
-                        </div>
-
-                </div>
-                
-                
-                </div>
-                </form>  
+      <div class="modal-body">
+        <div class="treeview">
+          <ul class="mb-1 pl-3 pb-2">
+            <li>
+              <i class="fas fa-angle-right rotate"></i>
+              <span>
+                <i class="far fa-folder-open ic-w mx-1"></i>
+                <a href="javascript:void(0)" onclick="selectfolder('/Archiv/');">Main archive folder</a>
+              </span>
+              <ul class="nested"></ul>
+            </li>
+            <hr />
+            {{ subdirhtml | safe }}
+          </ul>
         </div>
       </div>
 
+      <div class="modal-footer">
+        <!-- Optional footer buttons can go here -->
+      </div>
 
-       <!-- TreeView Modal -->
-       <div class="modal fade" id="myModal2" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Select folder</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              
-              <div class="treeview">
-                
-                <ul class="mb-1 pl-3 pb-2">
-              
-
-                <li><i class="fas fa-angle-right rotate"></i>
-                  <span><i class="far fa-folder-open ic-w mx-1"></i><a href="javascript:void(0)" onClick="selectfolder('/Archiv/');">Main archiv folder</a></span>
-                  <ul class="nested">
-                    </ul>
-                    </li>
-            
-                  <hr>
-          
-		<!--subdirhtml  
-            -->
-            {{ subdirhtml|safe }}
-       
-          
-
-
-
-          </ul></div>
-          </div>
-              
-			
-
-              
-            </div>
-            <div class="modal-footer">
-            <!--  <button type="button" id="apply" class="btn btn-primary btn-sm">Apply</button> -->
-            </div>
-          </div>
-        </div>
-
-</body>
-
-<script>
-
-$(document).ready(function() {
-      $('.treeview').mdbTreeview();
-    });
-
-  function selectfolder(sfolder){
-    var folder=document.getElementById("folder");
-    folder.setAttribute('value',sfolder);
-    $('#myModal2').modal('hide')
-  }
-
-</script>
-
-
+    </div>
+  </div>
+</div>
 
 {% endblock content %}

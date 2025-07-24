@@ -1,5 +1,4 @@
 # syntax=docker/dockerfile:1
-#FROM python:3.11.0-slim-buster
 FROM python:3.11-slim-bookworm
 WORKDIR /source
 ENV WORKDIR=/source

@@ -1,1 +1,14 @@
-{"port": 80, "debug": "off", "lang": "deu", "updatetime": 1800, "index": {"/Archiv/Test1/TESTARC;Filename": ["Keyword1"], "/Archiv/Test1;Filename": ["Bibliothek", "Johann"]}}
+{
+  "port": 80,
+  "debug": "on",
+  "lang": "deu",
+  "updatetime": 1800,
+  "append_date": true,
+  "append_random": true,
+  "enable_update_flag": true,
+  "index": {
+    "unknown;": [
+      ""
+    ]
+  }
+}

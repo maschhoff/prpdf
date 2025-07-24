@@ -1,357 +1,373 @@
 {% extends "layout.html" %}
 {% block content %}
-<body>
+<div class="container-fluid">
+  <div class="row"><br/></div> <!-- Spacer row -->
+  <div class="row">
+    <div class="col">
 
-  <div class="container-fluid">
-    <div class="row"><br/></div>
-      <div class="row">
-         <div class="col">
-  
-              <h3>Scanned Documents</h3>
-              
-              
-            <!-- <table id="dtDocuments" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">-->
-              <table id="dtDocuments" class="table  table-hover " cellspacing="0"> 
-              <thead>
-                  <tr>
-                    <th scope="col">Name
-                    </th>
-                    <th scope="col">Size
-                    </th>
-                    <th scope="col">Date
-                    </th>
-                    <th scope="col">View
-                    </th>
-                  
-                  </tr>
-                </thead>
-           
-                <tbody>
+      <h3>Scanned Documents</h3>
 
-                  {% for pdf in liste %}
+      <table id="documentsTable" class="table table-hover" cellspacing="0">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Size</th>
+            <th scope="col">Date</th>
+            <th scope="col">View</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for pdf in liste %}
+          <tr>
+            <td>{{ pdf.name }}</td>
+            <td>{{ pdf.size }}</td>
+            <td>{{ pdf.date }}</td>
+            <td>
+              <span class="table-view">
+                <button type="button" id="{{ pdf.name }}" class="btn btn-primary btn-rounded btn-sm px-3" data-toggle="tooltip" data-placement="bottom" title="Document preview">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </span>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
 
-                  <tr>
-                    <td>{{pdf["name"]}}</td>
-                    <td>{{pdf["size"]}}</td>
-                    <td>{{pdf["date"]}}</td>
-                    <td>
-                
-                      <span class="table-view">
-                        <button type="button" id="{{pdf["name"]}}" class="btn btn-primary btn-rounded btn-sm px-3" data-toggle="tooltip" data-placement="bottom"
-                        title="Document preview">
-                          <i class="fas fa-eye"></i>
-                        </button>
-                      </span>
-                </td>
-                    
-                  </tr>
+    </div>
 
-                  {% endfor %} 
-                
-                </tbody>
+    <div class="col" id="pdfPreviewSection">
 
-              </table>
-  
-  </div>
-  <div class="col" id="embedpdf" >
-  
-     
-              <form action="/"  name="prForm"  onsubmit="return validateForm()" method="POST">
-              
-              
-              <h3>Edit and Move</h3>
-              
-              <div class="row">
-              <div class="col-6">
-              <div class="form-outline">
-              <input type="hidden" class="form-control" id="inputiterator" name="inputiterator" value="">
-              <input type="hidden" class="form-control" id="oldtitle" name="oldpdf" value="">
-              <input type="hidden" id="folder" name="folder" value="unknown">
-              <input type="text" id="edittitle" class="form-control" name="pdf" value=""/>
-
-              </div>
-              </div>
-              <div class="col-2"> 
-   
-              
-                
-             <button type="button" class="btn btn-primary btn-sm" id="select" data-toggle="modal" data-target="#myModal2" data-toggle="tooltip" data-placement="bottom"
-                  title="select folder"><i class="fas fa-folder"></i></button>
-            <p id="out_folder"></p>
-              
-            
-              
-              </div>
-              
-              <div class="col-2">
-    
-                <button type="submit" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                title="Edit document title"><i class="fas fa-check"></i></button>
-
-              </div>
-              </div>
-              </form>  
-
-
-<hr>
-              
-              <!--  <a href="/ScanDocument"> <button type="submit" class="btn btn-primary btn-sm" id="filter"><i class="fas fa-filter"></i></button></a>-->
-                  <button type="submit" class="btn btn-primary btn-sm" id="next" data-toggle="tooltip" data-placement="bottom"
-                  title="Preview next document"><i class="fas fa-angle-double-right"></i></button>
-                  <button type="submit" class="btn btn-primary btn-sm" id="magic" data-toggle="tooltip" data-placement="bottom"
-                  title="OCR-Scan and set keywords for autoscan"><i class="fas fa-magic"></i></button>
-                  <button type="submit" class="btn btn-primary btn-sm" id="rotate" data-toggle="tooltip" data-placement="bottom"
-                  title="Rotate document 180"><i class="fas fa-redo"></i></button>
-                  <button type="submit" class="btn btn-primary btn-sm" id="download" data-toggle="tooltip" data-placement="bottom"
-                  title="Download document"><i class="fas fa-download"></i></button>
-                  <button type="button" class="btn btn-primary btn-sm" id="del" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="bottom"
-                  title="Delete this document"><i class="fas fa-trash"></i></button>
-                  <embed id="embed" src="./static/pdf/unknown/{{preview}}" width="100%" height="700px" alt="pdf" type="application/pdf">
-              
-  </div>
-      </div>
-
-      <!-- File Delete Modal -->
-      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Delete file?</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              This file will be permanently deleted and cannot be recovered.<br/> Are you sure?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-              <button type="button" id="dodel" class="btn btn-primary btn-sm">Save changes</button>
-            </div>
+      <form action="/" name="editForm" onsubmit="return validateFileName()" method="POST">
+        <h3>Edit and Move</h3>
+        <div class="row mb-2">
+          <div class="col-2">
+            <!-- Folder select button triggers modal -->
+            <button type="button" class="btn btn-primary btn-sm" id="btnselectfolder" data-toggle="modal" data-target="#folderModal" data-placement="right" title="Select target folder">
+              <i class="fas fa-folder"></i>
+            </button>
+          </div>
+          <div class="col-10">
+            <p id="folderDisplay">No target folder selected (Default: /unknown)</p>
           </div>
         </div>
+        <div class="row mb-3">
+          <div class="col-10">
+            <!-- Editable document title -->
+            <input type="text" id="editTitle" class="form-control" name="pdf" value="">
+            <!-- Hidden inputs for state tracking -->
+            <input type="hidden" id="currentIndex" name="inputiterator" value="">
+            <input type="hidden" id="originalFileName" name="oldpdf" value="">
+            <input type="hidden" id="selectedFolder" name="folder" value="unknown">
+            <input type="hidden" id="sortColumn" name="sortCol" value="{{ sort_column|default(2) }}">
+            <input type="hidden" id="sortDirection" name="sortDir" value="{{ sort_direction|default('desc') }}">
+            <input type="hidden" id="searchTerm" name="searchTerm" value="{{ search_term|default('') }}">
+          </div>
+          <div class="col-2">
+            <!-- Submit edit -->
+            <button type="submit" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edit document title">
+              <i class="fas fa-check"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <hr>
+
+      <!-- Action buttons -->
+      <button type="submit" class="btn btn-primary btn-sm" id="btnNext" data-toggle="tooltip" data-placement="bottom" title="Preview next document">
+        <i class="fas fa-angle-double-right"></i>
+      </button>
+      <button type="submit" class="btn btn-primary btn-sm" id="btnMagic" data-toggle="tooltip" data-placement="bottom" title="OCR-Scan and set keywords for autoscan">
+        <i class="fas fa-magic"></i>
+      </button>
+      <button type="submit" class="btn btn-primary btn-sm" id="btnRotate" data-toggle="tooltip" data-placement="bottom" title="Rotate document 180">
+        <i class="fas fa-redo"></i>
+      </button>
+      <button type="submit" class="btn btn-primary btn-sm" id="btnDownload" data-toggle="tooltip" data-placement="bottom" title="Download document">
+        <i class="fas fa-download"></i>
+      </button>
+      <button type="button" class="btn btn-primary btn-sm" id="btnDelete" data-toggle="modal" data-target="#deleteModal" data-placement="bottom" title="Delete this document">
+        <i class="fas fa-trash"></i>
+      </button>
+
+      <!-- PDF viewer iframe -->
+      <iframe
+        id="pdfViewerFrame"
+        src="/static/pdfjs/web/viewer.html?file=/static/pdf/unknown/{{ preview }}"
+        width="100%"
+        height="800px"
+        frameborder="0"
+        style="border: none;">
+      </iframe>
+
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete file?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      
-      
-        
-      
-      <!-- TreeView Modal -->
-      <div class="modal fade" id="myModal2" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Select folder</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              
-              <div class="treeview">
-                
-                <ul class="mb-1 pl-3 pb-2">
-              
-						<!--subdirhtml  
-            
-              TODO unknown und .
+      <div class="modal-body">
+        This file will be permanently deleted and cannot be recovered.<br/> Are you sure?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        <button type="button" id="btnConfirmDelete" class="btn btn-primary btn-sm">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-            -->
-
+<!-- Folder Selection Modal -->
+<div class="modal fade" id="folderModal" tabindex="-2" role="dialog" aria-labelledby="folderModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="folderModalLabel">Select folder</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="treeview">
+          <ul class="mb-1 pl-3 pb-2">
             <li><i class="fas fa-angle-right rotate"></i>
-              <span><i class="far fa-folder-open ic-w mx-1"></i><a href="javascript:void(0)" onClick="selectfolder('unknown');">Unknown</a></span>
-              <ul class="nested">
-                </ul>
-                </li>
-
-                <li><i class="fas fa-angle-right rotate"></i>
-                  <span><i class="far fa-folder-open ic-w mx-1"></i><a href="javascript:void(0)" onClick="selectfolder('/Archiv/');">Main archiv folder</a></span>
-                  <ul class="nested">
-                    </ul>
-                    </li>
-            
-                  <hr>
-          
-
+              <span><i class="far fa-folder-open ic-w mx-1"></i>
+                <a href="javascript:void(0)" onclick="selectfolder('unknown');">Unknown</a>
+              </span>
+              <ul class="nested"></ul>
+            </li>
+            <li><i class="fas fa-angle-right rotate"></i>
+              <span><i class="far fa-folder-open ic-w mx-1"></i>
+                <a href="javascript:void(0)" onclick="selectfolder('/Archiv/');">Main archive folder</a>
+              </span>
+              <ul class="nested"></ul>
+            </li>
+            <hr>
             {{ subdirhtml|safe }}
-       
-          
-
-
-
-          </ul></div>
-          </div>
-              
-			
-
-              
-            </div>
-            <div class="modal-footer">
-            <!--  <button type="button" id="apply" class="btn btn-primary btn-sm">Apply</button> -->
-            </div>
-          </div>
+          </ul>
         </div>
       </div>
-      
-      
-      
+    </div>
+  </div>
+</div>
 
-  </body>
-
-
-  <script>
-
-//Validate Input dont let there be special caraters
-function validateForm() {
-  let x = document.forms["prForm"]["edittitle"].value;
-  if (x == "") {
-    alert("Name must be filled out");
-    return false;
-  }else{
-    var regex = /^[\w,\s-]+$/
-    if(regex.test(x)){
-      return true;
-    }else{
-      alert("No special chars allowed");
+<script>
+  /**
+   * Validate filename on form submit.
+   * Disallow empty input and forbidden Windows filename chars and control chars.
+   * @returns {boolean} true if valid, else false
+   */
+  function validateFileName() {
+    const fileName = document.forms["editForm"]["pdf"].value.trim();
+    if (!fileName) {
+      alert("Name must be filled out");
       return false;
     }
+    // Forbidden characters: \ / : * ? " < > | and control chars (0x00-0x1F)
+    const forbiddenPattern = /^[^\\\/:\*\?"<>\|\x00-\x1F]+$/u;
+    if (!forbiddenPattern.test(fileName)) {
+      alert('Invalid characters in filename. Avoid \\ / : * ? " < > | and control characters.');
+      return false;
+    }
+    return true;
   }
-}
+  
+  /**
+   * Select folder from modal, update hidden input and UI, then close modal.
+   * @param {string} folderName - Selected folder path/name
+   */
+  function selectfolder(folderName) {
+    document.getElementById("selectedFolder").value = folderName;
+    document.getElementById("folderDisplay").textContent = folderName;
+    $('#folderModal').modal('hide');
+    console.log("Selected folder:", folderName);
+  }
 
+  /**
+   * Periodically check server for new scanned documents.
+   * If update detected, reset update flag and reload page.
+   */
+  function checkUpdate() {
+    fetch("/check_update")
+      .then(response => response.json())
+      .then(data => {
+        if (data.update) {
+          fetch("/reset_update_flag")
+            .then(() => location.reload())
+            .catch(err => console.error("Error resetting update flag:", err));
+        }
+      });
+  }
+  setInterval(checkUpdate, 5000); // Check every 5 seconds
 
-//selected folder modal
-function selectfolder(sfolder){
-  var folder=document.getElementById("folder");
-  folder.setAttribute('value',sfolder);
-  $('#myModal2').modal('hide')
-  console.log(sfolder)
-  document.getElementById("out_folder").innerHTML=sfolder;
-}
+  $(document).ready(function () {
+    // Initialize DataTable with sorting and scroll options
+    const initialSortCol = {{ sort_column|default(2) }};
+    const initialSortDir = "{{ sort_direction|default('desc') }}";
+    let currentSort = { col: initialSortCol, dir: initialSortDir };
 
-          //Document Ready initiate DataTable - sort on Date  
-          $(document).ready(function () {
-              $('#dtDocuments').DataTable({
-                "scrollY": "700px",
-                "scrollCollapse": true,
-                "bPaginate": false,
-                "info": false,
-                "scrollX": false,
-                "order": [[ 2, "desc" ]]
-          });
-          $('.dataTables_length').addClass('bs-select');
+    const $table = $('#documentsTable');
+    const dataTable = $table.DataTable({
+      scrollY: "calc(100vh - 222px)",
+      scrollCollapse: true,
+      paging: false,
+      info: false,
+      scrollX: false,
+      order: [[initialSortCol, initialSortDir]],
+      columnDefs: [{ orderable: false, targets: 3 }] // Disable sorting on "View" column
+    });
 
-          //TREEVIEW
-          $('.treeview').mdbTreeview();
+    // Apply preserved search term if any
+    const preservedSearch = "{{ search_term|default('') }}";
+    if (preservedSearch) {
+      dataTable.search(preservedSearch).draw();
+    }
 
-          //Iterator for Preview
-          iterator={{iterator}};
-          const $tableID = $('#dtDocuments');
+    // Track currently selected row index (document)
+    let selectedIndex = {{ iterator|default(0) }};
 
-          //PREVIEW on document ready
-	  var td = $tableID.find('tr').eq(++iterator).children('td')[0];
-	  id = $(td).hasClass('dataTables_empty') ? '' : td.innerHTML;
+    /**
+     * Scroll the table body to make the row at given index visible
+     * @param {number} index - Row index to scroll to
+     */
+    function scrollToRow(index) {
+      const rowPosition = $table.find('tbody tr').eq(index).position().top;
+      $('.dataTables_scrollBody').animate({ scrollTop: rowPosition }, 300);
+    }
 
-          console.log("PREVIEW", iterator, id);
+    /**
+     * Update PDF preview iframe, form fields, and highlight selected row
+     * @param {number} index - Row index to preview
+     */
+    function updatePreview(index) {
+      const row = $table.find('tbody tr').eq(index);
+      const fileName = row.children('td').eq(0).text();
 
-          var embed=document.getElementById("embed");
-          embed.setAttribute('src','./static/pdf/unknown/'+id);
-          var edittitle=document.getElementById("edittitle");
-          edittitle.setAttribute('value',id.slice(0,id.length-4));
-          var oldtitle=document.getElementById("oldtitle");
-          oldtitle.setAttribute('value',id); 
-          var inputiterator=document.getElementById("inputiterator");
-          inputiterator.setAttribute('value',iterator);
+      // Update PDF viewer iframe src
+      const pdfUrl = '/static/pdfjs/web/viewer.html?file=/static/pdf/unknown/' + encodeURIComponent(fileName);
+      document.getElementById('pdfViewerFrame').src = pdfUrl;
 
-          //Table row clicked
-          $tableID.on('click', 'tr', function (r) {
-		var table = $tableID.DataTable();  
-		row = $(this).closest('tr').index();
-                console.log("TID", table.row(this).data()[0]);
-                id = table.row(this).data()[0];
-                //#console.log("ROW",row, iterator);
-                $(this).parents('tr'); 
-                //id=$(this).children('button').attr('id');
-                var embed=document.getElementById("embed");
-                embed.setAttribute('src','./static/pdf/unknown/'+id);
-                var edittitle=document.getElementById("edittitle");
-                edittitle.setAttribute('value',id.slice(0,id.length-4));
-                var oldtitle=document.getElementById("oldtitle");
-                oldtitle.setAttribute('value',id);
-                var inputiterator=document.getElementById("inputiterator");
-                inputiterator.setAttribute('value',row);
-                iterator=row+1
+      // Update form fields for editing
+      $('#editTitle').val(fileName.replace(/\.[^/.]+$/, "")); // Remove extension
+      $('#originalFileName').val(fileName);
+      $('#currentIndex').val(index);
 
-          });
+      // Highlight selected row
+      $table.find('tbody tr').removeClass('row-selected');
+      row.addClass('row-selected');
 
-          //PREVIEW BUTTON clicked
-          $tableID.on('click', '.table-view', function () {
-          
-                row=$(this).parents('tr').index();
-                console.log("ROW",row, iterator);
-                $(this).parents('tr'); 
-                id=$(this).children('button').attr('id');
-                var embed=document.getElementById("embed");
-                embed.setAttribute('src','./static/pdf/unknown/'+id);
-                var edittitle=document.getElementById("edittitle");
-                edittitle.setAttribute('value',id.slice(0,id.length-4));
-                var oldtitle=document.getElementById("oldtitle");
-                oldtitle.setAttribute('value',id);
-                var inputiterator=document.getElementById("inputiterator");
-                inputiterator.setAttribute('value',row);
-                iterator=row+1
+      // Update hidden sort inputs
+      $("#sortColumn").val(currentSort.col);
+      $("#sortDirection").val(currentSort.dir);
 
-          });
+      selectedIndex = index;
 
+      scrollToRow(index);
+    }
 
-          //NEXT BUTTON clicked      
-          var next=document.getElementById("next");
-          next.onclick=function(){
-                
-                id = $tableID.find('tr').eq(++iterator).children('td')[0].innerHTML;
-                console.log("NEXT", iterator, id);
+    // On table sort change, update sort state and selected row index
+    dataTable.on('order.dt', function () {
+      const order = dataTable.order();
+      currentSort.col = order[0][0];
+      currentSort.dir = order[0][1];
 
-                var embed=document.getElementById("embed");
-                embed.setAttribute('src','./static/pdf/unknown/'+id);
-                var edittitle=document.getElementById("edittitle");
-                edittitle.setAttribute('value',id.slice(0,id.length-4));
-                var oldtitle=document.getElementById("oldtitle");
-                oldtitle.setAttribute('value',id);
-                var inputiterator=document.getElementById("inputiterator");
-                inputiterator.setAttribute('value',iterator);         
-        
-        };
+      $("#sortColumn").val(currentSort.col);
+      $("#sortDirection").val(currentSort.dir);
 
+      // Find new index of currently selected document after sort
+      const currentFileName = $("#originalFileName").val();
+      const indexes = dataTable.rows({ order: 'applied' }).indexes().toArray();
 
-      // MAGIC BUTTON click
-      var magic=document.getElementById("magic");
-      magic.onclick=function(){
-          id = $tableID.find('tr').eq(iterator).children('td')[0].innerHTML;
-          location.href = "/"+id; 
-        };
+      for (let i = 0; i < indexes.length; i++) {
+        if (dataTable.row(indexes[i]).data()[0] === currentFileName) {
+          selectedIndex = i;
+          $("#currentIndex").val(selectedIndex);
+          $table.find('tbody tr').removeClass('row-selected').eq(i).addClass('row-selected');
+          break;
+        }
+      }
 
-        // ROTATE BUTTON click
-      var rotate=document.getElementById("rotate");
-      rotate.onclick=function(){
-          id = $tableID.find('tr').eq(iterator).children('td')[0].innerHTML;
-          location.href = "/rotate/"+id; 
-        };
+      scrollToRow(selectedIndex);
+    });
 
-      var download=document.getElementById("download");
-      download.onclick=function(){
-          location.href = "./static/pdf/unknown/"+id; 
-        };
+    // Initialize treeview (requires MDB or compatible library)
+    $('.treeview').mdbTreeview();
 
+    // Initialize preview on page load: highlight previewed or first item
+    const renamedFile = "{{ preview if preview else '' }}";
+    if (renamedFile) {
+      const indexes = dataTable.rows({ order: 'applied' }).indexes().toArray();
+      for (let i = 0; i < indexes.length; i++) {
+        if (dataTable.row(indexes[i]).data()[0] === renamedFile) {
+          updatePreview(i);
+          break;
+        }
+      }
+    } else {
+      updatePreview(selectedIndex);
+    }
 
-         // DODEL BUTTON click
-      var dodel=document.getElementById("dodel");
-      dodel.onclick=function(){
-          id = $tableID.find('tr').eq(iterator).children('td')[0].innerHTML;
-          location.href = "/del/"+id; 
-        };
+    // Click on table row updates preview
+    $table.on('click', 'tbody tr', function () {
+      updatePreview($(this).index());
+    });
 
-});
+    // Click on eye button also updates preview
+    $table.on('click', '.table-view', function () {
+      updatePreview($(this).closest('tr').index());
+    });
 
+    // Button: preview next document (cycle)
+    $('#btnNext').on('click', function (e) {
+      e.preventDefault();
+      const rowCount = $table.find('tbody tr').length;
+      selectedIndex = (selectedIndex + 1) % rowCount;
+      updatePreview(selectedIndex);
+    });
 
-  </script>
+    // Button: OCR Magic triggers server route with filename
+    $('#btnMagic').on('click', function () {
+      const fileName = $table.find('tbody tr').eq(selectedIndex).children('td').eq(0).text();
+      window.location.href = "/" + encodeURIComponent(fileName);
+    });
 
+    // Button: Rotate document by 180 degrees
+    $('#btnRotate').on('click', function () {
+      const fileName = $table.find('tbody tr').eq(selectedIndex).children('td').eq(0).text();
+      window.location.href = "/rotate/" + encodeURIComponent(fileName);
+    });
 
-  {% endblock content %}
+    // Button: Download document opens in new tab
+    $('#btnDownload').on('click', function () {
+      const fileName = $table.find('tbody tr').eq(selectedIndex).children('td').eq(0).text();
+      const url = "/static/pdf/unknown/" + encodeURIComponent(fileName);
+      window.open(url, '_blank');
+    });
+
+    // Button: Confirm delete triggers server delete route
+    $('#btnConfirmDelete').on('click', function () {
+      const fileName = $table.find('tbody tr').eq(selectedIndex).children('td').eq(0).text();
+      window.location.href = "/delete/" + encodeURIComponent(fileName);
+    });
+
+    // Initialize all tooltips
+    $('[title], [data-toggle="tooltip"]').tooltip();
+
+    // Save current search term before form submit to preserve it on reload
+    $('#pdfPreviewSection form button[type="submit"]').on('click', function () {
+      const currentSearch = dataTable.search();
+      $('#searchTerm').val(currentSearch);
+    });
+
+  });
+</script>
+{% endblock %}
