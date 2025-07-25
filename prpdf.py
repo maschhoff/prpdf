@@ -11,6 +11,7 @@ import autoscan
 import merge
 import splitpages
 import status
+import shutil
 from vars import *
 
 app = Flask(__name__)
