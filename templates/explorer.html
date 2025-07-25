@@ -48,7 +48,8 @@
             </button>
           </div>
           <div class="col-10">
-            <p id="folderDisplay">No target folder selected (Default: /unknown)</p>
+            <p id="folderDisplay">{{ selected_folder }}</p>
+            <input type="hidden" id="selectedFolder" name="folder" value="{{ selected_folder }}">
           </div>
         </div>
         <div class="row mb-3">
@@ -269,9 +270,13 @@
       $("#sortColumn").val(currentSort.col);
       $("#sortDirection").val(currentSort.dir);
 
+      // Update selected index + scroll doc-row into view 
       selectedIndex = index;
-
       scrollToRow(index);
+
+      // Set focus into edittitle field
+      $('#editTitle').focus();
+
     }
 
     // On table sort change, update sort state and selected row index

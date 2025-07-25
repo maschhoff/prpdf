@@ -5,7 +5,7 @@ import json
 import logging
 from datetime import datetime, date
 from logging.handlers import TimedRotatingFileHandler
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, render_template, request, redirect, jsonify, session
 import settings
 import autoscan
 import merge
@@ -15,6 +15,7 @@ import shutil
 from vars import *
 
 app = Flask(__name__)
+app.secret_key = 'L6^uzJZ6En5EJs'
 
 # Homepage - List PDFs and show preview
 @app.route('/')
@@ -49,12 +50,15 @@ def my_form_post():
     append_date = config.get("append_date", True)
     append_random = config.get("append_random", True)
 
+    session['selected_folder'] = request.form.get("folder", "unknown")
+    selected_folder = session.get("selected_folder", "unknown")
+
     fileneu = newid
     if append_date:
-        filedatum = date.fromtimestamp(os.path.getmtime(os.path.join(unknown_dir, oldid))).strftime('%d_%m_%Y')
-        fileneu += "_" + filedatum
+        filedatum = date.fromtimestamp(os.path.getmtime(os.path.join(unknown_dir, oldid))).strftime('%d-%m-%Y')
+        fileneu += " - " + filedatum
     if append_random:
-        fileneu += "_" + str(random.randint(1111, 9999))
+        fileneu += " - " + str(random.randint(1111, 9999))
     fileneu += ".pdf"
 
     message = ""
@@ -63,11 +67,11 @@ def my_form_post():
     if newid != "":
         if folder != "unknown":
             shutil.move(os.path.join(unknown_dir, oldid), os.path.join(folder, fileneu))
-            message = "Success: File moved"
+            message = "Success: File '" + fileneu + "' moved"
             file_moved = True
         else:
             shutil.move(os.path.join(unknown_dir, oldid), os.path.join(unknown_dir, fileneu))
-            message = "Success: Title changed"
+            message = "Success: Title changed to:" + fileneu
 
     pdf = loadFiles()
 
@@ -96,7 +100,8 @@ def my_form_post():
         iterator=iterator,
         sort_column=sortCol,
         sort_direction=sortDir,
-        search_term=searchTerm
+        search_term=searchTerm,
+        selected_folder=selected_folder
     )
 
 
