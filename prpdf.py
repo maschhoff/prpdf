@@ -266,17 +266,29 @@ def setting_save():
 
 
 # Check if update is needed (for front-end polling)
-@app.route("/check_update")
+@app.route("/check_update", methods=["GET", "POST"])
 def check_update():
-    logging.info(f"Checking for new files... Update needed? Result: {status.update_needed}")
-    return jsonify({"update": status.update_needed})
-
+    update = status.get_update_needed()
+    response = jsonify({"update": update})
+    response.headers["Cache-Control"] = "no-store"  # Cache verhindern
+    return response
 
 # Reset the update flag
-@app.route("/reset_update_flag")
+@app.route("/reset_update_flag", methods=["GET", "POST"])
 def reset_update_flag():
-    status.update_needed = False
-    return '', 204
+    status.set_update_needed(False)
+    response = jsonify({"update": status.get_update_needed()})
+    response.headers["Cache-Control"] = "no-store"
+    return response
+
+# Set the update flag
+@app.route("/set_update_flag", methods=["GET", "POST"])
+def set_update_flag():
+    status.set_update_needed(True)
+    response = jsonify({"update": status.get_update_needed()})
+    response.headers["Cache-Control"] = "no-store"
+    return response
+
 
 
 # Subdirectories list & HTML generation for folder tree
@@ -345,6 +357,7 @@ if __name__ == '__main__':
     )
 
     config = settings.loadConfig()
+    debug = config["debug"]
 
     logging.info(f"Start PR PDF Server from {work_dir}...")
     print(f"Start PR PDF Server from {work_dir}...")

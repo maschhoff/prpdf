@@ -6,9 +6,13 @@
   "append_date": true,
   "append_random": true,
   "enable_update_flag": true,
-  "index": {
-    "unknown;": [
-      ""
-    ]
-  }
+  "force_ocr": false,
+  "ocr_options": {
+    "ocr_mode": "skip_text",
+    "rotate_pages": true,
+    "deskew": true,
+    "optimize": 1,
+    "jobs": 2
+  },
+  "index": {}
 }

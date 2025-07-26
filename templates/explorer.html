@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col">
 
-      <h3>Scanned Documents</h3>
+      <h3><span id="documentCount">{{ liste|length }}</span> Scanned Documents</h3>
 
       <table id="documentsTable" class="table table-hover" cellspacing="0">
         <thead>
@@ -197,20 +197,34 @@
    * Periodically check server for new scanned documents.
    * If update detected, reset update flag and reload page.
    */
-  function checkUpdate() {
-    fetch("/check_update")
-      .then(response => response.json())
-      .then(data => {
-        if (data.update) {
-          fetch("/reset_update_flag")
-            .then(() => location.reload())
-            .catch(err => console.error("Error resetting update flag:", err));
-        }
-      });
-  }
-  setInterval(checkUpdate, 5000); // Check every 5 seconds
+
+    function checkUpdate() {
+      fetch("/check_update")
+        .then(response => response.json())
+        .then(data => {
+          if (data.update) {
+            fetch("/reset_update_flag")
+              .then(response => {
+                if (!response.ok) throw new Error(`Status ${response.status}`);
+                return response.json();
+              })
+              .then(() => {
+                // Nach 1 Sekunde (1000 ms) zur Root-Seite weiterleiten
+                setTimeout(() => {
+                  window.location.href = "/";
+                }, 1000);
+              })
+              .catch(err => console.error("Error resetting update flag:", err));
+          }
+        })
+        .catch(err => console.error("Error checking update:", err));
+    }
+
 
   $(document).ready(function () {
+    
+    setInterval(checkUpdate, 5000);
+    
     // Initialize DataTable with sorting and scroll options
     const initialSortCol = {{ sort_column|default(2) }};
     const initialSortDir = "{{ sort_direction|default('desc') }}";
@@ -226,6 +240,19 @@
       order: [[initialSortCol, initialSortDir]],
       columnDefs: [{ orderable: false, targets: 3 }] // Disable sorting on "View" column
     });
+
+    // Set the number of documents once directly after initialization:
+    function updateDocumentCount() {
+      const visibleCount = dataTable.rows({ filter: 'applied' }).count();
+      $('#documentCount').text(visibleCount);
+    }
+    updateDocumentCount();
+    
+    // Each time the table is filtered, update the number:
+    dataTable.on('search.dt', function () {
+      updateDocumentCount();
+    });
+
 
     // Apply preserved search term if any
     const preservedSearch = "{{ search_term|default('') }}";
