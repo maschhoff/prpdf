@@ -38,6 +38,8 @@ def index():
 # Form submission on homepage (file rename/move)
 @app.route('/', methods=['POST'])
 def my_form_post():
+    config = settings.loadConfig()
+    
     newid = request.form['pdf']
     oldid = request.form['oldpdf']
     folder = request.form['folder']
@@ -247,8 +249,10 @@ def setting():
 # Save settings
 @app.route('/settings', methods=['POST'])
 def setting_save():
-    config_raw = request.form['hiddenconfig']
     global config
+    config = settings.loadConfig()
+    
+    config_raw = request.form['hiddenconfig']
     logging.info(f"Config: {config_raw}")
 
     if not config_raw:
@@ -357,7 +361,7 @@ if __name__ == '__main__':
     )
 
     config = settings.loadConfig()
-    debug = config["debug"]
+    debug = config.get("debug", False)
 
     logging.info(f"Start PR PDF Server from {work_dir}...")
     print(f"Start PR PDF Server from {work_dir}...")
@@ -373,4 +377,4 @@ if __name__ == '__main__':
       PR PDF
     """)
 
-    app.run(host='0.0.0.0', port=config["port"], debug=True)
+    app.run(host='0.0.0.0', port=config.get("port", 5000), debug=debug)
