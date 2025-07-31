@@ -3,6 +3,7 @@ import pytesseract
 import ocrmypdf
 from PIL import Image
 import PyPDF2
+from PyPDF2.errors import DependencyError
 from datetime import datetime, date
 import logging
 import time
@@ -10,6 +11,7 @@ import threading
 import shutil
 import random
 from concurrent.futures import ProcessPoolExecutor, as_completed
+import shutil as sh
 
 import settings
 import status
@@ -30,6 +32,10 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+
+# Verify dependencies (optional)
+logging.debug(f"jbig2enc found: {sh.which('jbig2enc') is not None}")
+logging.debug(f"qpdf found: {sh.which('qpdf') is not None}")
 
 # Verzeichnisse sicherstellen
 for d in [archiv_dir, temp_dir, unknown_dir]:
@@ -74,17 +80,16 @@ def safe_ocrpdf(file_path, save_path):
     config = get_config()
     lang = config.get("lang", "deu")
     ocr_opts = config.get("ocr_options", {})
-    ocr_mode = ocr_opts.get("ocr_mode", "skip_text")  # default: skip_text
-
+    ocr_mode = ocr_opts.get("ocr_mode", "skip_text")
     temp_output = save_path + ".tmp"
 
     try:
         logging.info(f"Running OCRmyPDF on: {file_path} (mode: {ocr_mode})")
-
-        # Nur genau eines dieser drei darf True sein
-        force_ocr = ocr_mode == "force_ocr" # Immer OCR, auch wenn Text vorhanden
-        skip_text = ocr_mode == "skip_text" # OCR nur bei Seiten ohne Text
-        redo_ocr = ocr_mode == "redo_ocr"   # Ersetze vorhandene OCR (wenn maschinell schlecht)
+        
+        # Only one of these three may be True
+        force_ocr = ocr_mode == "force_ocr" # Always OCR, even if text is present
+        skip_text = ocr_mode == "skip_text" # OCR only for pages without text
+        redo_ocr = ocr_mode == "redo_ocr"   # Replace existing OCR (if machine-readable-results are poor)
 
         ocrmypdf.ocr(
             file_path,
@@ -111,8 +116,6 @@ def safe_ocrpdf(file_path, save_path):
             os.remove(temp_output)
         raise
 
-
-
 # OCR-Wrapper
 def ocr(folder, pdf_file):
     config = get_config()
@@ -130,6 +133,10 @@ def ocr(folder, pdf_file):
         if not force_ocr:
             with open(source, "rb") as pdf_file_obj:
                 reader = PyPDF2.PdfReader(pdf_file_obj)
+
+                if not reader.pages:
+                    raise ValueError("PDF has no pages or is malformed.")
+
                 first_page = reader.pages[0]
                 extracted_text = first_page.extract_text()
 
@@ -146,6 +153,8 @@ def ocr(folder, pdf_file):
 
         with open(source, "rb") as pdf_file_obj:
             reader = PyPDF2.PdfReader(pdf_file_obj)
+            if not reader.pages:
+                raise ValueError("PDF has no pages after OCR – possibly invalid output.")
             first_page = reader.pages[0]
             final_text = first_page.extract_text()
             if final_text and final_text.strip():
@@ -154,10 +163,12 @@ def ocr(folder, pdf_file):
                 logging.warning(f"OCR ran but no text extracted for {pdf_file}")
             return final_text
 
+    except DependencyError as dep_err:
+        logging.error(f"PyCryptodome is required for AES decryption in {pdf_file}: {dep_err}")
+        return None
     except Exception as e:
         logging.exception(f"OCR failed for {source}: {e}")
         return None
-
 
 # Sortierfunktion anhand des Textinhalts
 def sort(pdf_file, text):
@@ -200,7 +211,6 @@ def sort(pdf_file, text):
 
     return False  # Kein Treffer im Index
 
-
 # Einzelne PDF-Datei verarbeiten
 def process_pdf(pdf_file):
     try:
@@ -216,7 +226,6 @@ def process_pdf(pdf_file):
     except Exception as e:
         logging.warning(f"Processing failed for {pdf_file}: {e}")
         move_to_unknown(pdf_file)
-
 
 # Hauptverarbeitung
 def run():
@@ -245,10 +254,7 @@ def run():
 
     config = get_config()
     moved_files = any(os.path.isfile(os.path.join(unknown_dir, f)) for f in os.listdir(unknown_dir))
-
-    # Setze explizit den Wert – unabhängig davon ob True oder False
     status.set_update_needed(bool(moved_files and config.get("enable_update_flag", True)))
-
 
 # Hintergrund-Thread für Cronjob
 cron_lock = threading.Lock()
