@@ -11,8 +11,8 @@
     "ocr_mode": "skip_text",
     "rotate_pages": true,
     "deskew": true,
-    "optimize": 1,
-    "jobs": 2
+    "optimize": 2,
+    "jobs": 3
   },
   "index": {}
 }
