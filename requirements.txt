@@ -4,6 +4,7 @@ pytesseract
 pdf2image
 PyPDF2
 ocrmypdf
+pycryptodome
 #pdfsplit==0.4.2
 #sudo apt-get install tesseract-ocr
 #sudo apt-get install poppler-utils
