@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:3.11-slim-bookworm
+FROM python:3.11-bookworm
 
 # Set working directory and environment
 WORKDIR /source
