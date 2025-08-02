@@ -34,12 +34,13 @@ This program is very new and theres a lot to test. Please report issues to the i
 # Install and run
 
 ## Run as docker
-` docker pull knex666/prpdf`
 
-` docker run -d --name='PRPDF' -p 80:80 -v '/mnt/user/Share':'/Archiv/':'rw' -v '/mnt/user/SCAN':'/source/static/pdf/':'rw' -v '/mnt/user/appdata/prpdf/':'/source/config':'rw' 'knex666/prpdf' python3 /source/prpdf.py`
+Example:
+` docker run -d --name='PRPDF' -p 80:80 -v '/mnt/user/Share':'/Archiv/':'rw' -v '/mnt/user/SCAN':'/source/static/pdf/':'rw' -v '/mnt/user/appdata/prpdf/':'/source/config':'rw' 'knex666/prpdf'`
 
-* Note 1: remember to setup the network to map the port of your configuration ` -p 80:80` you can choose any port you want see config
-* Note 2: besited a folder structure for documents in a folder you mount to /Archiv/ you can volume mount any directory you want to /Archiv/ to build you own virtual folder structure
+* Note 1: use knex666/latest-dev for developer preview
+* Note 2: remember to setup the network to map the port of your configuration ` -p 80:80` you can choose any port you want see config
+* Note 3: besited a folder structure for documents in a folder you mount to /Archiv/ you can volume mount any directory you want to /Archiv/ to build you own virtual folder structure
 ` -v '/mnt/user/Files/Accounting':'/Archiv/Accounting':'rw'` etc.
 
 ## Run with python on linux
