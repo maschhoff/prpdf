@@ -1,66 +1,53 @@
-"""
-
-PR PDF
-
-Merge Pages File 
-
-2020 maschhoff github.com/maschhoff
-
-""" 
-
-from PyPDF2 import PdfReader,PdfWriter, PdfMerger #PdfFileMerger
+from PyPDF2 import PdfReader, PdfWriter, PdfMerger
 import os
 from vars import *
 
 #------------------------------------------------
-# Vorder Rueckseite in einzelne PDFs
-# Automatic Document Feader
-def pdf_adf(frontpdfraw, backpdfraw, out_filename):
+# Merge front and back PDFs page by page (like an Automatic Document Feeder)
+def pdf_adf(front_pdf_path, back_pdf_path, out_filename):
+    front_pdf = PdfReader(open(front_pdf_path, "rb"))
+    back_pdf = PdfReader(open(back_pdf_path, "rb"))
 
-    frontpdf = PdfReader(open(frontpdfraw, "rb"))
-    backpdf = PdfReader(open(backpdfraw, "rb"))
-
-    if len(frontpdf.pages)==len(backpdf.pages):
-
+    if len(front_pdf.pages) == len(back_pdf.pages):
         output = PdfWriter()
-        for i in range(int(len(frontpdf.pages))):
-            #print(i)
-            output.add_page(frontpdf.pages[i])
-            output.add_page(backpdf.pages[len(backpdf.pages)-i-1])
-            #print(backpdf.pages-i-1)
-        with open(unknown_dir+out_filename+".pdf", "wb") as outputStream:
-            output.write(outputStream)
+        for i in range(len(front_pdf.pages)):
+            output.add_page(front_pdf.pages[i])
+            # Add back pages in reverse order to simulate back side
+            output.add_page(back_pdf.pages[len(back_pdf.pages) - i - 1])
+
+        output_path = os.path.join(unknown_dir, out_filename + ".pdf")
+        with open(output_path, "wb") as output_stream:
+            output.write(output_stream)
 
         return "merged"
-
     else:
-        return "page amount front/back differs"
+        return "page count front/back differs"
 
 
+# Merge all PDFs from a list of files into one PDF
+def pdf_merge_all(pdf_file_list, out_filename):
+    pdf_count = len(pdf_file_list)
+    if pdf_count > 1:
+        merger = PdfMerger()
+        for pdf_file in pdf_file_list:
+            merger.append(pdf_file)
 
-# Alle PDFs aus Verzeichnis in eine PDF
-def pdf_merge_all(allpdfs,out_filename):
-
-    #allpdfs = [a for a in glob(in_dir+"*.pdf")]     # Liste Files aus in_dir
-    pdf_anz=int(len(allpdfs))                       # Anzahl Files
-    if pdf_anz >1:
-        merger = PdfMerger() 
-        for i in range(int(pdf_anz)):
-            merger.append(allpdfs[i])               # alle Seiten plus
-
-        with open(unknown_dir+out_filename+".pdf", "wb") as new_file:
-            merger.write(new_file)              # alle Seiten in neues File
+        output_path = os.path.join(unknown_dir, out_filename + ".pdf")
+        with open(output_path, "wb") as new_file:
+            merger.write(new_file)
     else:
-        print("Fehler!!! PDF Dir nicht vorhanden")
+        print("Error!!! PDF directory does not contain multiple files")
 
 
-# PDF zusammenfassen aus mehreren Files alle Seiten in neues File
-def pdf_merge_file(file1,file2,out_filename):
-    pdf_files=[file1,file2]
-    merger = PdfMerger() 
-    for files in pdf_files:
-        merger.append(files) 
-    with open(unknown_dir+out_filename+".pdf", "wb") as new_file:
-        merger.write(new_file)              # alle Seiten in neues File
+# Merge two PDF files into one new PDF file
+def pdf_merge_file(file1, file2, out_filename):
+    pdf_files = [file1, file2]
+    merger = PdfMerger()
+    for file in pdf_files:
+        merger.append(file)
+
+    output_path = os.path.join(unknown_dir, out_filename + ".pdf")
+    with open(output_path, "wb") as new_file:
+        merger.write(new_file)
+
     return "merged"
-

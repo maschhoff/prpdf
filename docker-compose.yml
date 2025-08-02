@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  prpdf:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: prpdf

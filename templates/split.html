@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
 
-
 <div class="container-fluid">
     <div class="row"><br/></div>
     <div class="row">
@@ -11,42 +10,29 @@
             <form action="/split" method="POST">
 
                 <div class="row">
-                <div class="col-sm">
-
-                    File:
-                    <select class="form-control" name="file1">
-                        
-                        {% for file in files %}
-                        <option value="{{file['name']}}">{{file['name']}}</option>
-                        {% endfor %} 
-                                  
+                    <div class="col-sm">
+                        File:
+                        <select class="form-control" name="file1">
+                            {% for file in files %}
+                            <option value="{{file['name']}}">{{file['name']}}</option>
+                            {% endfor %}
                         </select>
-
-                </div>
-
-
-
-                <div class="col-sm">
-                    Split after page:
-                    <input type="number" id="page" class="form-control" name="page" value=""/>
-
-                </div>
-
-
-                <div class="col-sm">
-                    <br/>
-                    <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-cut"></i></button>
                     </div>
 
-                </div>
-            </form>
+                    <div class="col-sm">
+                        Split after page:
+                        <input type="number" id="page" class="form-control" name="page" value=""/>
+                    </div>
 
+                    <div class="col-sm">
+                        <br/>
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-cut"></i></button>
+                    </div>
+                </div>
+
+            </form>
          </div>
     </div>
 </div>
-
-
-
-
 
 {% endblock content %}

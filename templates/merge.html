@@ -1,74 +1,70 @@
 {% extends "layout.html" %}
 {% block content %}
 
-
 <div class="container-fluid">
-    <div class="row"><br/></div>
-    <div class="row">
-         <div class="col">
-             <h3>Merge Files</h3>
+  <div class="row"><br/></div> <!-- Spacer row -->
 
-            <form action="/merge" method="POST">
+  <div class="row">
+    <div class="col">
+      <h3>Merge Files</h3>
 
-                <div class="row">
-                <div class="col-sm">
+      <form action="/merge" method="POST">
+        <div class="row">
 
-                    First File:
-                    <select class="form-control" name="file1">
-                        
-                        {% for file in files %}
-                        <option value="{{file['name']}}">{{file['name']}}</option>
-                        {% endfor %} 
-                                  
-                        </select>
+          <!-- First file select -->
+          <div class="col-sm">
+            <label for="file1">First File:</label>
+            <select class="form-control" name="file1" id="file1">
+              {% for file in files %}
+                <option value="{{ file['name'] }}">{{ file['name'] }}</option>
+              {% endfor %}
+            </select>
+          </div>
 
-                </div>
+          <!-- Second file select -->
+          <div class="col-sm">
+            <label for="file2">Second File:</label>
+            <select class="form-control" name="file2" id="file2">
+              {% for file in files %}
+                <option value="{{ file['name'] }}">{{ file['name'] }}</option>
+              {% endfor %}
+            </select>
+          </div>
 
+          <!-- Merge option select -->
+          <div class="col-sm">
+            <label for="option">Option:</label>
+            <select class="form-control" name="option" id="option">
+              <option value="merge">Merge</option>
+              <option value="frontback">Front/Back Merge</option>
+            </select>
+          </div>
 
-                <div class="col-sm">
+          <!-- Filename input -->
+          <div class="col-sm">
+            <label for="edittitle">Filename:</label>
+            <input
+              type="text"
+              id="edittitle"
+              class="form-control"
+              name="pdf"
+              value=""
+              placeholder="Enter new filename"
+            />
+          </div>
 
-                    Second File:
-                    <select class="form-control" name="file2">
-                                               
-                        {% for file in files %}
-                        <option value="{{file['name']}}">{{file['name']}}</option>
-                        {% endfor %} 
-                                  
-                        </select>
+          <!-- Submit button -->
+          <div class="col-sm d-flex align-items-end">
+            <button type="submit" class="btn btn-primary btn-sm" title="Merge files">
+              <i class="fas fa-caret-square-down"></i>
+            </button>
+          </div>
 
-                </div>
+        </div>
+      </form>
 
-                <div class="col-sm">
-                    Option:
-                    <select class="form-control" name="option">
-                        <option value="merge">Merge</option>
-                        <option value="frontback">Front/Back Merge</option>
-                                                
-                        </select>
-
-                </div>
-
-                <div class="col-sm">
-                    Filename:
-                    <input type="text" id="edittitle" class="form-control" name="pdf" value=""/>
-
-                </div>
-
-
-                <div class="col-sm">
-                    <br/>
-                    <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-caret-square-down"></i></button>
-                    </div>
-
-                </div>
-            </form>
-
-         </div>
     </div>
+  </div>
 </div>
-
-
-
-
 
 {% endblock content %}

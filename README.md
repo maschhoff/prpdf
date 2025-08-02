@@ -20,7 +20,7 @@ This program is very new and theres a lot to test. Please report issues to the i
 
 ## How it works:
 1. Documents get scanned to a scan-folder 
-2. these documents will be autoscanned and moved to the specific locations
+2. These documents will be autoscanned and moved to the specific locations
 3. Any files that are not recognized by autoscan will be moved to the subfolder "unknown" of the scan-folder
 4. The Webbased PR PDF Explorer lists all documents of the "unknown" folder.
 
@@ -28,6 +28,8 @@ This program is very new and theres a lot to test. Please report issues to the i
 
 ![Explorer](https://i.ibb.co/b723gYv/Explorer.jpg)
 ![OCR](https://i.ibb.co/JQb8Frf/OCR.jpg)
+![UNRAID-PATH-EXAMPLES](https://ibb.co/WWN4XJqP)
+
 
 # Install and run
 
@@ -69,8 +71,12 @@ An example: https://github.com/maschhoff/prpdf/blob/main/config/config.json
     "port":80, - choose any port you want
     "debug":"off", set so on or off to see ocr results while autoscan
     "lang":"deu", set the ocr language see https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html
-    "updatetime":1800, uptime in seconds
+    "updatetime":1800, updatetime in seconds until next auto-scan/sort will happen
+    "append_date": true, if true, appends date to filename on save
+    "append_random": true, if true, appends random int to filename on save
+    "enable_update_flag": true, if true, watches /unknown folder for new PDFs and, if detected, refreshes explorer automatically
 
 # Donate
-If you like what you see please buy me a Pizza -> https://www.buymeacoffee.com/maschhoff
+If you like what you see please buy me a Pizza -> https://www.buymeacoffee.com/maschhoff 
+Or please buy tobias a coffee -> https://www.buymeacoffee.com/tobiasgraeber
 

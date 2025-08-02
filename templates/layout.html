@@ -1,129 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-  <head>
-        
+<head>
+  <title>PR PDF - Scan Documents Explorer</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-title" content="PR-PDF" />
+  <link rel="icon" type="image/png" href="/../static/favicons/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/../static/favicons/favicon.svg" />
+  <link rel="shortcut icon" href="/../static/favicons/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/../static/favicons/apple-touch-icon.png" />
+  
+  <link rel="manifest" href="/../static/favicons/site.webmanifest" />
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/css/mdb.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="../static/main.css" rel="stylesheet">
-    
-    <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"/>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/js/mdb.min.js"></script>
-    
+  <!-- Stylesheets for icons, fonts, and frameworks -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/css/mdb.min.css" rel="stylesheet" />
+  <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" />
+  <link href="../static/main.css" rel="stylesheet" />
 
-    <!-- LoadingOverlay und ACE Editpor-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+  <!-- JavaScript Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/js/mdb.min.js"></script>
 
+  <!-- Loading overlay and ACE editor -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js" charset="utf-8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
 
-    <style>
-body {
-  overflow: hidden; /* Hide scrollbars */
-}
-</style>
+  <!-- PDF.js styles and scripts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.7.107/pdf_viewer.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.7.107/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.7.107/pdf_viewer.min.js"></script>
+</head>
 
-        </head>
+<body id="load">
 
-    <body id="load">
+  <header>
+    <!-- Main navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light text-dark">
+      <div class="container-fluid px-0">
 
+        <!-- Hamburger menu for small screens -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
 
-        
-      <header>
-            <!-- Navbar -->
-           <!--<nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
-            <nav class="navbar navbar-expand-lg navbar-light text-dark bg-light">
-                <!-- Container wrapper -->
-                <div class="container-fluid">
-                  <!-- Toggle button -->
-                  <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-mdb-toggle="collapse"
-                    data-mdb-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                  >
-                    <i class="fas fa-bars"></i>
-                  </button>
-              
-                  <!-- Collapsible wrapper -->
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Navbar brand -->
-                    <a class="navbar-brand" href="/"><i class="fas fa-file-pdf"></i></a>
-                    
-                     PR PDF - Scan Documents Explorer
+        <!-- Navbar brand and title -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <a class="navbar-brand" href="/">
+            <i class="fas fa-file-pdf"></i> 
+            PR PDF - Scan Documents Explorer
+          </a>
+        </div>
 
-                  </div>
+        <!-- Placeholder for dynamic messages -->
+        {{ message }}
 
-                  {{ message }}
-                  <ul class="navbar-nav nav-flex-icons">
+        <!-- Right side navigation icons -->
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="/autoscan"
+              id="button_autoscan"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Renew / Import new scans"
+              ><i class="fas fa-sync"></i
+            ></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/merge" data-toggle="tooltip" data-placement="bottom" title="Merge files">
+              <i class="fas fa-caret-square-down"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/split" data-toggle="tooltip" data-placement="bottom" title="Split document">
+              <i class="fas fa-cut"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/settings" data-toggle="tooltip" data-placement="bottom" title="Settings">
+              <i class="fas fa-cog"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/maschhoff/prpdf/" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+        </ul>
 
-        <li class="nav-item">
-          <a class="nav-link" href="/autoscan" id="button_autoscan" data-toggle="tooltip" data-placement="bottom"
-  title="Renew / Import new scans"> <i class="fas fa-sync"></i></a>
-        </li>
-         <li class="nav-item">
-          <a class="nav-link" href="/merge" id="button_autoscan" data-toggle="tooltip" data-placement="bottom"
-  title="Merge files"> <i class="fas fa-caret-square-down"></i></a>
-        </li>   
-        <li class="nav-item">
-          <a class="nav-link" href="/split" id="button_autoscan" data-toggle="tooltip" data-placement="bottom"
-  title="Split document"> <i class="fas fa-cut"></i>  </a>
-        </li> 
+      </div>
+    </nav>
+  </header>
 
+  <!-- Main content block for page-specific content -->
+  {% block content %}{% endblock %}
 
-              
-     
-        <li class="nav-item">
-          <a class="nav-link" href="/settings" data-toggle="tooltip" data-placement="bottom"
-  title="Settings"> <i class="fas fa-cog"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://github.com/maschhoff/prpdf/" target="_blank"> <i class="fab fa-github"></i></a>
-        </li>
-      </ul>
-    
-              
-           
-                 
-                  <!-- Right elements -->
-                </div>
-                <!-- Container wrapper -->
-              </nav>
-            <!-- Navbar -->
-          
-    
-          </header>
-
-    {% block content %}{% endblock %}
-    
-
-<script>  
-
-        var autoscan_cl=document.getElementById("button_autoscan");
-        autoscan_cl.onclick=function(){
-                
-                $("#load").LoadingOverlay("show")
-        
-        };
-        
-
-</script>
+  <script>
+    // Show loading overlay when autoscan button is clicked
+    document.getElementById("button_autoscan").onclick = function () {
+      $("#load").LoadingOverlay("show");
+    };
+  </script>
+</body>
 
 </html>
