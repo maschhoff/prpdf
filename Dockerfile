@@ -50,6 +50,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY --from=builder /usr/local/bin/jbig2enc /usr/local/bin/jbig2enc
 COPY --from=builder /usr/local/bin/gs /usr/local/bin/gs
 COPY ./ /source
+RUN pip3 install -r /source/requirements.txt
 
 # Set entrypoint or command if needed (optional)
-# CMD ["python", "main.py"]
+CMD ["flask", "run"]
