@@ -49,6 +49,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy built binaries from builder
 COPY --from=builder /usr/local/bin/jbig2enc /usr/local/bin/jbig2enc
 COPY --from=builder /usr/local/bin/gs /usr/local/bin/gs
+COPY ./ /source
 
 # Set entrypoint or command if needed (optional)
 # CMD ["python", "main.py"]
