@@ -28,7 +28,7 @@ This program is very new and theres a lot to test. Please report issues to the i
 
 ![Explorer](https://i.ibb.co/b723gYv/Explorer.jpg)
 ![OCR](https://i.ibb.co/JQb8Frf/OCR.jpg)
-![UNRAID-PATH-EXAMPLES](https://i.ibb.co/vxC6WngQ/grafik.png) 
+![UNRAID-PATH-EXAMPLES](https://i.ibb.co/vxC6WngQ/grafik.png)
 
 
 # Install and run
