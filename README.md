@@ -36,7 +36,7 @@ This program is very new and theres a lot to test. Please report issues to the i
 
 ## Run as docker
 
-Example:
+Example:  
 ` docker run -d --name='PRPDF' -p 80:80 -v '/mnt/user/Share':'/Archiv/':'rw' -v '/mnt/user/SCAN':'/source/static/pdf/':'rw' -v '/mnt/user/appdata/prpdf/':'/source/config':'rw' 'knex666/prpdf'`
 
 * Note 1: use knex666/latest-dev for developer preview
@@ -51,7 +51,8 @@ and a folder /source/static/pdf/ as location for you scanned pdfs
 otherwise feel free to edit the sourcecode on vars.py etc.
 
 * ` python3 -m pip install -r requirements.txt`
-* ` sudo apt-get install tesseract-ocr poppler-utils`
+* ` sudo apt-get install tesseract-ocr poppler-utils` etc. (see Dockerfile)
+* ` export Workdir=path to app folder
 * ` python3 prpdf.py`
 
 ## Run as systemd service on Fedora
