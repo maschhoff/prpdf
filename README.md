@@ -69,13 +69,21 @@ A default config will be creating within the first start of PR PDF.
 For Docker please mount the config folder to make it persistent.
 An example: https://github.com/maschhoff/prpdf/blob/main/config/config.json
 
-    "port":80, - choose any port you want
-    "debug":"off", set so on or off to see ocr results while autoscan
-    "lang":"deu", set the ocr language see https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html
-    "updatetime":1800, updatetime in seconds until next auto-scan/sort will happen
-    "append_date": true, if true, appends date to filename on save
-    "append_random": true, if true, appends random int to filename on save
-    "enable_update_flag": true, if true, watches /unknown folder for new PDFs and, if detected, refreshes explorer automatically
+  "port": 80,
+  "debug": "on",
+  "lang": "deu",
+  "updatetime": 1800,
+  "append_date": true,
+  "append_random": true,
+  "enable_update_flag": true,
+  "force_ocr": false,
+  "ocr_options": {
+    "ocr_mode": "skip_text",
+    "rotate_pages": true,
+    "deskew": true,
+    "optimize": 2,
+    "jobs": 3
+
 
 # Donate
 If you like what you see please buy me a Pizza -> https://www.buymeacoffee.com/maschhoff 
