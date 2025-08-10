@@ -31,7 +31,7 @@ def index():
         preview=search['name'], 
         subdirhtml=subdirhtml, 
         folders=loadArchivFolder(),
-        iterator=0
+        iterator=0,
         selected_folder=unknown_dir
     )
 
