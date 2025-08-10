@@ -32,6 +32,7 @@ def index():
         subdirhtml=subdirhtml, 
         folders=loadArchivFolder(),
         iterator=0
+        selected_folder=unknown_dir
     )
 
 
@@ -52,8 +53,8 @@ def my_form_post():
     append_date = config.get("append_date", True)
     append_random = config.get("append_random", True)
 
-    session['selected_folder'] = request.form.get("folder", "unknown")
-    selected_folder = session.get("selected_folder", "unknown")
+    session['selected_folder'] = request.form.get("folder", unknown_dir)
+    selected_folder = session.get("selected_folder", unknown_dir)
 
     fileneu = newid
     if append_date:
