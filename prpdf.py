@@ -319,7 +319,7 @@ def upload_file():
 
     # Prüfen, ob Dateiendung erlaubt ist
     if file and allowed_file(file.filename):
-        filepath = os.path.join(unknown_dir, file.filename)
+        filepath = os.path.join(pdf_dir, file.filename)
         file.save(filepath)
         return jsonify({
             "message": "Datei erfolgreich hochgeladen.",
