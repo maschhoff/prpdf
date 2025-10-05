@@ -17,6 +17,7 @@ from vars import *
 app = Flask(__name__)
 app.secret_key = 'L6^uzJZ6En5EJs'
 
+
 # Homepage - List PDFs and show preview
 @app.route('/')
 def index():
@@ -295,6 +296,38 @@ def set_update_flag():
     return response
 
 
+## UPLOAD ##
+
+# Erlaubte Dateiendungen
+ALLOWED_EXTENSIONS = {"pdf", "pdfx"}
+
+def allowed_file(filename):
+    """Prüft, ob die Datei eine erlaubte Endung hat."""
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route("/upload", methods=["POST"])
+def upload_file():
+    # Prüfen, ob eine Datei im Request enthalten ist
+    if "file" not in request.files:
+        return jsonify({"error": "Keine Datei im Request gefunden."}), 400
+
+    file = request.files["file"]
+
+    # Prüfen, ob eine Datei ausgewählt wurde
+    if file.filename == "":
+        return jsonify({"error": "Keine Datei ausgewählt."}), 400
+
+    # Prüfen, ob Dateiendung erlaubt ist
+    if file and allowed_file(file.filename):
+        filepath = os.path.join(unknown_dir, file.filename)
+        file.save(filepath)
+        return jsonify({
+            "message": "Datei erfolgreich hochgeladen.",
+            "filename": file.filename,
+            "path": filepath
+        }), 200
+    else:
+        return jsonify({"error": "Dateityp nicht erlaubt."}), 400
 
 # Subdirectories list & HTML generation for folder tree
 subdirs = [archiv_dir]
