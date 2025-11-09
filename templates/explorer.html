@@ -82,6 +82,9 @@
       <button type="submit" class="btn btn-primary btn-sm" id="btnMagic" data-toggle="tooltip" data-placement="bottom" title="OCR-Scan and set keywords for autoscan">
         <i class="fas fa-magic"></i>
       </button>
+       <button type="submit" class="btn btn-primary btn-sm" id="btnAI" data-toggle="tooltip" data-placement="bottom" title="AI suggedtion">
+        <i class="fas fa-magic"></i>
+      </button>
       <button type="submit" class="btn btn-primary btn-sm" id="btnRotate" data-toggle="tooltip" data-placement="bottom" title="Rotate document 180">
         <i class="fas fa-redo"></i>
       </button>
@@ -364,6 +367,12 @@
       const rowCount = $table.find('tbody tr').length;
       selectedIndex = (selectedIndex + 1) % rowCount;
       updatePreview(selectedIndex);
+    });
+
+    // Button: AI triggers server route with filename
+    $('#btnAI').on('click', function () {
+      const fileName = $table.find('tbody tr').eq(selectedIndex).children('td').eq(0).text();
+      window.location.href = "/ai/" + encodeURIComponent(fileName);
     });
 
     // Button: OCR Magic triggers server route with filename

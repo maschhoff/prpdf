@@ -13,6 +13,7 @@ import splitpages
 import status
 import shutil
 from vars import *
+import ai
 
 app = Flask(__name__)
 app.secret_key = 'L6^uzJZ6En5EJs'
@@ -148,6 +149,12 @@ def dosplitpost():
     pdf = loadFiles()
     return render_template('explorer.html', liste=pdf, message="", subdirhtml=subdirhtml, folders=loadArchivFolder(), iterator=0)
 
+
+# Try AI to get folder and filename
+@app.route('/ai/<string:id>)
+def aisug():
+    result=ai.categorize_document(id,loadArchivFolder())
+    return render_template('explorer.html', liste=pdf, message=result, subdirhtml=subdirhtml, folders=loadArchivFolder(), iterator=0)
 
 # Trigger autoscan manually
 @app.route('/autoscan')

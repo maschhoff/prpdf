@@ -27,6 +27,8 @@ def loadConfig():
             "append_date": true,
             "append_random": true,
             "enable_update_flag": true,
+            "force_ocr": false,
+            "openai_api_key":"",
             "index": {
                 "Foldername/Filename": ["Keyword1"],
                 "Foldername2/Filename": ["Keyword1", "Keyword2", "Keyword3"]
