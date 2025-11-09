@@ -151,7 +151,7 @@ def dosplitpost():
 
 
 # Try AI to get folder and filename
-@app.route('/ai/<string:id>)
+@app.route('/ai/<string:id>')
 def aisug():
     result=ai.categorize_document(id,loadArchivFolder())
     return render_template('explorer.html', liste=pdf, message=result, subdirhtml=subdirhtml, folders=loadArchivFolder(), iterator=0)
