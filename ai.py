@@ -8,7 +8,6 @@ import settings
 config = settings.loadConfig()
 API_KEY = config.get("openai_api_key", "")
 
-# Client initialisieren
 client = OpenAI(api_key=API_KEY)
 
 def categorize_document(file_path: str, ordner_liste: list[str]):
@@ -23,45 +22,42 @@ def categorize_document(file_path: str, ordner_liste: list[str]):
             purpose="assistants"
         )
 
-    # 2️⃣ Nachrichten im alten (Chat Completions) Format
-    messages = [
-        {
-            "role": "system",
-            "content": (
-                "Du bist ein intelligentes Dokumentenverwaltungssystem. "
-                "Lies den Inhalt der Datei, verstehe den Kontext (z. B. Rechnung, Versicherung, Steuer etc.) "
-                "und gib ausschließlich ein JSON-Objekt im Format "
-                "{\"Ordner\": \"<Ordnername>\", \"Datei\": \"<NeuerDateiname.pdf>\"} zurück."
-            )
-        },
-        {
-            "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": (
-                        f"Hier ist die Liste der möglichen Ordner:\n{chr(10).join(ordner_liste)}\n\n"
-                        "Analysiere die folgende Datei und bestimme den passenden Ordner und Dateinamen."
-                    )
-                },
-                {
-                    # ✅ korrekt für chat.completions
-                    "type": "file",
-                    "file_id": uploaded_file.id
-                }
-            ]
-        }
-    ]
-
-    # 3️⃣ Anfrage an ChatGPT senden
-    response = client.chat.completions.create(
+    # 2️⃣ Anfrage an das Modell über responses.create (neuer Endpoint)
+    response = client.responses.create(
         model="gpt-5",
-        messages=messages,
-        temperature=0.0
+        input=[
+            {
+                "role": "system",
+                "content": (
+                    "Du bist ein intelligentes Dokumentenverwaltungssystem. "
+                    "Lies den Inhalt der Datei, verstehe den Kontext (z. B. Rechnung, Versicherung, Steuer etc.) "
+                    "und gib ausschließlich ein JSON-Objekt im Format "
+                    "{\"Ordner\": \"<Ordnername>\", \"Datei\": \"<NeuerDateiname.pdf>\"} zurück."
+                )
+            },
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": (
+                            f"Hier ist die Liste der möglichen Ordner:\n{chr(10).join(ordner_liste)}\n\n"
+                            "Analysiere die folgende Datei und bestimme den passenden Ordner und Dateinamen."
+                        )
+                    },
+                    {
+                        # ✅ Das ist jetzt korrekt im responses-API
+                        "type": "input_file",
+                        "input_file_id": uploaded_file.id
+                    }
+                ]
+            }
+        ],
+        temperature=0.0,
     )
 
-    # 4️⃣ Ergebnis extrahieren
-    result = response.choices[0].message.content.strip()
+    # 3️⃣ Antworttext extrahieren
+    result = response.output_text.strip()
     return result
 
 
