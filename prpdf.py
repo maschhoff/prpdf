@@ -56,7 +56,7 @@ def my_form_post():
     append_random = config.get("append_random", True)
 
     session['selected_folder'] = request.form.get("folder", unknown_dir)
-    selected_folder = session.get("selected_folder", unknown_dir)/static/pdf/unknown/
+    selected_folder = session.get("selected_folder", unknown_dir) #/static/pdf/unknown/
 
     fileneu = newid
     if append_date:
