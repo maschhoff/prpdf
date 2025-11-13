@@ -23,7 +23,7 @@ def categorize_document(file_path: str, ordner_liste: list[str]):
             purpose="assistants"
         )
 
-    # 2️⃣ Nachrichteninhalt definieren (neues Format!)
+    # 2️⃣ Nachrichten im alten (Chat Completions) Format
     messages = [
         {
             "role": "system",
@@ -45,15 +45,15 @@ def categorize_document(file_path: str, ordner_liste: list[str]):
                     )
                 },
                 {
-                    # ⚠️ wichtig: type=input_file, input_file_id statt file_id
-                    "type": "input_file",
-                    "input_file_id": uploaded_file.id
+                    # ✅ korrekt für chat.completions
+                    "type": "file",
+                    "file_id": uploaded_file.id
                 }
             ]
         }
     ]
 
-    # 3️⃣ Anfrage an Chat-Modell senden
+    # 3️⃣ Anfrage an ChatGPT senden
     response = client.chat.completions.create(
         model="gpt-5",
         messages=messages,
