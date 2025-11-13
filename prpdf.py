@@ -56,7 +56,7 @@ def my_form_post():
     append_random = config.get("append_random", True)
 
     session['selected_folder'] = request.form.get("folder", unknown_dir)
-    selected_folder = session.get("selected_folder", unknown_dir)
+    selected_folder = session.get("selected_folder", unknown_dir)/static/pdf/unknown/
 
     fileneu = newid
     if append_date:
@@ -153,7 +153,7 @@ def dosplitpost():
 # Try AI to get folder and filename
 @app.route('/ai/<string:id>')
 def aisug(id):
-    result=ai.categorize_document(id,loadArchivFolder())
+    result=ai.categorize_document(unknown_dir+id,loadArchivFolder())
     return render_template('explorer.html', liste=pdf, message=result, subdirhtml=subdirhtml, folders=loadArchivFolder(), iterator=0)
 
 # Trigger autoscan manually
