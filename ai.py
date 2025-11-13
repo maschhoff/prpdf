@@ -39,7 +39,7 @@ def categorize_document(file_path: str, ordner_liste: list[str]):
                 "role": "user",
                 "content": [
                     {
-                        "type": "text",
+                        "type": "input_text",
                         "text": (
                             f"Hier ist die Liste der möglichen Ordner:\n{chr(10).join(ordner_liste)}\n\n"
                             "Analysiere die folgende Datei und bestimme den passenden Ordner und Dateinamen."
