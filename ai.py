@@ -4,7 +4,7 @@ import os
 from openai import OpenAI
 import settings
 
-# 🔑 OpenAI API-Key aus config laden
+# 🔑 OpenAI API-Key laden
 config = settings.loadConfig()
 API_KEY = config.get("openai_api_key", "")
 
@@ -16,14 +16,14 @@ def categorize_document(file_path: str, ordner_liste: list[str]):
     Analysiert ein PDF oder Textdokument und gibt den passenden Ordner + Dateinamen als JSON zurück.
     """
 
-    # 1️⃣ Datei zuerst zu OpenAI hochladen
+    # 1️⃣ Datei hochladen
     with open(file_path, "rb") as f:
         uploaded_file = client.files.create(
             file=f,
-            purpose="assistants"  # oder "fine-tune", falls du trainieren willst
+            purpose="assistants"
         )
 
-    # 2️⃣ System- und User-Prompt aufbauen
+    # 2️⃣ Nachrichteninhalt definieren (neues Format!)
     messages = [
         {
             "role": "system",
@@ -45,26 +45,27 @@ def categorize_document(file_path: str, ordner_liste: list[str]):
                     )
                 },
                 {
-                    "type": "file",
-                    "file_id": uploaded_file.id
+                    # ⚠️ wichtig: type=input_file, input_file_id statt file_id
+                    "type": "input_file",
+                    "input_file_id": uploaded_file.id
                 }
             ]
         }
     ]
 
-    # 3️⃣ Anfrage an ChatGPT senden
+    # 3️⃣ Anfrage an Chat-Modell senden
     response = client.chat.completions.create(
         model="gpt-5",
         messages=messages,
         temperature=0.0
     )
 
-    # 4️⃣ Ergebnis extrahieren und zurückgeben
+    # 4️⃣ Ergebnis extrahieren
     result = response.choices[0].message.content.strip()
     return result
 
 
-# Beispielaufruf (auskommentiert)
+# Beispielaufruf:
 # ordner = ["Rechnungen", "Versicherung", "Steuer", "Privat"]
 # ergebnis = categorize_document("Rechnung_AfB_NotebookX280_27-2024-191259_27_03_2024_2754.pdf", ordner)
 # print(ergebnis)
