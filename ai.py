@@ -20,7 +20,7 @@ def extract_text_from_pdf(path: str, max_chars: int = 15000) -> str:
             break
     return "\n".join(text_parts)[:max_chars]
 
-def categorize_document_local_text(file_path: str, ordner_liste: list[str]):
+def categorize_document(file_path: str, ordner_liste: list[str]):
     if(API_KEY==""):
         raise ValueError("Kein API Key vorhanden!")
     pdf_text = extract_text_from_pdf(file_path)
