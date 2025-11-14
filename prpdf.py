@@ -154,6 +154,7 @@ def dosplitpost():
 @app.route('/ai/<string:id>')
 def aisug(id):
     result=ai.categorize_document(unknown_dir+id,loadArchivFolder())
+    pdf = loadFiles()
     return render_template('explorer.html', liste=pdf, message=result, subdirhtml=subdirhtml, folders=loadArchivFolder(), iterator=0)
 
 # Trigger autoscan manually
