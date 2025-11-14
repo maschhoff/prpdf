@@ -1,103 +1,64 @@
-# ai_with_file_upload.py
+# ai_local_text.py
 import json
 import os
 from openai import OpenAI
 import settings
-from openai import error as openai_error
+from PyPDF2 import PdfReader  # pip install PyPDF2
 
 config = settings.loadConfig()
 API_KEY = config.get("openai_api_key", "")
 client = OpenAI(api_key=API_KEY)
 
-def categorize_document_with_upload(file_path: str, ordner_liste: list[str]):
-    # 1) Upload
+def extract_text_from_pdf(path: str, max_chars: int = 15000) -> str:
+    reader = PdfReader(path)
+    text_parts = []
+    for page in reader.pages:
+        text = page.extract_text() or ""
+        text_parts.append(text)
+        # Stop early if very large
+        if sum(len(p) for p in text_parts) > max_chars:
+            break
+    return "\n".join(text_parts)[:max_chars]
+
+def categorize_document_local_text(file_path: str, ordner_liste: list[str]):
+    if(API_KEY==""):
+        raise ValueError("Kein API Key vorhanden!")
+    pdf_text = extract_text_from_pdf(file_path)
+    if not pdf_text.strip():
+        raise ValueError("Keine extrahierbaren Textinhalte in der PDF.")
+
+    # Baue Prompt — sende reinen Text (kein file-objekt)
+    system_prompt = (
+        "Du bist ein intelligentes Dokumentenverwaltungssystem. "
+        "Lies den folgende Text (aus einer PDF) und gib ausschließlich ein JSON-Objekt im Format "
+        "{\"Ordner\": \"<Ordnername>\", \"Datei\": \"<NeuerDateiname.pdf>\"} zurück."
+    )
+
+    user_text = (
+        f"Liste der möglichen Ordner:\n{chr(10).join(ordner_liste)}\n\n"
+        "Analysiere den folgenden Auszug aus der PDF und bestimme den passenden Ordner und Dateinamen.\n\n"
+        "BEGIN PDF TEXT\n" + pdf_text + "\nEND PDF TEXT"
+    )
+
+    # Verwende chat.completions (kein file)
+    response = client.chat.completions.create(
+        model="gpt-5",
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_text}
+        ],
+        temperature=0.0,
+    )
+
+    raw = response.choices[0].message.content.strip()
+    # Versuche JSON zu parsen
     try:
-        with open(file_path, "rb") as f:
-            uploaded = client.files.create(file=f, purpose="assistants")
-    except Exception as e:
-        print("FEHLER beim Hochladen der Datei:", e)
-        raise
-
-    # Debug: inspect uploaded object
-    print("Uploaded file object (für Debug):", uploaded)
-    # Stelle sicher, dass id vorhanden ist
-    file_id = getattr(uploaded, "id", None) or uploaded.get("id") if isinstance(uploaded, dict) else None
-    if not file_id:
-        raise RuntimeError("Upload hat keine 'id' zurückgegeben. Objekt: " + str(uploaded))
-
-    # 2) Call responses.create mit input_file
-    try:
-        response = client.responses.create(
-            model="gpt-5",
-            input=[
-                {"role": "system",
-                 "content": (
-                     "Du bist ein intelligentes Dokumentenverwaltungssystem. "
-                     "Gib ausschließlich ein JSON-Objekt im Format "
-                     "{\"Ordner\": \"<Ordnername>\", \"Datei\": \"<NeuerDateiname.pdf>\"} zurück."
-                 )},
-                {"role": "user",
-                 "content": [
-                     {"type": "text",
-                      "text": f"Liste der Ordner:\n{chr(10).join(ordner_liste)}\n\nAnalysiere die Datei und nenne Ordner und Dateinamen."},
-                     {"type": "input_file", "input_file_id": file_id}
-                 ]}
-            ],
-            temperature=0.0,
-        )
-    except openai_error.BadRequestError as e:
-        # Detailliertes Debugging-Output
-        print("BadRequestError:", e)
-        # Wenn möglich, zeige raw response
-        try:
-            print("Error response:", e.response.json())
-        except Exception:
-            pass
-        raise
-    except Exception as e:
-        print("Allgemeiner Fehler bei responses.create:", e)
-        raise
-
-    # 3) Extrahiere textuelle Ausgabe robust
-    # Manche SDK-Versionen haben response.output_text, manche liefern content im response.output
-    output_text = None
-    if hasattr(response, "output_text"):
-        output_text = response.output_text
-    else:
-        # Versuche generischen Zugriff
-        try:
-            out = response.output
-            # Suche rekursiv nach text-Strings
-            fragments = []
-            if isinstance(out, list):
-                for item in out:
-                    # Das Format kann versch. sein; handle common cases:
-                    if isinstance(item, dict):
-                        # item.get("content") kann Liste sein
-                        content = item.get("content")
-                        if isinstance(content, list):
-                            for c in content:
-                                if isinstance(c, dict) and c.get("type") == "output_text":
-                                    fragments.append(c.get("text", ""))
-                                elif isinstance(c, str):
-                                    fragments.append(c)
-                        elif isinstance(content, str):
-                            fragments.append(content)
-            output_text = "\n".join(fragments).strip()
-        except Exception:
-            output_text = None
-
-    if not output_text:
-        # fallback to raw repr
-        output_text = str(response)
-
-    # Versuch JSON zu parsen
-    try:
-        parsed = json.loads(output_text.strip())
-        return parsed
+        parsed = json.loads(raw)
     except Exception:
-        return {"raw": output_text}
+        # Fallback: gib Raw zurück, damit du siehst, was das Modell ausgegeben hat
+        return {"raw": raw}
+    return parsed
 
 # Beispiel
 # ordner = ["Rechnungen", "Versicherung", "Steuer", "Privat"]
-# print(categorize_document_with_upload("rechnung.pdf", ordner))
+# print(categorize_document_local_text("rechnung.pdf", ordner))
