@@ -47,7 +47,6 @@ def categorize_document(file_path: str, ordner_liste: list[str]):
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_text}
         ],
-        temperature=0.0,
     )
 
     raw = response.choices[0].message.content.strip()
