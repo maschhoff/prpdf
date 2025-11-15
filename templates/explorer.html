@@ -52,30 +52,33 @@
             <input type="hidden" id="selectedFolder" name="folder" value="{{ selected_folder }}">
           </div>
         </div>
-        <div class="row mb-3">
-          <div class="col-10">
-            <!-- Editable document title -->
-            <input type="text" id="editTitle" class="form-control" name="pdf" value="{{ sugg_filename }}">
-            <!-- Hidden inputs for state tracking -->
-            <input type="hidden" id="currentIndex" name="inputiterator" value="">
-            <input type="hidden" id="originalFileName" name="oldpdf" value="">
-            <input type="hidden" id="selectedFolder" name="folder" value="unknown">
-            <input type="hidden" id="sortColumn" name="sortCol" value="{{ sort_column|default(2) }}">
-            <input type="hidden" id="sortDirection" name="sortDir" value="{{ sort_direction|default('desc') }}">
-            <input type="hidden" id="searchTerm" name="searchTerm" value="{{ search_term|default('') }}">
-          </div>
-          <div class="col-2">
-            <!-- Submit edit -->
+    
 
-               <button type="submit" class="btn btn-primary btn-sm" id="btnAI" data-toggle="tooltip" data-placement="bottom" title="AI suggedtion">
+              <div class="row mb-3">
+        <div class="col-10">
+          <input type="text" id="editTitle" class="form-control" name="pdf" value="{{ sugg_filename }}">
+
+          <input type="hidden" id="currentIndex" name="inputiterator" value="">
+          <input type="hidden" id="originalFileName" name="oldpdf" value="">
+          <input type="hidden" id="selectedFolder" name="folder" value="unknown">
+          <input type="hidden" id="sortColumn" name="sortCol" value="{{ sort_column|default(2) }}">
+          <input type="hidden" id="sortDirection" name="sortDir" value="{{ sort_direction|default('desc') }}">
+          <input type="hidden" id="searchTerm" name="searchTerm" value="{{ search_term|default('') }}">
+        </div>
+
+        <div class="col-2 d-flex align-items-center justify-content-end">
+            <button type="button" class="btn btn-primary btn-sm mr-2" id="btnAI" data-toggle="tooltip" data-placement="bottom" title="AI suggestion">
                 <i class="fas fa-magic"></i>
-              </button>
+            </button>
 
             <button type="submit" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edit document title">
-              <i class="fas fa-check"></i>
+                <i class="fas fa-check"></i>
             </button>
-          </div>
         </div>
+      </div>
+
+
+
       </form>
 
       <hr>
