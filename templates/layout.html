@@ -64,6 +64,9 @@
             <i class="fas fa-file-pdf"></i> 
             PR PDF - Scan Documents Explorer
           </a>
+           <button type="button" class="btn btn-primary btn-sm" id="btnUpload" data-toggle="modal" data-target="#uploadModal" data-placement="bottom" title="Upload a document">
+            <i class="fas fa-trash"></i>
+           </button>
         </div>
 
         <!-- Placeholder for dynamic messages -->
@@ -110,6 +113,29 @@
 
   <!-- Main content block for page-specific content -->
   {% block content %}{% endblock %}
+
+  <!-- Delete Confirmation Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadModalLabel">Upload file?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label class="form-label" for="customFile">Choose file to upload</label>
+        <input type="file" class="form-control" id="customFile" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        <button type="button" id="btnConfirmDelete" class="btn btn-primary btn-sm">Upload</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   <script>
     // Show loading overlay when autoscan button is clicked
