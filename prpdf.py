@@ -273,7 +273,7 @@ def setting_save():
         json.loads(config_raw)
         settings.writeConfig(config_raw)
         config = settings.loadConfig()
-        return render_template('settings.html', config=config, config_raw=config_raw, message="Config saved")
+        return render_template('settings.html', config=config, config_raw=config_raw, message="Config saved, please restart!")
     except Exception as e:
         logging.error(e)
         return render_template('settings.html', config=config, config_raw=config_raw, message="JSON error")

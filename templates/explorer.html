@@ -287,14 +287,16 @@
      */
     function updatePreview(index) {
       const row = $table.find('tbody tr').eq(index);
-      const fileName = row.children('td').eq(0).text();
+      var fileName = row.children('td').eq(0).text();
+      var tmp="{{ sugg_filename }}.pdf"
+      let fileNameX = tmp || row.children('td').eq(0).text();
 
       // Update PDF viewer iframe src
       const pdfUrl = '/static/pdfjs/web/viewer.html?file=/static/pdf/unknown/' + encodeURIComponent(fileName);
       document.getElementById('pdfViewerFrame').src = pdfUrl;
 
       // Update form fields for editing
-      $('#editTitle').val(fileName.replace(/\.[^/.]+$/, "")); // Remove extension
+      $('#editTitle').val(fileNameX.replace(/\.[^/.]+$/, "")); // Remove extension
       $('#originalFileName').val(fileName);
       $('#currentIndex').val(index);
 
