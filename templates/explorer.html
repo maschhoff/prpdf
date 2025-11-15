@@ -55,7 +55,7 @@
         <div class="row mb-3">
           <div class="col-10">
             <!-- Editable document title -->
-            <input type="text" id="editTitle" class="form-control" name="pdf" value="">
+            <input type="text" id="editTitle" class="form-control" name="pdf" value="{{ sugg_filename }}">
             <!-- Hidden inputs for state tracking -->
             <input type="hidden" id="currentIndex" name="inputiterator" value="">
             <input type="hidden" id="originalFileName" name="oldpdf" value="">
@@ -66,6 +66,11 @@
           </div>
           <div class="col-2">
             <!-- Submit edit -->
+
+               <button type="submit" class="btn btn-primary btn-sm" id="btnAI" data-toggle="tooltip" data-placement="bottom" title="AI suggedtion">
+                <i class="fas fa-magic"></i>
+              </button>
+
             <button type="submit" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edit document title">
               <i class="fas fa-check"></i>
             </button>
@@ -82,9 +87,7 @@
       <button type="submit" class="btn btn-primary btn-sm" id="btnMagic" data-toggle="tooltip" data-placement="bottom" title="OCR-Scan and set keywords for autoscan">
         <i class="fas fa-magic"></i>
       </button>
-       <button type="submit" class="btn btn-primary btn-sm" id="btnAI" data-toggle="tooltip" data-placement="bottom" title="AI suggedtion">
-        <i class="fas fa-magic"></i>
-      </button>
+    
       <button type="submit" class="btn btn-primary btn-sm" id="btnRotate" data-toggle="tooltip" data-placement="bottom" title="Rotate document 180">
         <i class="fas fa-redo"></i>
       </button>
